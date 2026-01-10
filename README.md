@@ -51,6 +51,8 @@ npm run dev
 ```
 The application will be accessible at: **[http://localhost:5000](http://localhost:5000)**
 
+
+
 ## 📁 Project Structure
 - `client/src/pages`: Component-based page layouts.
 - `client/src/assets`: Image assets and visual resources.
