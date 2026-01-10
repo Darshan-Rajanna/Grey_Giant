@@ -116,7 +116,7 @@ export default function Contact() {
                       <FormItem>
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
-                          <Input {...field} className="h-12 bg-white/5 border-white/10 rounded-none focus:border-white" />
+                          <Input {...field} value={field.value || ""} className="h-12 bg-white/5 border-white/10 rounded-none focus:border-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -132,7 +132,7 @@ export default function Contact() {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input {...field} className="h-12 bg-white/5 border-white/10 rounded-none focus:border-white" />
+                          <Input {...field} value={field.value || ""} className="h-12 bg-white/5 border-white/10 rounded-none focus:border-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -144,7 +144,7 @@ export default function Contact() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Event Type</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
                           <FormControl>
                             <SelectTrigger className="h-12 bg-white/5 border-white/10 rounded-none focus:border-white">
                               <SelectValue placeholder="Select type" />

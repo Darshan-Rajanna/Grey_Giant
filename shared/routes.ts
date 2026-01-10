@@ -11,6 +11,10 @@ export const errorSchemas = {
   }),
 };
 
+// Explicit type exports for the frontend hooks
+export type InsertInquiry = z.infer<typeof insertInquirySchema>;
+export type InsertReview = z.infer<typeof insertReviewSchema>;
+
 export const api = {
   inquiries: {
     create: {

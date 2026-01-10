@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <div className="pt-20 min-h-screen bg-background">
+    <div className="bg-background">
       {/* HERO */}
       <section className="py-20 md:py-32 container mx-auto px-6">
         <motion.div 

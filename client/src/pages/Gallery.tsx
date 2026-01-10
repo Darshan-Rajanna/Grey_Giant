@@ -22,7 +22,7 @@ export default function Gallery() {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
 
   return (
-    <div className="pt-20 min-h-screen bg-black">
+    <div className="min-h-screen bg-black">
       <div className="container mx-auto px-6 py-20">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
