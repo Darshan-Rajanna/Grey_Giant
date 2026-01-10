@@ -14,7 +14,7 @@ export default function Home() {
           <img 
             src={heroImg} 
             alt="Luxury Event Background" 
-            className="w-full h-full object-cover opacity-60 grayscale"
+            className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         </div>
@@ -58,7 +58,7 @@ export default function Home() {
               <img 
                 src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60"
                 alt="Architecture"
-                className="relative z-10 w-full aspect-[4/5] object-cover grayscale brightness-75 contrast-125"
+                className="relative z-10 w-full aspect-[4/5] object-cover brightness-75 contrast-125"
               />
             </div>
             <div className="space-y-8">

@@ -54,7 +54,7 @@ export default function Gallery() {
               <img 
                 src={photo.src} 
                 alt={photo.alt} 
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 ease-in-out group-hover:scale-105"
+                className="w-full h-auto transition-all duration-700 ease-in-out group-hover:scale-105"
               />
             </motion.div>
           ))}

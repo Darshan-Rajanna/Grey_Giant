@@ -33,7 +33,7 @@ export default function About() {
             <img 
               src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800&auto=format&fit=crop&q=60"
               alt="Event Setup" 
-              className="w-full h-full object-cover grayscale opacity-90"
+              className="w-full h-full object-cover opacity-90"
             />
             <div className="absolute -bottom-8 -left-8 bg-neutral-900 p-8 border border-white/10 hidden md:block">
               <p className="font-serif text-3xl text-white mb-2">24/7</p>
