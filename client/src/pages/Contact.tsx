@@ -48,14 +48,15 @@ export default function Contact() {
                 <MapPin className="w-6 h-6 text-primary mt-1 shrink-0" />
                 <div>
                   <h3 className="text-white font-medium uppercase tracking-widest mb-2">Location</h3>
-                  <p className="text-white/60 font-light leading-relaxed">
-                    Post-office, Kamakshipalya,<br />
-                    Bengaluru, Karnataka 560079
-                  </p>
-                  <div className="mt-4 flex gap-4 text-sm text-primary/60">
-                    <span className="flex items-center gap-2"><Navigation className="w-4 h-4" /> 1 hr 5 mins</span>
-                    <span className="flex items-center gap-2">· 25 mins</span>
-                  </div>
+                  <a href="https://maps.app.goo.gl/p6miECt3U0FevDmiC" target="_blank" rel="noopener noreferrer" className="group block">
+                    <p className="text-white/60 font-light leading-relaxed group-hover:text-primary transition-colors">
+                      Post-office, Kamakshipalya,<br />
+                      Bengaluru, Karnataka 560079
+                    </p>
+                    <div className="mt-4 flex gap-4 text-sm text-primary/80 group-hover:text-primary transition-colors">
+                      <span className="flex items-center gap-2"><Navigation className="w-4 h-4" /> Get Directions</span>
+                    </div>
+                  </a>
                 </div>
               </div>
 

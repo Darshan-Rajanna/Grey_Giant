@@ -15,6 +15,8 @@ import corporateImg from "@assets/corporate_event_new.png";
 import weddingImg from "@assets/wedding_event_new.jpg";
 import thematicImg from "@assets/social_gathering_new.jpg";
 
+import introductionImg from "@assets/introduction_decor_new.jpg";
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -48,11 +50,37 @@ export default function Home() {
               Vision meets excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 h-14 text-base tracking-wide border-primary">
-                <Link href="/contact">Get a Quote</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 hover:text-primary rounded-none px-8 h-14 text-base tracking-wide font-bold">
-                <Link href="/services">View Catalogue</Link>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 h-14 text-base tracking-wide border-primary cursor-pointer">
+                    Get a Quote
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-neutral-900 border-primary/20 text-white p-12 text-center max-w-2xl">
+                  <DialogHeader>
+                    <Star className="w-12 h-12 text-primary mx-auto mb-8 animate-pulse" />
+                    <DialogTitle className="text-3xl md:text-4xl font-serif mb-6 leading-relaxed italic">
+                      "We don’t just plan events, we create memories wrapped in elegance."
+                    </DialogTitle>
+                    <DialogDescription className="text-xl text-primary/80 font-light tracking-widest uppercase">
+                      Every occasion, a signature of distinction.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="mt-12 flex justify-center">
+                    <Button asChild className="bg-primary text-black hover:bg-primary/90 rounded-none px-12 h-14 text-sm tracking-[0.2em] font-bold uppercase transition-all duration-500">
+                      <Link href="/contact">Begin Your Vision</Link>
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                className="border-primary text-primary hover:bg-primary/10 hover:text-primary rounded-none px-8 h-14 text-base tracking-wide font-bold cursor-pointer"
+              >
+                View Catalogue
               </Button>
             </div>
           </motion.div>
@@ -67,7 +95,7 @@ export default function Home() {
               <div className="absolute -inset-4 bg-white/5 blur-2xl rounded-full opacity-50" />
               {/* minimalist black architecture abstract - Keeping unsplash for variety */}
               <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60"
+                src={introductionImg}
                 alt="Architecture"
                 className="relative z-10 w-full aspect-[4/5] object-cover brightness-75 contrast-125"
               />
@@ -98,7 +126,7 @@ export default function Home() {
                     </DialogHeader>
 
                     <div className="prose prose-invert prose-lg text-white/70 font-light mt-4">
-                      <p className="lead text-white text-xl">
+                      <p className="lead text-xl">
                         "Grey Giant Events & Services is a premium event management company specializing in luxury corporate events, bespoke weddings, birthday celebrations, and exclusive social gatherings."
                       </p>
                       <p>
@@ -165,8 +193,8 @@ export default function Home() {
                     <h3 className="text-3xl md:text-5xl font-sans font-bold tracking-[0.15em] text-white transition-all duration-500 group-hover:tracking-[0.2em]">
                       {item.title}
                     </h3>
-                    <div className="w-12 h-[1px] bg-primary mx-auto my-6 transition-all duration-500 group-hover:w-24" />
-                    <p className="text-white/80 text-base md:text-lg font-normal max-w-md mx-auto">
+                    <div className="w-12 h-[1px] bg-white/20 mx-auto my-6 transition-all duration-500 group-hover:w-24 group-hover:bg-primary" />
+                    <p className="text-primary/90 text-base md:text-lg font-medium max-w-md mx-auto">
                       {item.desc}
                     </p>
                   </motion.div>
