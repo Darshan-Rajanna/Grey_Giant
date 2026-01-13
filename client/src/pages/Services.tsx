@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
 
-import corporateImg from "@assets/image_1768032170619.png"; // Launch event
-import weddingImg from "@assets/image_1768032128663.png"; // Engagement sign
-import retirementImg from "@assets/image_1768032161591.png"; // Retirement farewell
-import thematicImg from "@assets/image_1768032149552.png"; // Tropical entrance
+import corporateImg from "@assets/gallery/image_1768032170619.png"; // Launch event
+import weddingImg from "@assets/gallery/image_1768032128663.png"; // Engagement sign
+import retirementImg from "@assets/gallery/image_1768032161591.png"; // Retirement farewell
+import thematicImg from "@assets/gallery/image_1768032149552.png"; // Tropical entrance
 
 const services = [
   {

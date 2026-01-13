@@ -10,12 +10,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import heroImg from "@assets/stock_images/luxury_corporate_eve_632147c4.jpg";
-import corporateImg from "@assets/corporate_event_new.png";
-import weddingImg from "@assets/wedding_event_new.jpg";
-import thematicImg from "@assets/social_gathering_new.jpg";
+import heroImg from "@assets/gallery/luxury_corporate_eve_632147c4.jpg";
+import corporateImg from "@assets/gallery/corporate_event_new.png";
+import weddingImg from "@assets/gallery/wedding_event_new.jpg";
+import thematicImg from "@assets/gallery/social_gathering_new.jpg";
 
-import introductionImg from "@assets/introduction_decor_new.jpg";
+import introductionImg from "@assets/gallery/introduction_decor_new.jpg";
 
 export default function Home() {
   return (

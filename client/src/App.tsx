@@ -9,7 +9,8 @@ import { Link, useLocation } from "wouter";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import WelcomePopup from "@/components/WelcomePopup";
+import logoImg from "@assets/logo/logo.png";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,8 +42,11 @@ function Navbar() {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-black/95 backdrop-blur-md py-4 border-b border-primary/20" : "bg-transparent py-6"}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <button onClick={() => scrollToSection('home')} className="text-xl font-serif font-bold text-primary tracking-widest">
-          GREY GIANT
+        <button onClick={() => scrollToSection('home')} className="flex items-center gap-3 group">
+          <img src={logoImg} alt="Grey Giant Logo" className="w-10 h-10 object-contain transition-transform duration-500 group-hover:scale-110" />
+          <span className="text-xl font-serif font-bold text-primary tracking-widest hidden sm:inline-block">
+            GREY GIANT
+          </span>
         </button>
 
         {/* Desktop Nav */}
@@ -148,6 +152,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
+        <WelcomePopup />
         <Router />
       </TooltipProvider>
     </QueryClientProvider>
