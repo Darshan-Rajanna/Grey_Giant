@@ -25,6 +25,8 @@ function Navbar() {
   const navItems = [
     { name: "Home", href: "home" },
     { name: "About", href: "about" },
+    { name: "Our Story", href: "story" },
+    { name: "Values", href: "values" },
     { name: "Services", href: "services" },
     { name: "Gallery", href: "gallery" },
     { name: "Reviews", href: "reviews" },
@@ -105,6 +107,8 @@ function MainLayout() {
       <div id="home"><Home /></div>
       <div id="about"><AboutSection /></div>
       <div id="services"><ServicesSection /></div>
+      <div id="story"><DistinctionSection /></div>
+      <div id="values"><ValuesSection /></div>
       <div id="gallery"><GallerySection /></div>
       <div id="reviews"><ReviewsSection /></div>
       <div id="contact"><ContactSection /></div>
@@ -115,12 +119,16 @@ function MainLayout() {
 
 // Wrapper components to remove their internal padding/min-h-screen where needed for single page flow
 import About from "@/pages/About";
+import Distinction from "@/components/sections/Distinction";
+import Values from "@/components/sections/Values";
 import Services from "@/pages/Services";
 import Gallery from "@/pages/Gallery";
 import Reviews from "@/pages/Reviews";
 import Contact from "@/pages/Contact";
 
 function AboutSection() { return <div className="py-20"><About /></div>; }
+function DistinctionSection() { return <div id="story"><Distinction /></div>; }
+function ValuesSection() { return <div id="values"><Values /></div>; }
 function ServicesSection() { return <div className="py-20"><Services /></div>; }
 function GallerySection() { return <div className="py-20"><Gallery /></div>; }
 function ReviewsSection() { return <div className="py-20"><Reviews /></div>; }
