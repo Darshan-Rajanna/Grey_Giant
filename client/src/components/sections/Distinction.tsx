@@ -5,11 +5,7 @@ import {
     DialogTrigger,
     DialogContent,
 } from "@/components/ui/dialog";
-<<<<<<< HEAD
-import introductionImg from "@assets/introduction_decor_new.jpg";
-=======
 import introductionImg from "@assets/gallery/introduction_decor_new.jpg";
->>>>>>> 7d2d20252b29bf38415cf0719f621d26bcabbdb2
 
 export default function Distinction() {
     return (
