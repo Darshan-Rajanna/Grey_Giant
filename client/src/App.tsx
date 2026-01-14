@@ -136,7 +136,7 @@ function ContactSection() { return <div className="py-20"><Contact /></div>; }
 
 function Footer() {
   return (
-    <footer className="bg-neutral-900 py-20 border-t border-white/5">
+    <footer className="bg-neutral-900 pt-20 pb-6 border-t border-white/5">
       <div className="container mx-auto px-6 text-center">
         <h2 className="text-2xl font-serif text-white mb-4">GREY GIANT</h2>
         <p className="text-white/40 text-sm tracking-widest uppercase mb-8">Vision Meets Excellence</p>
@@ -157,19 +157,9 @@ function Footer() {
           </a>
         </div>
 
-        {/* Contact Details */}
-        <div className="space-y-4 mb-10 text-white/60 font-light text-sm tracking-wide">
-          <div className="flex items-center justify-center gap-3">
-            <Phone className="w-4 h-4 text-primary" />
-            <span>7483216698 / 7676361603</span>
-          </div>
-          <div className="flex items-center justify-center gap-3">
-            <Mail className="w-4 h-4 text-primary" />
-            <span>greygiant01@gmail.com</span>
-          </div>
-        </div>
 
-        <p className="text-white/20 text-xs">© 2026 Grey Giant Events & Services. All Rights Reserved.</p>
+
+        <p className="text-white/20 text-xs">© 2026 The Gowtrix Hub. All Rights Reserved.</p>
       </div>
     </footer>
   );

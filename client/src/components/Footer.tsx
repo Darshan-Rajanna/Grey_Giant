@@ -36,15 +36,15 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-white/40 shrink-0" />
-                <span>Post-office, Kamakshipalya,<br/>Bengaluru, Karnataka 560079</span>
+                <span>Post-office, Kamakshipalya,<br />Bengaluru, Karnataka 560079</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-white/40 shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 7483216698</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-white/40 shrink-0" />
-                <span>contact@greygiant.com</span>
+                <span>greygiant01@gmail.com</span>
               </li>
             </ul>
           </div>

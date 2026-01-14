@@ -1,4 +1,4 @@
-import { useCreateInquiry } from "@/hooks/use-inquiries";
+// import { useCreateInquiry } from "@/hooks/use-inquiries";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertInquirySchema, type InsertInquiry } from "@shared/schema";
@@ -11,8 +11,6 @@ import { MapPin, Clock, Phone, Navigation } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Contact() {
-  const { mutate, isPending } = useCreateInquiry();
-
   const form = useForm<InsertInquiry>({
     resolver: zodResolver(insertInquirySchema),
     defaultValues: {
@@ -25,9 +23,11 @@ export default function Contact() {
   });
 
   const onSubmit = (data: InsertInquiry) => {
-    mutate(data, {
-      onSuccess: () => form.reset()
-    });
+    const subject = `New Inquiry from ${data.name} - ${data.eventType}`;
+    const body = `Name: ${data.name}%0D%0APhone: ${data.phone}%0D%0AEmail: ${data.email}%0D%0AEvent Type: ${data.eventType}%0D%0A%0D%0ADetails:%0D%0A${data.message}`;
+
+    window.location.href = `mailto:greygiant01@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    form.reset();
   };
 
   return (
@@ -76,8 +76,8 @@ export default function Contact() {
                 <div>
                   <h3 className="text-white font-medium uppercase tracking-widest mb-2">Contact</h3>
                   <p className="text-white/60 font-light">
-                    +91 98765 43210<br />
-                    hello@greygiant.com
+                    7483216698<br />
+                    greygiant01@gmail.com
                   </p>
                 </div>
               </div>
@@ -182,10 +182,9 @@ export default function Contact() {
                 <Button
                   type="submit"
                   size="lg"
-                  disabled={isPending}
                   className="w-full h-14 bg-primary text-black hover:bg-primary/90 rounded-none text-base tracking-wide uppercase font-medium border-primary"
                 >
-                  {isPending ? "Sending..." : "Request Quote"}
+                  Request Quote
                 </Button>
               </form>
             </Form>
