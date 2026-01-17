@@ -334,7 +334,7 @@ export default function Services() {
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center mb-32 text-center px-4 max-w-4xl mx-auto"
         >
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-4 mb-10"
@@ -348,7 +348,7 @@ export default function Services() {
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
             Our Exclusive <br />
-            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Catalogue</span>
+            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Crafted Offerings</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
             "Explore our curated suite of services, where every element is designed to elevate your celebration into a masterpiece of distinction."

@@ -18,8 +18,8 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Abstract Background Noise / Grid */}
-        <div className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none" 
-             style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
+        <div className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none"
+          style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
 
         {/* Dynamic Glows */}
         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none animate-pulse z-10" />
@@ -42,7 +42,7 @@ export default function Home() {
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* Standardized Eyebrow */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -57,11 +57,11 @@ export default function Home() {
 
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
               GREY <span className="relative inline-block">
-                 <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">GIANT</span>
+                <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">GIANT</span>
               </span>
             </h1>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
@@ -73,7 +73,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <Dialog>
                 <DialogTrigger asChild>
-                  <motion.button 
+                  <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     className="relative px-12 py-5 bg-gradient-to-r from-primary via-[#f8e4b1] to-primary text-black font-bold uppercase tracking-[0.3em] text-[11px] overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] rounded-none"
@@ -108,7 +108,7 @@ export default function Home() {
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-12 py-5 bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white/60 font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-500 hover:text-white hover:border-white/20 rounded-none relative overflow-hidden group"
               >
-                <span className="relative z-10">View Catalogue</span>
+                <span className="relative z-10">View Crafted Offerings</span>
                 <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </motion.button>
             </div>
