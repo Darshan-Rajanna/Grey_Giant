@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Star } from "lucide-react";
@@ -13,6 +14,7 @@ import {
 import heroImg from "@assets/gallery/luxury_corporate_eve_632147c4.jpg";
 
 export default function Home() {
+  const [quoteStep, setQuoteStep] = useState(0);
   return (
     <div className="min-h-screen bg-[#020202] overflow-hidden selection:bg-primary/30">
       {/* HERO SECTION */}
@@ -71,7 +73,7 @@ export default function Home() {
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <Dialog>
+              <Dialog onOpenChange={(open) => !open && setQuoteStep(0)}>
                 <DialogTrigger asChild>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -95,9 +97,18 @@ export default function Home() {
                     </DialogDescription>
                   </DialogHeader>
                   <div className="mt-4">
-                    <Button asChild className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-16 text-[10px] tracking-[0.3em] font-bold uppercase w-full md:w-auto">
-                      <Link href="/contact">Define Your Celebration</Link>
-                    </Button>
+                    {quoteStep === 0 ? (
+                      <Button
+                        onClick={() => setQuoteStep(1)}
+                        className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-16 text-[10px] tracking-[0.3em] font-bold uppercase w-full md:w-auto cursor-pointer"
+                      >
+                        Begin Your Vision
+                      </Button>
+                    ) : (
+                      <Button asChild className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-16 text-[10px] tracking-[0.3em] font-bold uppercase w-full md:w-auto whitespace-normal md:whitespace-nowrap text-center leading-relaxed">
+                        <Link href="/contact">Define Your Celebration & Experience the Difference</Link>
+                      </Button>
+                    )}
                   </div>
                 </DialogContent>
               </Dialog>
