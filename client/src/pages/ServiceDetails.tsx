@@ -13,7 +13,7 @@ export default function ServiceDetails() {
             <div className="min-h-screen bg-black flex items-center justify-center text-white">
                 <div className="text-center">
                     <h1 className="text-4xl font-serif mb-4">Service Not Found</h1>
-                    <Button onClick={() => window.location.href = '/'} className="bg-primary text-black rounded-none">
+                    <Button onClick={() => window.location.href = import.meta.env.BASE_URL} className="bg-primary text-black rounded-none">
                         Return Home
                     </Button>
                 </div>
@@ -23,7 +23,8 @@ export default function ServiceDetails() {
 
     // Handle navigation to sections on home page
     const navigateToSection = (sectionId: string) => {
-        window.location.href = `/#${sectionId}`;
+        const basePath = import.meta.env.BASE_URL;
+        window.location.href = `${basePath}#${sectionId}`;
     };
 
     return (
