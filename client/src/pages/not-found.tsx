@@ -18,7 +18,7 @@ export default function NotFound() {
           </p>
 
           <Button asChild className="w-full bg-white text-black hover:bg-white/90 rounded-none">
-            <Link href="/">Return Home</Link>
+            <Link href={import.meta.env.BASE_URL}>Return Home</Link>
           </Button>
         </CardContent>
       </Card>
