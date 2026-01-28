@@ -28,8 +28,9 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    if (window.location.pathname !== '/') {
-      window.location.href = `/#${id}`;
+    const basePath = import.meta.env.BASE_URL;
+    if (window.location.pathname !== basePath && window.location.pathname !== basePath.replace(/\/$/, "")) {
+      window.location.href = `${basePath}#${id}`;
       return;
     }
     const element = document.getElementById(id);
