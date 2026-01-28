@@ -1,4 +1,3 @@
-// import { useCreateInquiry } from "@/hooks/use-inquiries";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { insertInquirySchema, type InsertInquiry } from "@shared/schema";
@@ -6,11 +5,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Navigation, Mail } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
+import { siteContent } from "@/data/siteContent";
 
 export default function Contact() {
+  const { contactPage, contact: contactInfo } = siteContent;
   const form = useForm<InsertInquiry>({
     resolver: zodResolver(insertInquirySchema),
     defaultValues: {
@@ -26,7 +26,7 @@ export default function Contact() {
     const subject = `New Inquiry from ${data.name} - ${data.eventType}`;
     const body = `Name: ${data.name}%0D%0APhone: ${data.phone}%0D%0AEmail: ${data.email}%0D%0AEvent Type: ${data.eventType}%0D%0A%0D%0ADetails:%0D%0A${data.message}`;
 
-    window.location.href = `mailto:greygiant01@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = `mailto:${contactInfo.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
     form.reset();
   };
 
@@ -59,25 +59,25 @@ export default function Contact() {
               >
                 <span className="w-10 h-[1px] bg-primary/20" />
                 <span className="text-[10px] uppercase tracking-[0.7em] text-primary/60 font-bold">
-                  Get In Touch
+                  {contactPage.eyebrow}
                 </span>
                 <span className="w-10 h-[1px] bg-primary/20 xl:hidden" />
               </motion.div>
               
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white tracking-tighter leading-[0.9]">
-                Envision Your <br />
-                <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Experience</span>
+                {contactPage.title.main} <br />
+                <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{contactPage.title.accent}</span>
               </h1>
               <p className="text-white/30 max-w-sm mx-auto xl:mx-0 font-light italic text-base md:text-lg leading-relaxed font-serif">
-                "Connect with our artisans to begin crafting your next milestone event with absolute precision and refined elegance."
+                "{contactPage.description}"
               </p>
             </div>
 
             <div className="grid sm:grid-cols-1 gap-6 max-w-2xl mx-auto xl:mx-0 mt-auto">
               {[
-                { icon: MapPin, label: "Location", value: "Post-office, Kamakshipalya, Bengaluru, 560079" },
-                { icon: Phone, label: "Contact", value: "+91 7483216698" },
-                { icon: Mail, label: "Email", value: "greygiant01@gmail.com" }
+                { icon: MapPin, label: "Location", value: contactInfo.address },
+                { icon: Phone, label: "Contact", value: `+${contactInfo.whatsapp}` },
+                { icon: Mail, label: "Email", value: contactInfo.email }
               ].map((item, i) => (
                 <motion.div 
                   key={item.label}
@@ -110,7 +110,7 @@ export default function Contact() {
             <div className="absolute -inset-10 bg-primary/5 blur-[120px] rounded-full opacity-20 pointer-events-none" />
             
             <div className="relative h-full p-10 md:p-14 backdrop-blur-3xl bg-white/[0.01] border border-white/5 rounded-[3rem] shadow-2xl flex flex-col">
-              <h2 className="text-2xl font-serif text-white mb-10 italic font-light tracking-tight text-center xl:text-left">"Define your celebration..."</h2>
+              <h2 className="text-2xl font-serif text-white mb-10 italic font-light tracking-tight text-center xl:text-left">"{contactPage.formQuote}"</h2>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -213,5 +213,5 @@ export default function Contact() {
       </div>
     </div>
   </div>
-  );
+);
 }

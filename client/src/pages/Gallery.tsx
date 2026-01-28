@@ -4,8 +4,8 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ChevronLeft, ChevronRight, Plus, Minus, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Dynamically import all images from the gallery folder
-const imageFiles = import.meta.glob("@assets/gallery/*.{png,jpg,jpeg}", { eager: true, import: "default" });
+// Dynamically import all portfolio images from the gallery folder
+const imageFiles = import.meta.glob("@assets/gallery/**/*.{png,jpg,jpeg}", { eager: true, import: "default" });
 
 const photos = Object.keys(imageFiles)
   .sort()
@@ -14,9 +14,12 @@ const photos = Object.keys(imageFiles)
     alt: `Portfolio Event ${index + 1}`,
   }));
 
+import { siteContent } from "@/data/siteContent";
+
 export default function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [displayRows, setDisplayRows] = useState(2);
+  const { galleryPage } = siteContent;
   const cols = 5;
   const visibleCount = displayRows * cols;
   const visiblePhotos = photos.slice(0, visibleCount);
@@ -48,16 +51,16 @@ export default function Gallery() {
           >
             <span className="w-12 h-[1px] bg-primary/20" />
             <span className="text-[10px] uppercase tracking-[0.7em] text-primary/60 font-bold">
-              Visual Journal
+              {galleryPage.eyebrow}
             </span>
             <span className="w-12 h-[1px] bg-primary/20" />
           </motion.div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-            Grey Gained <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Collections</span>
+            {galleryPage.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{galleryPage.title.accent}</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
-            "A curated display of distinction and refined moments, captured across our most prestigious celebrations."
+            "{galleryPage.description}"
           </p>
         </motion.div>
 

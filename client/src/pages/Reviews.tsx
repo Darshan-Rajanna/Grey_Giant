@@ -1,5 +1,6 @@
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
+import { siteContent } from "@/data/siteContent";
 
 const reviews = [
   {
@@ -35,6 +36,8 @@ const reviews = [
 ];
 
 export default function Reviews() {
+  const { reviewsPage } = siteContent;
+  
   return (
     <div className="pt-20 min-h-screen bg-[#020202] relative overflow-hidden selection:bg-primary/30">
       {/* Abstract Background Noise / Grid */}
@@ -54,17 +57,17 @@ export default function Reviews() {
           >
             <span className="w-12 h-[1px] bg-primary/20" />
             <span className="text-[11px] uppercase tracking-[0.6em] text-primary/60 font-bold">
-              Client Voices
+              {reviewsPage.eyebrow}
             </span>
             <span className="w-12 h-[1px] bg-primary/20" />
           </motion.div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-            Reflections of <br />
-            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Excellence</span>
+            {reviewsPage.title.main} <br />
+            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{reviewsPage.title.accent}</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
-            "Authentic perspectives from our distinguished clients who have journeyed with us to create extraordinary moments."
+            "{reviewsPage.description}"
           </p>
         </div>
 

@@ -1,24 +1,16 @@
-import { motion, useAnimationControls, useMotionValue, animate, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, animate, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Sparkles, MoveRight } from "lucide-react";
-
-const values = [
-    { title: "Precision", desc: "Attention to detail is our hallmark. Nothing is left to chance." },
-    { title: "Elegance", desc: "We believe in refined aesthetics that speak volumes." },
-    { title: "Excellence", desc: "Delivering beyond expectations is our standard." },
-    { title: "Artistry", desc: "Every detail is thoughtfully composed to create striking experiences." },
-    { title: "Integrity", desc: "We operate with honesty, transparency, and respect in every collaboration." },
-    { title: "Innovation", desc: "Fresh ideas and modern approaches to every event." },
-    { title: "Commitment", desc: "Your vision is our responsibility, from concept to final moment." },
-    { title: "Sophistication", desc: "Refined taste guides every decision, ensuring timeless appeal." },
-    { title: "Passion", desc: "Drafting moments that truly matter with heart and soul." }
-];
-
-const duplicatedValues = [...values, ...values, ...values]; // Triple for buffer
+import { siteContent } from "@/data/siteContent";
 
 // --- Helper Components ---
 
-const GlassCard = ({ item }: { item: typeof values[0] }) => {
+interface ValueItem {
+    title: string;
+    desc: string;
+}
+
+const GlassCard = ({ item }: { item: ValueItem }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -83,6 +75,8 @@ const GlassCard = ({ item }: { item: typeof values[0] }) => {
 };
 
 export default function Values() {
+    const { values: valuesContent } = siteContent;
+    const duplicatedValues = [...valuesContent.items, ...valuesContent.items, ...valuesContent.items]; // Triple for buffer
     const x = useMotionValue(0);
     const [isPaused, setIsPaused] = useState(false);
     const scrollAnimationRef = useRef<any>(null);
@@ -151,14 +145,14 @@ export default function Values() {
                     >
                         <span className="w-12 h-[1px] bg-primary/20" />
                         <span className="text-[10px] uppercase tracking-[0.7em] text-primary/60 font-bold">
-                            Essence of Excellence
+                            {valuesContent.eyebrow}
                         </span>
                         <span className="w-12 h-[1px] bg-primary/20" />
                     </motion.div>
                     
                     <h2 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-                        Our Core <span className="relative inline-block">
-                             <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Values</span>
+                        {valuesContent.title.main} <span className="relative inline-block">
+                             <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{valuesContent.title.accent}</span>
                         </span>
                     </h2>
                 </div>
@@ -194,7 +188,7 @@ export default function Values() {
                             onHoverEnd={() => setIsPaused(false)}
                             className="flex gap-8"
                         >
-                            {duplicatedValues.map((item, i) => (
+                            {duplicatedValues.map((item: ValueItem, i: number) => (
                                 <GlassCard key={i} item={item} />
                             ))}
                         </motion.div>

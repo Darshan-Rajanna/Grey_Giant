@@ -5,97 +5,20 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import { Link, useLocation } from "wouter";
-import { motion, useScroll, useSpring } from "framer-motion";
-import { Menu, X, Instagram, Facebook, Twitter, Phone, Mail, MessageCircle } from "lucide-react";
-import { useState, useEffect } from "react";
-import WelcomePopup from "@/components/WelcomePopup";
-import logoImg from "@assets/logo/logo1.jpeg";
+import About from "@/pages/About";
+import Services from "@/pages/Services";
+import Gallery from "@/pages/Gallery";
+import Reviews from "@/pages/Reviews";
+import Contact from "@/pages/Contact";
 import ServiceDetails from "@/pages/ServiceDetails";
-
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    { name: "Home", href: "home" },
-    { name: "About", href: "about" },
-    { name: "Our Story", href: "story" },
-    { name: "Values", href: "values" },
-    { name: "Services", href: "services" },
-    { name: "Gallery", href: "gallery" },
-    { name: "Reviews", href: "reviews" },
-    { name: "Contact", href: "contact" },
-  ];
-
-  const scrollToSection = (id: string) => {
-    if (window.location.pathname !== '/') {
-      window.location.href = `/#${id}`;
-      return;
-    }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setIsOpen(false);
-  };
-
-  return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? "bg-black/95 backdrop-blur-md py-4 border-b border-primary/20" : "bg-transparent py-6"}`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <button onClick={() => scrollToSection('home')} className="flex items-center gap-3 group">
-          <img src={logoImg} alt="Grey Giant Logo" className="w-10 h-10 object-contain transition-transform duration-500 group-hover:scale-110" />
-          <span className="text-xl font-serif font-bold text-primary tracking-widest hidden sm:inline-block">
-            GREY GIANT
-          </span>
-        </button>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className="text-xs uppercase tracking-[0.2em] text-foreground/70 hover:text-primary transition-colors font-bold"
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-full left-0 w-full bg-black border-b border-white/10 p-6 flex flex-col gap-6 md:hidden"
-        >
-          {navItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => scrollToSection(item.href)}
-              className="text-sm uppercase tracking-widest text-white/70 hover:text-white text-left font-bold"
-            >
-              {item.name}
-            </button>
-          ))}
-        </motion.div>
-      )}
-    </nav>
-  );
-}
+import Distinction from "@/components/sections/Distinction";
+import Values from "@/components/sections/Values";
+import WelcomePopup from "@/components/modals/WelcomePopup";
+import { Navigation } from "@/components/layout/Navigation";
+import { Footer } from "@/components/layout/Footer";
+import Admin from "@/pages/Admin";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect } from "react";
 
 function MainContent() {
   const { scrollYProgress } = useScroll();
@@ -110,7 +33,6 @@ function MainContent() {
       const id = window.location.hash.slice(1);
       const element = document.getElementById(id);
       if (element) {
-        // Delay slightly to ensure component is rendered
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
         }, 100);
@@ -122,73 +44,25 @@ function MainContent() {
     <>
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-white z-[60] origin-left" style={{ scaleX }} />
       <div id="home"><Home /></div>
-      <div id="about"><AboutSection /></div>
-      <div id="story"><DistinctionSection /></div>
-      <div id="values"><ValuesSection /></div>
-      <div id="services"><ServicesSection /></div>
-      <div id="gallery"><GallerySection /></div>
-      <div id="reviews"><ReviewsSection /></div>
-      <div id="contact"><ContactSection /></div>
+      <div id="about"><About /></div>
+      <div id="story"><Distinction /></div>
+      <div id="values"><Values /></div>
+      <div id="services"><Services /></div>
+      <div id="gallery"><Gallery /></div>
+      <div id="reviews"><Reviews /></div>
+      <div id="contact"><Contact /></div>
     </>
-  );
-}
-
-// Wrapper components to remove their internal padding/min-h-screen where needed for single page flow
-import About from "@/pages/About";
-import Distinction from "@/components/sections/Distinction";
-import Values from "@/components/sections/Values";
-import Services from "@/pages/Services";
-import Gallery from "@/pages/Gallery";
-import Reviews from "@/pages/Reviews";
-import Contact from "@/pages/Contact";
-
-function AboutSection() { return <div id="about"><About /></div>; }
-function DistinctionSection() { return <div id="story"><Distinction /></div>; }
-function ValuesSection() { return <div id="values"><Values /></div>; }
-function ServicesSection() { return <div id="services"><Services /></div>; }
-function GallerySection() { return <div id="gallery"><Gallery /></div>; }
-function ReviewsSection() { return <div id="reviews"><Reviews /></div>; }
-function ContactSection() { return <div id="contact"><Contact /></div>; }
-
-function Footer() {
-  return (
-    <footer className="bg-neutral-900 pt-20 pb-6 border-t border-white/5">
-      <div className="container mx-auto px-6 text-center flex flex-col items-center">
-        <img src={logoImg} alt="Grey Giant Logo" className="w-12 h-12 object-contain mb-6 opacity-80" />
-        <h2 className="text-2xl font-serif text-white mb-4">GREY GIANT</h2>
-        <p className="text-white/40 text-sm tracking-widest uppercase mb-8">Vision Meets Excellence</p>
-
-        {/* Social Icons */}
-        <div className="flex justify-center gap-8 mb-10">
-          <a href="#" className="text-white/40 hover:text-primary transition-colors hover:scale-110 duration-300">
-            <Instagram className="w-5 h-5" />
-          </a>
-          <a href="#" className="text-white/40 hover:text-primary transition-colors hover:scale-110 duration-300">
-            <Facebook className="w-5 h-5" />
-          </a>
-          <a href="https://wa.me/917483216698" className="text-white/40 hover:text-primary transition-colors hover:scale-110 duration-300">
-            <MessageCircle className="w-5 h-5" />
-          </a>
-          <a href="#" className="text-white/40 hover:text-primary transition-colors hover:scale-110 duration-300">
-            <Twitter className="w-5 h-5" />
-          </a>
-        </div>
-
-
-
-        <p className="text-white/20 text-xs">© 2026 The Gowtrix Hub. All Rights Reserved.</p>
-      </div>
-    </footer>
   );
 }
 
 function Router() {
   return (
     <div className="bg-black min-h-screen flex flex-col">
-      <Navbar />
+      <Navigation />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={MainContent} />
+          <Route path="/admin" component={Admin} />
           <Route path="/services/:id" component={ServiceDetails} />
           <Route component={NotFound} />
         </Switch>

@@ -5,8 +5,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { services } from "@/data/services";
 
+import { siteContent } from "@/data/siteContent";
+
 export default function Services() {
   const [showAll, setShowAll] = useState(false);
+  const { servicesPage } = siteContent;
 
   return (
     <div className="min-h-screen bg-black">
@@ -23,17 +26,17 @@ export default function Services() {
           >
             <span className="w-12 h-[1px] bg-primary/20" />
             <span className="text-[10px] uppercase tracking-[0.7em] text-primary/60 font-bold">
-              The Offering
+              {servicesPage.eyebrow}
             </span>
             <span className="w-12 h-[1px] bg-primary/20" />
           </motion.div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-            Our Exclusive <br />
-            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Crafted Offerings</span>
+            {servicesPage.title.main} <br />
+            <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{servicesPage.title.accent}</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
-            "Explore our curated suite of services, where every element is designed to elevate your celebration into a masterpiece of distinction."
+            "{servicesPage.description}"
           </p>
         </motion.div>
 

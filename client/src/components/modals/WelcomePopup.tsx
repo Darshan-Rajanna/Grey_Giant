@@ -20,7 +20,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import inviteBg from "@assets/gallery/TraditionalBands&BrandOpenings/B1.jpg";
+import { getFirstImageInDir } from "@/lib/asset-utils";
+
+const inviteBg = getFirstImageInDir("Welcome");
 
 export default function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);

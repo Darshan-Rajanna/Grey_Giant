@@ -12,11 +12,16 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import heroImg from "@assets/gallery/luxury_corporate_eve_632147c4.jpg";
+import { siteContent } from "@/data/siteContent";
+import { getFirstImageInDir } from "@/lib/asset-utils";
+
+const heroImg = getFirstImageInDir("Hero");
 
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { hero } = siteContent;
+
   return (
     <div className="min-h-screen bg-[#020202] overflow-hidden selection:bg-primary/30">
       {/* HERO SECTION */}
@@ -54,14 +59,14 @@ export default function Home() {
             >
               <span className="w-12 h-[1px] bg-primary/20" />
               <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
-                Premium Event Management
+                {hero.eyebrow}
               </span>
               <span className="w-12 h-[1px] bg-primary/20" />
             </motion.div>
 
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-              GREY <span className="relative inline-block">
-                <span className="inline-block bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">GIANT&nbsp;</span>
+              {hero.title.first} <span className="relative inline-block">
+                <span className="inline-block bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{hero.title.second}&nbsp;</span>
               </span>
             </h1>
 
@@ -71,7 +76,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 1 }}
               className="max-w-2xl mx-auto text-base md:text-lg text-white/50 font-light leading-relaxed mb-16 italic font-serif"
             >
-              "Specializing in luxury corporate events, bespoke weddings, and exclusive gatherings. Where vision meets excellence."
+              "{hero.description}"
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
@@ -85,7 +90,7 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="relative px-12 py-5 bg-gradient-to-r from-primary via-[#f8e4b1] to-primary text-black font-bold uppercase tracking-[0.3em] text-[11px] overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] rounded-none"
                   >
-                    <span className="relative z-10">Get a Quote</span>
+                    <span className="relative z-10">{hero.ctaPrimary}</span>
                     <div className="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                   </motion.button>
                 </DialogTrigger>
@@ -95,10 +100,20 @@ export default function Home() {
                       <Star className="w-8 h-8 text-primary animate-pulse" />
                     </div>
                     <DialogTitle className="text-3xl md:text-5xl font-serif mb-10 leading-[1.1] italic text-white font-light text-center">
-                      "We don’t just plan events, we create memories wrapped in <span className="text-primary not-italic">elegance</span>."
+                      "{hero.dialog.quote.split(',').map((part, i) => (
+                        <span key={i}>
+                          {i > 0 && ", "}
+                          {part.includes("elegance") ? (
+                            <>
+                              {part.replace("elegance", "")}
+                              <span className="text-primary not-italic">elegance</span>
+                            </>
+                          ) : part}
+                        </span>
+                      ))}"
                     </DialogTitle>
                     <DialogDescription className="text-[10px] text-primary/40 font-semibold tracking-[0.5em] uppercase mb-10 text-center">
-                      Every occasion, a signature of distinction.
+                      {hero.dialog.eyebrow}
                     </DialogDescription>
                   </DialogHeader>
 
@@ -113,7 +128,7 @@ export default function Home() {
                       }}
                       className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-16 text-[10px] tracking-[0.3em] font-bold uppercase w-full md:w-auto cursor-pointer"
                     >
-                      Begin Your Vision
+                      {hero.dialog.button}
                     </Button>
                   </div>
 
@@ -148,8 +163,14 @@ export default function Home() {
                           </div>
 
                           <h3 className="text-2xl md:text-3xl font-serif italic text-white leading-tight mb-6">
-                            "Define Your Celebration & <br />
-                            <span className="text-primary not-italic">Experience the Difference</span>"
+                            "{hero.redirectPopup.quote.split('&').map((part, i) => (
+                              <span key={i}>
+                                {i > 0 && <br />}
+                                {part.includes("Experience the Difference") ? (
+                                  <span className="text-primary not-italic">{part.trim()}</span>
+                                ) : part}
+                              </span>
+                            ))}"
                           </h3>
 
                           <motion.div
@@ -162,7 +183,7 @@ export default function Home() {
                           <div className="flex items-center justify-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
                             <p className="text-[10px] uppercase tracking-[0.6em] text-primary/50 font-bold">
-                              Redirecting to Your Journey
+                              {hero.redirectPopup.status}
                             </p>
                           </div>
                         </motion.div>
@@ -178,7 +199,7 @@ export default function Home() {
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-12 py-5 bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white/60 font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-500 hover:text-white hover:border-white/20 rounded-none relative overflow-hidden group"
               >
-                <span className="relative z-10">View Crafted Offerings</span>
+                <span className="relative z-10">{hero.ctaSecondary}</span>
                 <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </motion.button>
             </div>

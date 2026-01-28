@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
+import { siteContent } from "@/data/siteContent";
+import { getFirstImageInDir } from "@/lib/asset-utils";
 
-import About_img from "@assets/gallery/About/about_hero.jpg";
+const About_img = getFirstImageInDir("About");
 
 export default function About() {
+  const { about } = siteContent;
   return (
     <div className="min-h-fit bg-[#020202] text-white py-24 selection:bg-primary/30 relative overflow-hidden">
       {/* Premium Background Accents */}
@@ -27,13 +30,13 @@ export default function About() {
               >
                 <span className="w-10 h-[1px] bg-primary/20" />
                 <span className="text-[10px] uppercase tracking-[0.7em] text-primary/60 font-bold">
-                  The Organization
+                  {about.eyebrow}
                 </span>
                 <span className="w-10 h-[1px] bg-primary/20 lg:hidden" />
               </motion.div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9] whitespace-nowrap">
-                About <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Giants</span>
+                {about.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{about.title.accent}</span>
               </h1>
             </motion.div>
 
@@ -44,15 +47,11 @@ export default function About() {
               viewport={{ once: true }}
               className="prose prose-invert prose-lg max-w-none text-white/70 font-light leading-relaxed text-justify space-y-8"
             >
-              <p className="first-letter:text-6xl first-letter:text-primary first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:leading-none">
-                "Grey Giant Events & Services is a premium event management company specializing in luxury corporate events, bespoke weddings, birthday celebrations, and exclusive social gatherings."
-              </p>
-              <p>
-                We provide end-to-end planning, coordination, and execution, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.
-              </p>
-              <p>
-                Whether it is a high-profile corporate gathering or a personal milestone celebration, we deliver customized experiences that reflect class, professionalism, and timeless elegance. At Grey Giant, we craft moments of distinction where vision meets excellence and every event leaves a lasting impression.
-              </p>
+              {about.description.map((paragraph, i) => (
+                <p key={i} className={i === 0 ? "first-letter:text-6xl first-letter:text-primary first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:leading-none" : ""}>
+                  {i === 0 ? `"${paragraph}"` : paragraph}
+                </p>
+              ))}
             </motion.div>
           </div>
 
@@ -67,7 +66,7 @@ export default function About() {
             <div className="flex items-center justify-center gap-4 mb-6">
               <span className="w-8 h-[1px] bg-primary/30" />
               <span className="text-[10px] uppercase tracking-[0.5em] text-primary/80 font-bold">
-                Elite • Tailored • Exquisite
+                {about.labels}
               </span>
               <span className="w-8 h-[1px] bg-primary/30" />
             </div>
@@ -84,7 +83,7 @@ export default function About() {
             {/* Bottom Label (Optional, but matching the screenshot's symmetry) */}
             <div className="flex items-center justify-center gap-4 mt-6 opacity-40">
               <span className="text-[8px] uppercase tracking-[0.6em] text-white/60 font-medium">
-                Elite • Tailored • Exquisite
+                {about.labels}
               </span>
             </div>
           </motion.div>

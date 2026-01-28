@@ -1,0 +1,144 @@
+{
+    "hero": {
+        "eyebrow": "Premium Event Management",
+        "title": {
+            "first": "GREY",
+            "second": "GIANT"
+        },
+        "description": "Specializing in luxury corporate events, bespoke weddings, and exclusive gatherings. Where vision meets excellence.",
+        "ctaPrimary": "Get a Quote",
+        "ctaSecondary": "View Crafted Offerings",
+        "dialog": {
+            "quote": "We don’t just plan events, we create memories wrapped in elegance.",
+            "eyebrow": "Every occasion, a signature of distinction.",
+            "button": "Begin Your Vision"
+        },
+        "redirectPopup": {
+            "quote": "Define Your Celebration & Experience the Difference",
+            "status": "Redirecting to Your Journey"
+        }
+    },
+    "about": {
+        "eyebrow": "The Organization",
+        "title": {
+            "main": "About",
+            "accent": "Giants"
+        },
+        "description": [
+            "Grey Giant Events & Services is a premium event management company specializing in luxury corporate events, bespoke weddings, birthday celebrations, and exclusive social gatherings.",
+            "We provide end-to-end planning, coordination, and execution, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.",
+            "Whether it is a high-profile corporate gathering or a personal milestone celebration, we deliver customized experiences that reflect class, professionalism, and timeless elegance. At Grey Giant, we craft moments of distinction where vision meets excellence and every event leaves a lasting impression."
+        ],
+        "labels": "Elite • Tailored • Exquisite"
+    },
+    "distinction": {
+        "eyebrow": "The Heritage",
+        "title": {
+            "parts": [
+                "Crafting Moments",
+                "of",
+                "Distinction"
+            ]
+        },
+        "shortDesc": "Grey Giant Events & Services is a premier event management firm in Bengaluru. We provide end-to-end planning, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.",
+        "dialog": {
+            "eyebrow": "Our Heritage",
+            "title": "A Legacy of Excellence",
+            "paragraphs": [
+                "At Grey Giant Events, our story began with a simple yet ambitious vision: to transform standard event planning into an art form. We believe that every gathering, whether a grand wedding or a strategic corporate summit, is a unique canvas waiting for a masterstroke of design and precision.",
+                "Over years of orchestrating high-profile events in the heart of Bengaluru, we have refined a philosophy of \"Silent Excellence.\" This means our planning is invisible yet omni-present, allowing our clients to be guests at their own milestones while we manage every intricate detail with military precision and artistic flair.",
+                "Our commitment to the \"Global Standard\" is reflected in our selection of vendors, our use of cutting-edge event technology, and our unwavering dedication to aesthetics. We don't just plan events; we architect experiences that linger in the memory long after the final toast.",
+                "Whether orchestrating a prestigious corporate engagement or an intimate personal celebration, we design tailor-made experiences that embody class, professionalism, and timeless style. At Grey Giant, where vision is elevated through excellence and every occasion leaves a lasting impression."
+            ]
+        }
+    },
+    "values": {
+        "eyebrow": "Essence of Excellence",
+        "title": {
+            "main": "Our Core",
+            "accent": "Values"
+        },
+        "items": [
+            {
+                "title": "Precision",
+                "desc": "Attention to detail is our hallmark. Nothing is left to chance."
+            },
+            {
+                "title": "Elegance",
+                "desc": "We believe in refined aesthetics that speak volumes."
+            },
+            {
+                "title": "Excellence",
+                "desc": "Delivering beyond expectations is our standard."
+            },
+            {
+                "title": "Artistry",
+                "desc": "Every detail is thoughtfully composed to create striking experiences."
+            },
+            {
+                "title": "Integrity",
+                "desc": "We operate with honesty, transparency, and respect in every collaboration."
+            },
+            {
+                "title": "Innovation",
+                "desc": "Fresh ideas and modern approaches to every event."
+            },
+            {
+                "title": "Commitment",
+                "desc": "Your vision is our responsibility, from concept to final moment."
+            },
+            {
+                "title": "Sophistication",
+                "desc": "Refined taste guides every decision, ensuring timeless appeal."
+            },
+            {
+                "title": "Passion",
+                "desc": "Drafting moments that truly matter with heart and soul."
+            }
+        ]
+    },
+    "servicesPage": {
+        "eyebrow": "The Offering",
+        "title": {
+            "main": "Our Exclusive",
+            "accent": "Crafted Offerings"
+        },
+        "description": "Explore our curated suite of services, where every element is designed to elevate your celebration into a masterpiece of distinction."
+    },
+    "galleryPage": {
+        "eyebrow": "Visual Journal",
+        "title": {
+            "main": "Grey Giant",
+            "accent": "Collections"
+        },
+        "description": "A curated display of distinction and refined moments, captured across our most prestigious celebrations."
+    },
+    "contactPage": {
+        "eyebrow": "Get In Touch",
+        "title": {
+            "main": "Envision Your",
+            "accent": "Experience"
+        },
+        "description": "Connect with our artisans to begin crafting your next milestone event with absolute precision and refined elegance.",
+        "formQuote": "Define your celebration..."
+    },
+    "reviewsPage": {
+        "eyebrow": "Client Reflections",
+        "title": {
+            "main": "Voices of",
+            "accent": "Distinction"
+        },
+        "description": "Authentic experiences from our most discerning clients, reflecting our commitment to absolute excellence."
+    },
+    "contact": {
+        "whatsapp": "917483216698",
+        "email": "greygiant01@gmail.com",
+        "address": "Post-office, Kamakshipalya, Bengaluru, Karnataka 560079",
+        "hours": "Monday - Sunday | Open 24 Hours"
+    },
+    "socials": {
+        "instagram": "https://instagram.com/greygiant",
+        "facebook": "https://facebook.com/greygiant",
+        "linkedin": "https://linkedin.com/company/greygiant"
+    }
+}
