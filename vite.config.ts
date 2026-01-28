@@ -4,7 +4,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? "/GREY-GIANT/" : "/",
+  base: process.env.GITHUB_ACTIONS ? "/Grey_gaint/" : "/", // /GREY-GIANT/
   plugins: [
     react(),
     runtimeErrorOverlay(),
