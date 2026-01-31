@@ -91,15 +91,52 @@ export default function Admin() {
   // --- Core Handlers ---
 
   const sendOtp = async () => {
-    if (!auth.githubToken || !auth.githubOwner || !auth.githubRepo) {
+    const trimmedToken = auth.githubToken.trim();
+    const trimmedOwner = auth.githubOwner.trim();
+    const trimmedRepo = auth.githubRepo.trim();
+
+    if (!trimmedToken || !trimmedOwner || !trimmedRepo) {
       setStatus({ type: "error", message: "Missing GitHub credentials." });
       return;
     }
-    const code = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(code);
-    console.log("OTP code:", code);
-    setAuth(prev => ({ ...prev, step: "otp" }));
-    setStatus({ type: "success", message: `Activation key sent to console: ${code}` });
+
+    setIsSaving(true);
+    setStatus({ type: "success", message: "Validating credentials..." });
+
+    try {
+      // Test the token by trying to get the repo info
+      const octokit = new (await import("octokit")).Octokit({ auth: trimmedToken });
+      await octokit.rest.repos.get({
+        owner: trimmedOwner,
+        repo: trimmedRepo,
+      });
+
+      // If we reach here, credentials are valid
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      setGeneratedOtp(code);
+      console.log("OTP code:", code);
+      
+      // Update state with trimmed values
+      setAuth(prev => ({ 
+        ...prev, 
+        githubToken: trimmedToken, 
+        githubOwner: trimmedOwner, 
+        githubRepo: trimmedRepo,
+        step: "otp" 
+      }));
+      
+      setStatus({ type: "success", message: `Activation key sent to console: ${code}` });
+    } catch (error: any) {
+      console.error("Validation Error:", error);
+      setStatus({ 
+        type: "error", 
+        message: error.status === 401 ? "Bad credentials: Check your Token." : 
+                 error.status === 404 ? "Repository not found: Check Owner/Repo names." :
+                 "Validation failed: " + error.message 
+      });
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const verifyOtp = () => {
