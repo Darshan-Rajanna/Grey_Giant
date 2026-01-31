@@ -113,7 +113,48 @@
         },
         "description": "A window into our world of distinction—captured moments from the storied celebrations we've had the honor to craft.",
         "viewMore": "Unveil More Collections",
-        "viewLess": "Show Fewer Masterpieces"
+        "viewLess": "Show Fewer Masterpieces",
+        "galleryItems": [
+            "BespokeWeddings&Engagements/W1.jpg",
+            "BespokeWeddings&Engagements/W2.jpg",
+            "BespokeWeddings&Engagements/W3.jpg",
+            "BespokeWeddings&Engagements/W4.jpg",
+            "LuxuryCorporateEvents/E1.jpg",
+            "LuxuryCorporateEvents/E2.jpg",
+            "LuxuryCorporateEvents/E3.jpg",
+            "LuxuryCorporateEvents/E4.jpg",
+            "DJNights&PrivateParties/dj1.jpg",
+            "DJNights&PrivateParties/dj2.jpg",
+            "DJNights&PrivateParties/dj3.jpg",
+            "DJNights&PrivateParties/dj4.jpg",
+            "TraditionalBands&BrandOpenings/B1.jpg",
+            "TraditionalBands&BrandOpenings/B2.jpg",
+            "TraditionalBands&BrandOpenings/T1.jpg",
+            "TraditionalBands&BrandOpenings/T2.jpg",
+            "Catering & Culinary Experiences/C1.jpg",
+            "Catering & Culinary Experiences/C2.jpg",
+            "Catering & Culinary Experiences/C3.jpg",
+            "Catering & Culinary Experiences/Catering, Birthday & Wedding Cakes and Desserts.jpg",
+            "Pastries & Celebration Cakes/C1.jpg",
+            "Pastries & Celebration Cakes/C2.jpg",
+            "Pastries & Celebration Cakes/C3.jpg",
+            "Makeup&StylingServices/M1.jpg",
+            "Makeup&StylingServices/M2.jpg",
+            "Makeup&StylingServices/M3.jpg",
+            "Makeup&StylingServices/M4.jpg",
+            "Balloon Decor & Birthday Celebrations/B1.jpg",
+            "Balloon Decor & Birthday Celebrations/B2.jpg",
+            "Balloon Decor & Birthday Celebrations/B3.jpg",
+            "Balloon Decor & Birthday Celebrations/B4.jpg",
+            "Private & Social Celebrations/p1.jpg",
+            "Private & Social Celebrations/P2.jpg",
+            "Private & Social Celebrations/p3.jpg",
+            "Private & Social Celebrations/p4.jpg",
+            "Schools, Colleges & University Event Services/I1.jpg",
+            "Schools, Colleges & University Event Services/I2.jpg",
+            "Schools, Colleges & University Event Services/I3.jpg",
+            "Schools, Colleges & University Event Services/I4.jpg"
+        ]
     },
     "contactPage": {
         "eyebrow": "Let's Connect",
@@ -154,10 +195,10 @@
         "image": "Welcome/welcome_bg.jpg"
     },
     "backgrounds": {
-        "home": "hero_new.png",
+        "home": "Hero_bg.jpg",
         "about": "About_bg.jpg",
         "story": "Story_bg.jpg",
-        "values": "Values_bg.jpg",
+        "values": "About_bg.jpg",
         "services": "Services_bg.jpg",
         "gallery": "Gallery_bg.jpg",
         "reviews": "Reviews_bg.jpg",
@@ -400,30 +441,30 @@
             "title": "Whimsical Decor & Birthdays",
             "desc": "Joyful, creative installations that bring a sense of wonder to every age.",
             "fullDescription": "Birthdays are about the magic of the moment. We use creative styling and installation art to turn standard spaces into wonderlands of color and joy.",
-            "image": "Balloon Décor & Birthday Celebrations/B1.jpg",
+            "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
             "details": [
                 {
                     "title": "Wonder Walls",
                     "buttonText": "See the Magic",
-                    "image": "Balloon Décor & Birthday Celebrations/B1.jpg",
+                    "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
                     "description": "Vibrant, creative backdrops that serve as the perfect frame for your celebratory photos."
                 },
                 {
                     "title": "Grand Entrances",
                     "buttonText": "Welcome Guests",
-                    "image": "Balloon Décor & Birthday Celebrations/B2.jpg",
+                    "image": "Balloon Decor & Birthday Celebrations/B2.jpg",
                     "description": "Whimsical arches and pillar installations that say 'the party has officially started'."
                 },
                 {
                     "title": "Youthful Joy",
                     "buttonText": "Plan a Dream",
-                    "image": "Balloon Décor & Birthday Celebrations/B3.jpg",
+                    "image": "Balloon Decor & Birthday Celebrations/B3.jpg",
                     "description": "Themed environments designed specifically to spark the imagination of our youngest guests."
                 },
                 {
                     "title": "Bespoke Accents",
                     "buttonText": "Style Your Party",
-                    "image": "Balloon Décor & Birthday Celebrations/B4.jpg",
+                    "image": "Balloon Decor & Birthday Celebrations/B4.jpg",
                     "description": "Coordinated decor that ensures your birthday celebration feels thoughtfully curated throughout."
                 }
             ]

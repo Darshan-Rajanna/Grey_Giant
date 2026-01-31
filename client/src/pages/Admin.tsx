@@ -1,11 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, Mail, Github, Save, CheckCircle, AlertCircle, Image as ImageIcon, Send, X, Plus, Trash2, ArrowRight, Layers, Star, PlusCircle, Pencil, Search, RefreshCw, UploadCloud, Eye, FileText } from "lucide-react";
+import { Lock, Mail, Github, Save, CheckCircle, AlertCircle, Image as ImageIcon, Send, X, Plus, Trash2, ArrowRight, Layers, Star, PlusCircle, Pencil, Search, RefreshCw, UploadCloud, Eye, FileText, ChevronLeft, ChevronRight, GripVertical, Maximize2 } from "lucide-react";
 import { siteContent, type SiteContent } from "@/data/siteContent";
 import { updateGitHubFile, uploadGitHubImage, listGitHubFiles, deleteGitHubFile, type GitHubConfig } from "@/lib/github-api";
 import { resolveAsset } from "@/lib/asset-utils";
 
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragEndEvent,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  rectSortingStrategy,
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
 // --- Types ---
+const allFolderImages = Object.keys(import.meta.glob("@assets/gallery/**/*.{png,jpg,jpeg}", { eager: true }));
+
 interface AuthState {
   isLoggedIn: boolean;
   step: "credentials" | "otp";
@@ -15,6 +38,273 @@ interface AuthState {
 }
 
 type Tab = "hero" | "about" | "story" | "values" | "services" | "gallery" | "reviews" | "contact" | "socials" | "welcome";
+
+// --- Sortable Components ---
+
+const SortableGridItem = ({ id, path, idx, otherUsage, onRemove, onReplace }: any) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? 50 : 'auto',
+    opacity: isDragging ? 0.3 : 1,
+  };
+
+  return (
+    <div 
+        ref={setNodeRef} 
+        style={style} 
+        className="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden cursor-pointer group p-2 bg-black/20 border border-primary/30 shadow-2xl rounded-sm w-full"
+    >
+        <div className="w-full h-full" {...attributes} {...listeners}>
+            <img 
+                src={resolveAsset(path)} 
+                className="w-full h-full object-cover rounded-sm transition-transform duration-1000 group-hover:scale-110" 
+                alt="Gallery Item" 
+            />
+        </div>
+        
+        {/* Usage Indicator */}
+        {otherUsage.has(path) && (
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 z-10 pointer-events-none">
+                <Layers size={10} className="text-primary/60"/>
+                <span className="text-[8px] font-black uppercase text-white/60 tracking-widest">In Use</span>
+            </div>
+        )}
+        
+        {/* Actions Overlay */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-4 z-20 pointer-events-none">
+            <div className="flex gap-2 pointer-events-auto">
+                {onReplace && (
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); onReplace(); }}
+                        className="p-3 bg-primary/20 hover:bg-primary text-primary hover:text-black rounded-full transition-all border border-primary/30"
+                        title="Replace Asset"
+                    >
+                        <RefreshCw size={14}/>
+                    </button>
+                )}
+                <button 
+                    onClick={(e) => { e.stopPropagation(); onRemove(); }}
+                    className="p-3 bg-red-500/20 hover:bg-red-500 text-red-500 hover:text-white rounded-full transition-all border border-red-500/30"
+                    title="Remove from Curator"
+                >
+                    <Trash2 size={14}/>
+                </button>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-full border border-primary/20">
+                <GripVertical className="text-primary/40 w-4 h-4" />
+            </div>
+        </div>
+        
+        <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/60 rounded-lg text-[8px] font-black text-white/40 border border-white/5 pointer-events-none">
+            {idx + 1}
+        </div>
+    </div>
+  );
+};
+
+const SortableListItem = ({ id, children, onRemove, handle = true }: any) => {
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        zIndex: isDragging ? 50 : 'auto',
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} className={`relative group ${isDragging ? 'opacity-50' : ''}`}>
+            <div className="flex items-start gap-4 p-6 bg-white/[0.01] border border-white/5 rounded-3xl hover:bg-white/[0.03] hover:border-white/10 transition-all">
+                {handle && (
+                    <div {...attributes} {...listeners} className="mt-1 cursor-grab active:cursor-grabbing text-white/5 hover:text-primary transition-colors p-2 -ml-2">
+                        <GripVertical size={20}/>
+                    </div>
+                )}
+                <div className="flex-1 space-y-4">
+                    {children}
+                </div>
+                {onRemove && (
+                    <button 
+                        onClick={onRemove}
+                        className="mt-1 p-3 text-red-500/20 hover:text-red-500 hover:bg-red-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-all"
+                    >
+                        <Trash2 size={20}/>
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// --- Externalized UI Components ---
+
+const Field = ({ label, value, onChange, area = false, italic = false, image = false, onBrowse }: any) => (
+  <div className="space-y-3">
+    <div className="flex items-center justify-between px-1">
+        <label className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black flex items-center gap-2">
+          {image ? <ImageIcon size={10} className="text-primary/40"/> : <Pencil size={10} className="text-primary/40"/>} {label}
+        </label>
+        {image && onBrowse && (
+            <button 
+              onClick={onBrowse}
+              className="text-[9px] uppercase font-black tracking-widest text-primary/60 hover:text-primary transition-colors flex items-center gap-2 bg-primary/5 px-3 py-1 rounded-full border border-primary/10"
+            >
+                <Search size={10}/> Browse Assets
+            </button>
+        )}
+    </div>
+    {area ? (
+      <textarea 
+        className={`w-full bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-white/80 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all min-h-[120px] resize-none leading-relaxed ${italic ? 'italic font-serif' : 'text-sm'}`}
+        value={value} 
+        onChange={(e) => onChange(e.target.value)} 
+      />
+    ) : (
+      <div className="relative group">
+          <input 
+            type="text" 
+            className={`w-full bg-white/[0.02] border border-white/5 rounded-2xl h-14 px-6 text-white/80 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all ${image ? 'pr-20 font-mono text-xs' : ''}`}
+            value={value} 
+            onChange={(e) => onChange(e.target.value)} 
+          />
+          {image && value && (
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg border border-white/10 overflow-hidden bg-black/40">
+                  <img src={resolveAsset(value)} className="w-full h-full object-cover" alt="Thumb" onError={(e:any)=>e.target.src="https://placehold.co/100x100/111/fff?text=?"}/>
+              </div>
+          )}
+      </div>
+    )}
+  </div>
+);
+
+const BackgroundControl = ({ pageId, backgrounds, assetFiles, onBrowse, onChange }: any) => (
+  <div className="p-8 bg-primary/5 border border-primary/20 rounded-[2.5rem] space-y-6">
+      <div className="flex items-center justify-between">
+          <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-primary/80">Page Background Engine</h4>
+          <div className="flex items-center gap-4">
+              <button 
+                onClick={onBrowse}
+                className="text-[9px] uppercase font-black tracking-widest text-primary/60 hover:text-primary transition-colors flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20"
+              >
+                  <Search size={12}/> Browse Backgrounds
+              </button>
+              <ImageIcon size={16} className="text-primary/40"/>
+          </div>
+      </div>
+      <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex-1 space-y-4">
+              <select 
+                  className="w-full bg-black/40 border border-white/10 rounded-2xl h-12 px-4 text-xs text-white/60 focus:border-primary/40 transition-all outline-none cursor-pointer"
+                  value={backgrounds[pageId]}
+                  onChange={(e) => onChange(e.target.value)}
+              >
+                  <option value="">Select Background Asset</option>
+                  {(assetFiles["backgrounds"] || []).map((f: string) => <option key={f} value={f}>{f}</option>)}
+              </select>
+              <p className="text-[9px] text-white/20 uppercase tracking-widest leading-relaxed">Assign any image from the `backgrounds` repository as the main canvas for this section.</p>
+          </div>
+          {backgrounds[pageId] && (
+              <div className="w-full md:w-32 aspect-video bg-black/40 rounded-2xl border border-white/5 overflow-hidden group relative">
+                  <img 
+                    src={resolveAsset(backgrounds[pageId])} 
+                    className="w-full h-full object-cover opacity-50 transition-opacity group-hover:opacity-80" 
+                    alt="Preview"
+                    onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Loading"}
+                  />
+              </div>
+          )}
+      </div>
+  </div>
+);
+
+const RepositoryBrowser = ({ dir, onSelect, activeSelection, assetFiles, fetchAllAssets, isFetchingFiles, onFileChange, selectedUploadFile, uploadTargetDirForSection, setUploadTargetDirForSection, handleImageUpload, handleDeleteAsset, usedAssets }: any) => (
+  <div className="space-y-8">
+      <div className="flex items-center justify-between px-2">
+          <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-white/20">Archive: {dir}</h4>
+          <div className="flex gap-6 items-center">
+             <button onClick={fetchAllAssets} className="text-primary/40 hover:text-primary transition-colors flex items-center gap-2 text-[10px] uppercase font-black"><RefreshCw size={12} className={isFetchingFiles ? "animate-spin" : ""}/> Sync</button>
+             <label htmlFor={`up-${dir}`} className="text-primary/60 hover:text-primary transition-colors cursor-pointer flex items-center gap-2 text-[10px] uppercase font-black">
+                  <UploadCloud size={14}/> Upload New
+             </label>
+             <input type="file" id={`up-${dir}`} className="hidden" accept="image/*" onChange={(e) => {
+                 setUploadTargetDirForSection(dir);
+                 onFileChange(e);
+             }} />
+          </div>
+      </div>
+
+      {selectedUploadFile && uploadTargetDirForSection === dir && (
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-6 bg-primary/10 border border-dashed border-primary/30 rounded-3xl flex items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl border border-primary/20 bg-black/40 overflow-hidden">
+                      <img src={selectedUploadFile.base64} className="w-full h-full object-cover" alt="Up"/>
+                  </div>
+                 <div className="flex flex-col">
+                      <span className="text-[10px] font-black text-primary/80 uppercase tracking-widest">{selectedUploadFile.name}</span>
+                      <span className="text-[9px] text-white/20 uppercase">Ready for deployment</span>
+                 </div>
+              </div>
+              <div className="flex gap-4">
+                  <button onClick={() => handleImageUpload(dir)} className="px-6 py-2 bg-primary text-black text-[10px] uppercase font-black rounded-full shadow-lg hover:scale-105 transition-all">Confirm Upload</button>
+                  <button onClick={() => onFileChange(null)} className="p-2 text-white/40 hover:text-red-500 transition-colors"><X size={16}/></button>
+              </div>
+          </motion.div>
+      )}
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {(assetFiles[dir] || []).map((f: string) => {
+              const isBg = dir === "backgrounds";
+              const fullPath = isBg ? f : `${dir}/${f}`;
+              const isActive = activeSelection === fullPath;
+              const isUsed = usedAssets && usedAssets.has(fullPath);
+              
+              return (
+                  <motion.div 
+                      key={f} 
+                      whileHover={{ scale: 1.02 }}
+                      className={`aspect-square bg-white/[0.02] border rounded-[2rem] overflow-hidden group relative transition-all duration-500 ${isActive ? 'border-primary/60 shadow-[0_0_30px_rgba(212,175,55,0.2)]' : 'border-white/5'}`}
+                  >
+                      <img 
+                        src={resolveAsset(fullPath)} 
+                        className={`w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-90 grayscale-0' : 'opacity-40 group-hover:opacity-80 grayscale-[0.5] group-hover:grayscale-0'}`} 
+                        alt={f}
+                        onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Error"}
+                      />
+                      
+                      {isUsed && (
+                          <div className="absolute top-4 left-4 flex items-center gap-1.5 px-2 py-1 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 z-10">
+                              <Layers size={10} className="text-primary/60"/>
+                              <span className="text-[8px] font-black uppercase text-white/60 tracking-widest">In Use</span>
+                          </div>
+                      )}
+
+                      <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col gap-2">
+                          <button 
+                              onClick={() => {
+                                  if(onSelect) onSelect(fullPath);
+                                  else {
+                                      navigator.clipboard.writeText(fullPath);
+                                  }
+                              }} 
+                              className="w-full py-2 bg-primary text-black rounded-xl text-[9px] uppercase font-black shadow-xl"
+                          >
+                              {onSelect ? "Apply Asset" : "Copy Reference"}
+                          </button>
+                          {!isUsed && (
+                              <button onClick={() => handleDeleteAsset(dir, f)} className="text-red-500/60 hover:text-red-500 transition-colors self-center p-1"><Trash2 size={12}/></button>
+                          )}
+                      </div>
+                      {isActive && (
+                          <div className="absolute top-4 right-4 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black shadow-lg animate-in zoom-in-50 duration-500">
+                              <CheckCircle size={14}/>
+                          </div>
+                      )}
+                  </motion.div>
+              );
+          })}
+      </div>
+  </div>
+);
 
 export default function Admin() {
   const [auth, setAuth] = useState<AuthState>({
@@ -36,17 +326,16 @@ export default function Admin() {
   const [assetFiles, setAssetFiles] = useState<{ [key: string]: string[] }>({});
   const [isFetchingFiles, setIsFetchingFiles] = useState(false);
   const [selectedUploadFile, setSelectedUploadFile] = useState<{ name: string; base64: string } | null>(null);
-  const [isMediaBrowserOpen, setIsMediaBrowserOpen] = useState(false);
   const [activePickerField, setActivePickerField] = useState<{ label: string, path: string, setter: (val: string) => void, preferredDir?: string } | null>(null);
 
-  const assetDirectories = ["backgrounds", "Hero", "About", "OurStory", "Welcome", "LuxuryCorporateEvents", "BespokeWeddings&Engagements", "DJNights&PrivateParties", "TraditionalBands&BrandOpenings", "Catering & Culinary Experiences", "Makeup&StylingServices", "Pastries & Celebration Cakes", "Balloon Décor & Birthday Celebrations", "Private & Social Celebrations", "Schools, Colleges & University Event Services"];
+  const assetDirectories = ["backgrounds", "Welcome", "LuxuryCorporateEvents", "BespokeWeddings&Engagements", "GeneralGallery", "DJNights&PrivateParties", "TraditionalBands&BrandOpenings", "Catering & Culinary Experiences", "Makeup&StylingServices", "Pastries & Celebration Cakes", "Balloon Decor & Birthday Celebrations", "Private & Social Celebrations", "Schools, Colleges & University Event Services"];
 
   // Configuration mapping for background directory associations
   const bgDirMap: Record<Tab, string> = {
-    hero: "Hero",
-    about: "About",
-    story: "OurStory",
-    values: "Welcome", // Using welcome dir for values contextually
+    hero: "backgrounds",
+    about: "backgrounds",
+    story: "backgrounds",
+    values: "backgrounds",
     services: "LuxuryCorporateEvents",
     gallery: "BespokeWeddings&Engagements",
     reviews: "DJNights&PrivateParties",
@@ -71,6 +360,20 @@ export default function Admin() {
     }
   }, [auth.isLoggedIn]);
 
+  const adminGalleryList = useMemo(() => {
+    const savedOrder = formData.galleryPage.galleryItems || [];
+    
+    const normalizedFolderImages = allFolderImages.map(path => {
+      const parts = path.split('/');
+      const fileName = parts[parts.length - 1];
+      const folderName = parts[parts.length - 2];
+      return `${folderName}/${fileName}`;
+    });
+    
+    const newImages = normalizedFolderImages.filter(path => !savedOrder.includes(path));
+    return [...savedOrder, ...newImages];
+  }, [formData.galleryPage.galleryItems]);
+
   const fetchAllAssets = async () => {
     setIsFetchingFiles(true);
     const config: GitHubConfig = { owner: auth.githubOwner, repo: auth.githubRepo, token: auth.githubToken };
@@ -86,6 +389,57 @@ export default function Admin() {
     }
     setAssetFiles(newAssets);
     setIsFetchingFiles(false);
+  };
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  const handleDragEnd = (event: DragEndEvent, section: string, subId?: string) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+       setFormData((prev: SiteContent) => {
+           const newData = { ...prev };
+           if (section === 'gallery') {
+              const oldIndex = adminGalleryList.indexOf(active.id as string);
+              const newIndex = adminGalleryList.indexOf(over.id as string);
+              
+              if (oldIndex !== -1 && newIndex !== -1) {
+                newData.galleryPage.galleryItems = arrayMove(adminGalleryList, oldIndex, newIndex);
+              }
+           } else if (section === 'services') {
+              const oldIndex = newData.services.findIndex(s => s.id === active.id);
+              const newIndex = newData.services.findIndex(s => s.id === over?.id);
+              newData.services = arrayMove([...newData.services], oldIndex, newIndex);
+           } else if (section === 'service-details' && subId) {
+              const sIdx = newData.services.findIndex(s => s.id === subId);
+              if(sIdx !== -1) {
+                  const details = [...(newData.services[sIdx].details || [])];
+                  const oldIndex = details.findIndex((_, idx) => `det-${subId}-${idx}` === active.id);
+                  const newIndex = details.findIndex((_, idx) => `det-${subId}-${idx}` === over?.id);
+                  newData.services[sIdx].details = arrayMove(details, oldIndex, newIndex);
+               }
+           } else if (section === 'about-desc') {
+              const oldIndex = newData.about.description.indexOf(active.id as string);
+              const newIndex = newData.about.description.indexOf(over?.id as string);
+              newData.about.description = arrayMove([...newData.about.description], oldIndex, newIndex);
+           } else if (section === 'distinction-dialog') {
+              const oldIndex = newData.distinction.dialog.paragraphs.indexOf(active.id as string);
+              const newIndex = newData.distinction.dialog.paragraphs.indexOf(over?.id as string);
+              newData.distinction.dialog.paragraphs = arrayMove([...newData.distinction.dialog.paragraphs], oldIndex, newIndex);
+           } else if (section === 'values') {
+              const oldIndex = newData.values.items.findIndex(v => v.title === active.id);
+              const newIndex = newData.values.items.findIndex(v => v.title === over?.id);
+              newData.values.items = arrayMove([...newData.values.items], oldIndex, newIndex);
+           } else if (section === 'reviews') {
+              const oldIndex = newData.reviewItems.findIndex(r => r.id === active.id);
+              const newIndex = newData.reviewItems.findIndex(r => r.id === over?.id);
+              newData.reviewItems = arrayMove([...newData.reviewItems], oldIndex, newIndex);
+           }
+           return newData;
+       });
   };
 
   // --- Core Handlers ---
@@ -229,181 +583,48 @@ export default function Admin() {
 
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
-  const Field = ({ label, value, onChange, area = false, italic = false, image = false, dir }: any) => (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between px-1">
-          <label className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black flex items-center gap-2">
-            {image ? <ImageIcon size={10} className="text-primary/40"/> : <Pencil size={10} className="text-primary/40"/>} {label}
-          </label>
-          {image && (
-              <button 
-                onClick={() => {
-                    setActivePickerField({ label, path: value, setter: onChange, preferredDir: dir });
-                    setIsPickerOpen(true);
-                }}
-                className="text-[9px] uppercase font-black tracking-widest text-primary/60 hover:text-primary transition-colors flex items-center gap-2 bg-primary/5 px-3 py-1 rounded-full border border-primary/10"
-              >
-                  <Search size={10}/> Browse Assets
-              </button>
-          )}
-      </div>
-      {area ? (
-        <textarea 
-          className={`w-full bg-white/[0.02] border border-white/5 rounded-2xl p-6 text-white/80 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all min-h-[120px] resize-none leading-relaxed ${italic ? 'italic font-serif' : 'text-sm'}`}
-          value={value} 
-          onChange={(e) => onChange(e.target.value)} 
-        />
-      ) : (
-        <div className="relative group">
-            <input 
-              type="text" 
-              className={`w-full bg-white/[0.02] border border-white/5 rounded-2xl h-14 px-6 text-white/80 focus:border-primary/40 focus:bg-white/[0.04] outline-none transition-all ${image ? 'pr-20 font-mono text-xs' : ''}`}
-              value={value} 
-              onChange={(e) => onChange(e.target.value)} 
-            />
-            {image && value && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg border border-white/10 overflow-hidden bg-black/40">
-                    <img src={resolveAsset(value)} className="w-full h-full object-cover" alt="Thumb" onError={(e:any)=>e.target.src="https://placehold.co/100x100/111/fff?text=?"}/>
-                </div>
-            )}
-        </div>
-      )}
-    </div>
-  );
-
-  const BackgroundControl = ({ pageId }: { pageId: string }) => (
-    <div className="p-8 bg-primary/5 border border-primary/20 rounded-[2.5rem] space-y-6">
-        <div className="flex items-center justify-between">
-            <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-primary/80">Page Background Engine</h4>
-            <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => {
-                      setActivePickerField({ 
-                          label: "Section Background", 
-                          path: (formData.backgrounds as any)[pageId], 
-                          setter: (val) => setFormData(p => ({ ...p, backgrounds: { ...p.backgrounds, [pageId]: val } })) 
-                      });
-                      setIsPickerOpen(true);
-                  }}
-                  className="text-[9px] uppercase font-black tracking-widest text-primary/60 hover:text-primary transition-colors flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20"
-                >
-                    <Search size={12}/> Browse Backgrounds
-                </button>
-                <ImageIcon size={16} className="text-primary/40"/>
-            </div>
-        </div>
-        <div className="flex flex-col md:flex-row gap-6">
-            <div className="flex-1 space-y-4">
-                <select 
-                    className="w-full bg-black/40 border border-white/10 rounded-2xl h-12 px-4 text-xs text-white/60 focus:border-primary/40 transition-all outline-none cursor-pointer"
-                    value={(formData.backgrounds as any)[pageId]}
-                    onChange={(e) => setFormData(p => ({ ...p, backgrounds: { ...p.backgrounds, [pageId]: e.target.value } }))}
-                >
-                    <option value="">Select Background Asset</option>
-                    {(assetFiles["backgrounds"] || []).map(f => <option key={f} value={f}>{f}</option>)}
-                </select>
-                <p className="text-[9px] text-white/20 uppercase tracking-widest leading-relaxed">Assign any image from the `backgrounds` repository as the main canvas for this section.</p>
-            </div>
-            {(formData.backgrounds as any)[pageId] && (
-                <div className="w-full md:w-32 aspect-video bg-black/40 rounded-2xl border border-white/5 overflow-hidden group relative">
-                    <img 
-                      src={resolveAsset((formData.backgrounds as any)[pageId])} 
-                      className="w-full h-full object-cover opacity-50 transition-opacity group-hover:opacity-80" 
-                      alt="Preview"
-                      onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Loading"}
-                    />
-                </div>
-            )}
-        </div>
-    </div>
-  );
-
-  const RepositoryBrowser = ({ dir, onSelect, activeSelection }: { dir: string, onSelect?: (f: string) => void, activeSelection?: string }) => (
-    <div className="space-y-8">
-        <div className="flex items-center justify-between px-2">
-            <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-white/20">Archive: {dir}</h4>
-            <div className="flex gap-6 items-center">
-               <button onClick={fetchAllAssets} className="text-primary/40 hover:text-primary transition-colors flex items-center gap-2 text-[10px] uppercase font-black"><RefreshCw size={12} className={isFetchingFiles ? "animate-spin" : ""}/> Sync</button>
-               <label htmlFor={`up-${dir}`} className="text-primary/60 hover:text-primary transition-colors cursor-pointer flex items-center gap-2 text-[10px] uppercase font-black">
-                    <UploadCloud size={14}/> Upload New
-               </label>
-               <input type="file" id={`up-${dir}`} className="hidden" accept="image/*" onChange={(e) => {
-                   setUploadTargetDirForSection(dir);
-                   onFileChange(e);
-               }} />
-            </div>
-        </div>
-
-        {selectedUploadFile && uploadTargetDirForSection === dir && (
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="p-6 bg-primary/10 border border-dashed border-primary/30 rounded-3xl flex items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl border border-primary/20 bg-black/40 overflow-hidden">
-                        <img src={selectedUploadFile.base64} className="w-full h-full object-cover" alt="Up"/>
-                    </div>
-                   <div className="flex flex-col">
-                        <span className="text-[10px] font-black text-primary/80 uppercase tracking-widest">{selectedUploadFile.name}</span>
-                        <span className="text-[9px] text-white/20 uppercase">Ready for deployment</span>
-                   </div>
-                </div>
-                <div className="flex gap-4">
-                    <button onClick={() => handleImageUpload(dir)} className="px-6 py-2 bg-primary text-black text-[10px] uppercase font-black rounded-full shadow-lg hover:scale-105 transition-all">Confirm Upload</button>
-                    <button onClick={() => setSelectedUploadFile(null)} className="p-2 text-white/40 hover:text-red-500 transition-colors"><X size={16}/></button>
-                </div>
-            </motion.div>
-        )}
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {(assetFiles[dir] || []).map(f => {
-                const isBg = dir === "backgrounds";
-                const fullPath = isBg ? f : `${dir}/${f}`;
-                const isActive = activeSelection === fullPath;
-                
-                return (
-                    <motion.div 
-                        key={f} 
-                        whileHover={{ scale: 1.02 }}
-                        className={`aspect-square bg-white/[0.02] border rounded-[2rem] overflow-hidden group relative transition-all duration-500 ${isActive ? 'border-primary/60 shadow-[0_0_30px_rgba(212,175,55,0.2)]' : 'border-white/5'}`}
-                    >
-                        <img 
-                          src={resolveAsset(fullPath)} 
-                          className={`w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-90 grayscale-0' : 'opacity-40 group-hover:opacity-80 grayscale-[0.5] group-hover:grayscale-0'}`} 
-                          alt={f}
-                          onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Error"}
-                        />
-                        <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col gap-2">
-                            <button 
-                                onClick={() => {
-                                    if(onSelect) onSelect(fullPath);
-                                    else {
-                                        navigator.clipboard.writeText(fullPath);
-                                        setStatus({ type: "success", message: "Path copied to clipboard." });
-                                    }
-                                }} 
-                                className="w-full py-2 bg-primary text-black rounded-xl text-[9px] uppercase font-black shadow-xl"
-                            >
-                                {onSelect ? "Apply Asset" : "Copy Reference"}
-                            </button>
-                            <button onClick={() => handleDeleteAsset(dir, f)} className="text-red-500/60 hover:text-red-500 transition-colors self-center p-1"><Trash2 size={12}/></button>
-                        </div>
-                        {isActive && (
-                            <div className="absolute top-4 right-4 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-black shadow-lg animate-in zoom-in-50 duration-500">
-                                <CheckCircle size={14}/>
-                            </div>
-                        )}
-                    </motion.div>
-                );
-            })}
-        </div>
-    </div>
-  );
-
-  const ImageCRUD = ({ dir }: { dir: string }) => <RepositoryBrowser dir={dir} />;
-
-  const promptCopyPath = (dir: string, f: string) => {
-      const path = `${dir}/${f}`;
-      navigator.clipboard.writeText(path);
-      setStatus({ type: "success", message: `Path copied: ${path}` });
+  // Helper to find all image references in siteContent
+  const getUsedAssets = (content: SiteContent) => {
+    const used = new Set<string>();
+    
+    // Backgrounds
+    Object.values(content.backgrounds).forEach((path: any) => { if(path) used.add(path as string); });
+    
+    // Services
+    content.services.forEach(s => {
+      if(s.image) used.add(s.image);
+      (s.details || []).forEach(d => { if(d.image) used.add(d.image); });
+    });
+    
+    // Gallery Items
+    (content.galleryPage.galleryItems || []).forEach((path: string) => { if(path) used.add(path); });
+    
+    // Welcome
+    if(content.welcomePopup?.image) used.add(content.welcomePopup.image);
+    
+    return used;
   };
+
+  const getOtherUsage = (content: SiteContent) => {
+    const used = new Set<string>();
+    
+    // Backgrounds
+    Object.values(content.backgrounds).forEach((path: any) => { if(path) used.add(path as string); });
+    
+    // Services
+    content.services.forEach(s => {
+      if(s.image) used.add(s.image);
+      (s.details || []).forEach(d => { if(d.image) used.add(d.image); });
+    });
+    
+    // Welcome
+    if(content.welcomePopup?.image) used.add(content.welcomePopup.image);
+    
+    return used;
+  };
+
+  const usedAssets = getUsedAssets(formData);
+  const otherUsage = getOtherUsage(formData);
 
   const [uploadTargetDirForSection, setUploadTargetDirForSection] = useState("");
 
@@ -493,7 +714,7 @@ export default function Admin() {
                 </nav>
 
                 {/* Dashboard Engine */}
-                <main className="lg:col-span-9 bg-white/[0.01] border border-white/5 rounded-[4rem] p-12 md:p-20 backdrop-blur-3xl relative overflow-hidden min-h-[900px]">
+                <main className="lg:col-span-9 bg-black/40 border border-white/5 rounded-[4rem] p-12 md:p-20 backdrop-blur-3xl relative overflow-hidden min-h-[900px]">
                     <AnimatePresence mode="wait">
                         <motion.div key={activeTab} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} className="space-y-16">
                             
@@ -505,7 +726,21 @@ export default function Admin() {
                             {/* Section Controls */}
                             <div className="space-y-12">
                                 {/* Integrated Background Select */}
-                                <BackgroundControl pageId={activeTab === 'story' ? 'story' : activeTab} />
+                                <BackgroundControl 
+                                    pageId={activeTab === 'story' ? 'story' : activeTab} 
+                                    backgrounds={formData.backgrounds}
+                                    assetFiles={assetFiles}
+                                    onBrowse={() => {
+                                        const pageId = activeTab === 'story' ? 'story' : activeTab;
+                                        setActivePickerField({ 
+                                            label: "Section Background", 
+                                            path: (formData.backgrounds as any)[pageId], 
+                                            setter: (val) => setFormData(p => ({ ...p, backgrounds: { ...p.backgrounds, [pageId]: val } })) 
+                                        });
+                                        setIsPickerOpen(true);
+                                    }}
+                                    onChange={(val: string) => setFormData(p => ({ ...p, backgrounds: { ...p.backgrounds, [activeTab === 'story' ? 'story' : activeTab]: val } }))}
+                                />
 
                                 <hr className="border-white/5"/>
 
@@ -522,156 +757,339 @@ export default function Admin() {
                                     )}
 
                                     {activeTab === 'about' && (
-                                        <>
+                                        <div className="space-y-12">
                                             <div className="grid md:grid-cols-2 gap-8">
                                                 <Field label="Heading Main" value={formData.about.title.main} onChange={(v: string) => setFormData(p => ({ ...p, about: { ...p.about, title: { ...p.about.title, main: v } } }))} />
                                                 <Field label="Heading Accent" value={formData.about.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, about: { ...p.about, title: { ...p.about.title, accent: v } } }))} />
                                             </div>
-                                            <div className="space-y-8">
-                                                <label className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Narrative Content</label>
-                                                {formData.about.description.map((p, i) => (
-                                                    <div key={i} className="relative group">
-                                                        <Field label={`Paragraph ${i+1}`} value={p} onChange={(v: string) => {
-                                                            const d = [...formData.about.description]; d[i] = v; setFormData(prev => ({ ...prev, about: { ...prev.about, description: d } }));
-                                                        }} area />
-                                                        <button onClick={() => setFormData(prev => ({ ...prev, about: { ...prev.about, description: prev.about.description.filter((_, idx) => idx !== i) } }))} className="absolute top-0 right-0 p-2 text-red-500/20 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 size={16}/></button>
-                                                    </div>
-                                                ))}
-                                                <button onClick={() => setFormData(p => ({ ...p, about: { ...p.about, description: [...p.about.description, "New Narrative Block..."] } }))} className="w-full py-5 border border-dashed border-white/5 rounded-2xl text-[10px] uppercase font-black text-white/20 hover:text-primary/40 transition-all flex items-center justify-center gap-2">Add New Paragraph</button>
+                                            <div className="space-y-6">
+                                                <div className="flex items-center justify-between px-2">
+                                                    <label className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Narrative Content</label>
+                                                    <span className="text-[9px] text-white/20 uppercase font-black">Drag to Reorder</span>
+                                                </div>
+                                                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'about-desc')}>
+                                                    <SortableContext items={formData.about.description} strategy={verticalListSortingStrategy}>
+                                                        <div className="space-y-4">
+                                                            {formData.about.description.map((p, i) => (
+                                                                <SortableListItem 
+                                                                    key={p} 
+                                                                    id={p} 
+                                                                    onRemove={() => setFormData(prev => ({ ...prev, about: { ...prev.about, description: prev.about.description.filter((_, idx) => idx !== i) } }))}
+                                                                >
+                                                                    <textarea 
+                                                                        className="w-full bg-transparent border-none text-white/80 outline-none min-h-[80px] resize-none text-sm leading-relaxed"
+                                                                        value={p}
+                                                                        onChange={(e) => {
+                                                                            const d = [...formData.about.description]; d[i] = e.target.value;
+                                                                            setFormData(prev => ({ ...prev, about: { ...prev.about, description: d } }));
+                                                                        }}
+                                                                    />
+                                                                </SortableListItem>
+                                                            ))}
+                                                        </div>
+                                                    </SortableContext>
+                                                </DndContext>
+                                                <button onClick={() => setFormData(p => ({ ...p, about: { ...p.about, description: [...p.about.description, "New Narrative Block " + Date.now()] } }))} className="w-full py-6 border border-dashed border-white/5 rounded-3xl text-[10px] uppercase font-black text-white/20 hover:text-primary/40 hover:bg-white/[0.01] transition-all flex items-center justify-center gap-2">
+                                                    <Plus size={16}/> Add Narrative Segment
+                                                </button>
                                             </div>
-                                        </>
+                                        </div>
                                     )}
 
                                     {activeTab === 'story' && (
-                                        <>
+                                        <div className="space-y-12">
                                             <Field label="Intro Overview" value={formData.distinction.shortDesc} onChange={(v: string) => setFormData(p => ({ ...p, distinction: { ...p.distinction, shortDesc: v } }))} area italic />
-                                            <div className="space-y-8 pt-8">
-                                                <label className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Full Legacy Story</label>
-                                                {formData.distinction.dialog.paragraphs.map((p, i) => (
-                                                    <div key={i} className="relative group">
-                                                        <Field label={`Story Block ${i+1}`} value={p} onChange={(v: string) => {
-                                                            const d = [...formData.distinction.dialog.paragraphs]; d[i] = v; setFormData(prev => ({ ...prev, distinction: { ...prev.distinction, dialog: { ...prev.distinction.dialog, paragraphs: d } } }));
-                                                        }} area />
-                                                        <button onClick={() => setFormData(prev => ({ ...prev, distinction: { ...prev.distinction, dialog: { ...prev.distinction.dialog, paragraphs: prev.distinction.dialog.paragraphs.filter((_, idx) => idx !== i) } } }))} className="absolute top-0 right-0 p-2 text-red-500/20 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><Trash2 size={16}/></button>
-                                                    </div>
-                                                ))}
-                                                <button onClick={() => setFormData(p => ({ ...p, distinction: { ...p.distinction, dialog: { ...p.distinction.dialog, paragraphs: [...p.distinction.dialog.paragraphs, "Extended story details..."] } } }))} className="w-full py-5 border border-dashed border-white/5 rounded-2xl text-[10px] uppercase font-black text-white/20 hover:text-primary/40 transition-all flex items-center justify-center gap-2">Expand Narrative</button>
+                                            <div className="space-y-6">
+                                                <div className="flex items-center justify-between px-2">
+                                                    <label className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Dialog Paragraphs</label>
+                                                </div>
+                                                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'distinction-dialog')}>
+                                                    <SortableContext items={formData.distinction.dialog.paragraphs} strategy={verticalListSortingStrategy}>
+                                                        <div className="space-y-4">
+                                                            {formData.distinction.dialog.paragraphs.map((p, i) => (
+                                                                <SortableListItem 
+                                                                    key={p} 
+                                                                    id={p} 
+                                                                    onRemove={() => setFormData(prev => ({ ...prev, distinction: { ...prev.distinction, dialog: { ...prev.distinction.dialog, paragraphs: prev.distinction.dialog.paragraphs.filter((_, idx) => idx !== i) } } }))}
+                                                                >
+                                                                    <textarea 
+                                                                        className="w-full bg-transparent border-none text-white/80 outline-none min-h-[60px] resize-none text-sm leading-relaxed italic font-serif"
+                                                                        value={p}
+                                                                        onChange={(e) => {
+                                                                            const d = [...formData.distinction.dialog.paragraphs]; d[i] = e.target.value;
+                                                                            setFormData(prev => ({ ...prev, distinction: { ...prev.distinction, dialog: { ...prev.distinction.dialog, paragraphs: d } } }));
+                                                                        }}
+                                                                    />
+                                                                </SortableListItem>
+                                                            ))}
+                                                        </div>
+                                                    </SortableContext>
+                                                </DndContext>
+                                                <button onClick={() => setFormData(p => ({ ...p, distinction: { ...p.distinction, dialog: { ...p.distinction.dialog, paragraphs: [...p.distinction.dialog.paragraphs, "New Dialog Segment " + Date.now()] } } }))} className="w-full py-6 border border-dashed border-white/5 rounded-3xl text-[10px] uppercase font-black text-white/20 hover:text-primary/40 hover:bg-white/[0.01] transition-all flex items-center justify-center gap-2">
+                                                    <Plus size={16}/> Add Dialog Segment
+                                                </button>
                                             </div>
-                                        </>
+                                        </div>
                                     )}
 
                                     {activeTab === 'values' && (
-                                        <div className="grid md:grid-cols-2 gap-8">
-                                            {formData.values.items.map((v, i) => (
-                                                <div key={i} className="p-8 bg-white/[0.02] border border-white/5 rounded-3xl space-y-4 relative group">
-                                                    <button onClick={() => setFormData(p => ({ ...p, values: { ...p.values, items: p.values.items.filter((_, idx) => idx !== i) } }))} className="absolute top-4 right-4 text-red-500/20 hover:text-red-500 transition-opacity"><Trash2 size={16}/></button>
-                                                    <Field label="Value Title" value={v.title} onChange={(val: string) => {
-                                                        const ni = [...formData.values.items]; ni[i].title = val; setFormData(p => ({ ...p, values: { ...p.values, items: ni } }));
-                                                    }} />
-                                                    <textarea placeholder="Description" className="w-full bg-black/40 border border-white/5 rounded-xl p-4 text-[11px] min-h-[80px] text-white/60 resize-none outline-none focus:border-primary/40" value={v.desc} onChange={(e) => {
-                                                        const ni = [...formData.values.items]; ni[i].desc = e.target.value; setFormData(p => ({ ...p, values: { ...p.values, items: ni } }));
-                                                    }} />
-                                                </div>
-                                            ))}
-                                            <button onClick={() => setFormData(p => ({ ...p, values: { ...p.values, items: [...p.values.items, { title: "Elegance", desc: "Our standard..." }] } }))} className="h-full min-h-[150px] border border-dashed border-white/5 rounded-3xl text-white/20 hover:text-primary/40 flex flex-col items-center justify-center gap-2"><Plus size={24}/> New Core Value</button>
+                                        <div className="space-y-12">
+                                            <div className="flex items-center justify-between px-2">
+                                                <label className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Core Principles</label>
+                                            </div>
+                                            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'values')}>
+                                                <SortableContext items={formData.values.items.map(v => v.title)} strategy={verticalListSortingStrategy}>
+                                                    <div className="space-y-4">
+                                                        {formData.values.items.map((v, i) => (
+                                                            <SortableListItem 
+                                                                key={v.title} 
+                                                                id={v.title} 
+                                                                onRemove={() => setFormData(p => ({ ...p, values: { ...p.values, items: p.values.items.filter((_, idx) => idx !== i) } }))}
+                                                            >
+                                                                <div className="grid md:grid-cols-3 gap-6">
+                                                                    <div className="md:col-span-1 border-r border-white/5 pr-6">
+                                                                        <Field label="Title" value={v.title} onChange={(val: string) => {
+                                                                            const ni = [...formData.values.items]; ni[i].title = val; setFormData(p => ({ ...p, values: { ...p.values, items: ni } }));
+                                                                        }} />
+                                                                    </div>
+                                                                    <div className="md:col-span-2">
+                                                                        <Field label="Essence" value={v.desc} onChange={(val: string) => {
+                                                                            const ni = [...formData.values.items]; ni[i].desc = val; setFormData(p => ({ ...p, values: { ...p.values, items: ni } }));
+                                                                        }} area />
+                                                                    </div>
+                                                                </div>
+                                                            </SortableListItem>
+                                                        ))}
+                                                    </div>
+                                                </SortableContext>
+                                            </DndContext>
+                                            <button onClick={() => setFormData(p => ({ ...p, values: { ...p.values, items: [...p.values.items, { title: "New Principle " + Date.now(), desc: "Describe the core essence..." }] } }))} className="w-full py-8 border border-dashed border-white/5 rounded-3xl text-[10px] uppercase font-black text-white/20 hover:text-primary/40 hover:bg-white/[0.01] transition-all flex flex-col items-center justify-center gap-2">
+                                                <Plus size={24}/> Add Core Principle
+                                            </button>
                                         </div>
                                     )}
 
                                     {activeTab === 'services' && (
-                                        <div className="space-y-16">
-                                            <div className="flex justify-between items-center mb-10">
+                                        <div className="space-y-12">
+                                            <div className="flex justify-between items-center px-2">
                                                 <p className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Offerings Repository</p>
-                                                <button onClick={() => setFormData(p => ({ ...p, services: [{ id: `svc-${Date.now()}`, title: "Luxury Event", desc: "Brief intro", fullDescription: "Detailed legacy", image: "", details: [] }, ...p.services] }))} className="px-6 py-3 bg-primary text-black rounded-full text-[10px] uppercase font-black flex items-center gap-2"><Plus size={14}/> Add Offering</button>
+                                                <button onClick={() => setFormData(p => ({ ...p, services: [{ id: `svc-${Date.now()}`, title: "New Offering", desc: "Brief intro", fullDescription: "Detailed narrative", image: "", details: [] }, ...p.services] }))} className="px-6 py-3 bg-primary text-black rounded-full text-[10px] uppercase font-black flex items-center gap-2 shadow-lg hover:scale-105 transition-all"><Plus size={14}/> New Offering</button>
                                             </div>
-                                            {formData.services.map((s, si) => (
-                                                <div key={s.id} className="p-10 bg-white/[0.01] border border-white/5 rounded-[3rem] space-y-10 relative group">
-                                                    <button onClick={() => setFormData(p => ({ ...p, services: p.services.filter((_, idx) => idx !== si) }))} className="absolute top-8 right-8 text-red-500/40 hover:text-red-500 transition-colors"><Trash2 size={18}/></button>
-                                                    <div className="grid md:grid-cols-2 gap-10">
-                                                        <Field label="Service Header" value={s.title} onChange={(v: string) => {
-                                                            const news = [...formData.services]; news[si].title = v; setFormData(p => ({ ...p, services: news }));
-                                                        }} />
-                                                        <Field label="Featured Asset (e.g. Hero/img.jpg)" value={s.image} dir={s.title.replace(/\s+/g, '')} onChange={(v: string) => {
-                                                            const news = [...formData.services]; news[si].image = v; setFormData(p => ({ ...p, services: news }));
-                                                        }} image />
-                                                    </div>
-                                                    <Field label="Catalog Snippet" value={s.desc} onChange={(v: string) => {
-                                                        const news = [...formData.services]; news[si].desc = v; setFormData(p => ({ ...p, services: news }));
-                                                    }} />
-                                                    <Field label="Vertical Journey Narrative" value={s.fullDescription || ""} onChange={(v: string) => {
-                                                        const news = [...formData.services]; news[si].fullDescription = v; setFormData(p => ({ ...p, services: news }));
-                                                    }} area italic />
+                                            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'services')}>
+                                                <SortableContext items={formData.services.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                                                    <div className="space-y-12">
+                                                        {formData.services.map((s, si) => (
+                                                            <SortableListItem 
+                                                                key={s.id} 
+                                                                id={s.id} 
+                                                                onRemove={() => setFormData(p => ({ ...p, services: p.services.filter((_, idx) => idx !== si) }))}
+                                                            >
+                                                                <div className="space-y-8">
+                                                                    <div className="grid md:grid-cols-2 gap-8">
+                                                                        <Field label="Service Header" value={s.title} onChange={(v: string) => {
+                                                                            const news = [...formData.services]; news[si].title = v; setFormData(p => ({ ...p, services: news }));
+                                                                        }} />
+                                                                        <Field 
+                                                                            label="Featured Asset" 
+                                                                            value={s.image} 
+                                                                            onChange={(v: string) => {
+                                                                                const news = [...formData.services]; news[si].image = v; setFormData(p => ({ ...p, services: news }));
+                                                                            }} 
+                                                                            image 
+                                                                            onBrowse={() => {
+                                                                                setActivePickerField({ 
+                                                                                    label: "Service Asset", 
+                                                                                    path: s.image, 
+                                                                                    setter: (v) => { const news = [...formData.services]; news[si].image = v; setFormData(p => ({ ...p, services: news })); },
+                                                                                    preferredDir: s.title.replace(/\s+/g, '')
+                                                                                });
+                                                                                setIsPickerOpen(true);
+                                                                            }}
+                                                                        />
+                                                                    </div>
+                                                                    <Field label="Catalog Snippet" value={s.desc} onChange={(v: string) => {
+                                                                        const news = [...formData.services]; news[si].desc = v; setFormData(p => ({ ...p, services: news }));
+                                                                    }} />
+                                                                    <Field label="Vertical Journey Narrative" value={s.fullDescription || ""} onChange={(v: string) => {
+                                                                        const news = [...formData.services]; news[si].fullDescription = v; setFormData(p => ({ ...p, services: news }));
+                                                                    }} area italic />
 
-                                                    <div className="pt-8 border-t border-white/5 space-y-8">
-                                                        <h5 className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black">Experience Sequence (Individual Detail Blocks)</h5>
-                                                        <div className="grid md:grid-cols-2 gap-6">
-                                                            {(s.details || []).map((d, di) => (
-                                                                <div key={di} className="p-6 bg-black/40 rounded-3xl border border-white/5 space-y-4 relative">
-                                                                    <button onClick={() => {
-                                                                        const news = [...formData.services]; news[si].details = news[si].details.filter((_, idx) => idx !== di);
-                                                                        setFormData(p => ({ ...p, services: news }));
-                                                                    }} className="absolute top-4 right-4 text-red-500/20 hover:text-red-500 transition-opacity"><X size={14}/></button>
-                                                                    <Field label="Experience Title" value={d.title} onChange={(v: string) => {
-                                                                        const news = [...formData.services]; news[si].details[di].title = v; setFormData(p => ({ ...p, services: news }));
-                                                                    }} />
-                                                                    <Field label="Asset Path" value={d.image} dir={s.title.replace(/\s+/g, '')} onChange={(v: string) => {
-                                                                        const news = [...formData.services]; news[si].details[di].image = v; setFormData(p => ({ ...p, services: news }));
-                                                                    }} image />
-                                                                    <textarea className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-4 text-[10px] h-20 text-white/60 resize-none" value={d.description} onChange={(e) => {
-                                                                        const news = [...formData.services]; news[si].details[di].description = e.target.value; setFormData(p => ({ ...p, services: news }));
-                                                                    }} />
+                                                                    <div className="pt-8 border-t border-white/5 space-y-6">
+                                                                        <h5 className="text-[9px] uppercase tracking-[0.4em] text-white/20 font-black px-2">Experience Sequence (Drag to Reorder)</h5>
+                                                                        
+                                                                        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'service-details', s.id)}>
+                                                                            <SortableContext items={(s.details || []).map((_, idx) => `det-${s.id}-${idx}`)} strategy={verticalListSortingStrategy}>
+                                                                                <div className="grid md:grid-cols-2 gap-4">
+                                                                                    {(s.details || []).map((d, di) => (
+                                                                                        <SortableListItem 
+                                                                                            key={`det-${s.id}-${di}`} 
+                                                                                            id={`det-${s.id}-${di}`}
+                                                                                            onRemove={() => {
+                                                                                                const news = [...formData.services]; news[si].details = news[si].details.filter((_, idx) => idx !== di);
+                                                                                                setFormData(p => ({ ...p, services: news }));
+                                                                                            }}
+                                                                                        >
+                                                                                            <div className="space-y-4">
+                                                                                                <Field label="Title" value={d.title} onChange={(v: string) => {
+                                                                                                    const news = [...formData.services]; news[si].details[di].title = v; setFormData(p => ({ ...p, services: news }));
+                                                                                                }} />
+                                                                                                <Field 
+                                                                                                    label="Asset" 
+                                                                                                    value={d.image} 
+                                                                                                    onChange={(v: string) => {
+                                                                                                        const news = [...formData.services]; news[si].details[di].image = v; setFormData(p => ({ ...p, services: news }));
+                                                                                                    }} 
+                                                                                                    image 
+                                                                                                    onBrowse={() => {
+                                                                                                        setActivePickerField({ 
+                                                                                                            label: "Detail Asset", 
+                                                                                                            path: d.image, 
+                                                                                                            setter: (v) => { const news = [...formData.services]; news[si].details[di].image = v; setFormData(p => ({ ...p, services: news })); },
+                                                                                                            preferredDir: s.title.replace(/\s+/g, '')
+                                                                                                        });
+                                                                                                        setIsPickerOpen(true);
+                                                                                                    }}
+                                                                                                />
+                                                                                                <textarea className="w-full bg-white/[0.02] border border-white/5 rounded-xl p-4 text-[10px] h-20 text-white/60 resize-none focus:border-primary/40 outline-none transition-all" value={d.description} onChange={(e) => {
+                                                                                                    const news = [...formData.services]; news[si].details[di].description = e.target.value; setFormData(p => ({ ...p, services: news }));
+                                                                                                }} />
+                                                                                            </div>
+                                                                                        </SortableListItem>
+                                                                                    ))}
+                                                                                    <button onClick={() => {
+                                                                                        const news = [...formData.services]; news[si].details = [...(news[si].details || []), { title: "New Feature", buttonText: "Explore", image: "", description: "" }];
+                                                                                        setFormData(p => ({ ...p, services: news }));
+                                                                                    }} className="border border-dashed border-white/5 rounded-3xl min-h-[150px] text-white/10 hover:text-primary/40 hover:bg-white/[0.01] flex flex-col items-center justify-center gap-2 transition-all"><Plus size={20}/> New Sequence Phase</button>
+                                                                                </div>
+                                                                            </SortableContext>
+                                                                        </DndContext>
+                                                                    </div>
                                                                 </div>
-                                                            ))}
-                                                            <button onClick={() => {
-                                                                const news = [...formData.services]; news[si].details = [...(news[si].details || []), { title: "New Feature", buttonText: "Explore", image: "", description: "" }];
-                                                                setFormData(p => ({ ...p, services: news }));
-                                                            }} className="border border-dashed border-white/10 rounded-3xl h-full min-h-[150px] text-white/20 hover:text-primary/40 flex flex-col items-center justify-center gap-2 transition-all"><Plus size={20}/> New Detail Block</button>
-                                                        </div>
+                                                            </SortableListItem>
+                                                        ))}
                                                     </div>
-                                                </div>
-                                            ))}
+                                                </SortableContext>
+                                            </DndContext>
                                         </div>
                                     )}
 
                                     {activeTab === 'gallery' && (
-                                        <>
+                                        <div className="space-y-12">
                                             <div className="grid md:grid-cols-2 gap-8">
                                                 <Field label="Section Header" value={formData.galleryPage.title.main} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, title: { ...p.galleryPage.title, main: v } } }))} />
                                                 <Field label="Header Accent" value={formData.galleryPage.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, title: { ...p.galleryPage.title, accent: v } } }))} />
                                             </div>
                                             <Field label="Archive Description" value={formData.galleryPage.description} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, description: v } }))} area />
-                                            <hr className="border-white/5 my-12"/>
-                                            <ImageCRUD dir="backgrounds" /> {/* Allow choosing background images in gallery browser */}
-                                        </>
+                                            
+                                            <div className="pt-12 border-t border-white/5 space-y-8">
+                                                <div className="flex items-center justify-between px-2">
+                                                    <div>
+                                                        <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-primary/80">Curated Gallery Collection</h4>
+                                                        <p className="text-[9px] text-white/20 uppercase tracking-widest mt-1">Mirroring client site layout • Drag to reorder</p>
+                                                    </div>
+                                                    <div className="flex items-center gap-4">
+                                                        <Layers size={14} className="text-white/20"/>
+                                                        <span className="text-[9px] uppercase font-black text-white/40 tracking-widest">{(formData.galleryPage.galleryItems || []).length} Masterpieces</span>
+                                                    </div>
+                                                </div>
+
+                                                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'gallery')}>
+                                                    <SortableContext items={adminGalleryList} strategy={rectSortingStrategy}>
+                                                        <div className="flex flex-wrap justify-center gap-3 md:gap-4">
+                                                            {adminGalleryList.map((path: string, idx: number) => (
+                                                                <div key={path} className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] lg:w-[calc(20%-1rem)]">
+                                                                    <SortableGridItem 
+                                                                        id={path}
+                                                                        path={path}
+                                                                        idx={idx}
+                                                                        otherUsage={otherUsage}
+                                                                        onRemove={() => {
+                                                                            const items = adminGalleryList.filter((p) => p !== path);
+                                                                            setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, galleryItems: items } }));
+                                                                        }}
+                                                                        onReplace={() => {
+                                                                            setActivePickerField({ 
+                                                                                label: `Replace Item ${idx + 1}`, 
+                                                                                path: path, 
+                                                                                setter: (val) => setFormData(p => {
+                                                                                    const items = [...p.galleryPage.galleryItems];
+                                                                                    items[idx] = val;
+                                                                                    return { ...p, galleryPage: { ...p.galleryPage, galleryItems: items } };
+                                                                                }),
+                                                                                preferredDir: path.includes('/') ? path.split('/')[0] : "BespokeWeddings&Engagements"
+                                                                            });
+                                                                            setIsPickerOpen(true);
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            ))}
+                                                            <button 
+                                                                onClick={() => {
+                                                                    setActivePickerField({ 
+                                                                        label: "Add Gallery Item", 
+                                                                        path: "", 
+                                                                        setter: (val) => setFormData(p => ({ 
+                                                                            ...p, 
+                                                                            galleryPage: { 
+                                                                                ...p.galleryPage, 
+                                                                                galleryItems: [...(p.galleryPage.galleryItems || []), val] 
+                                                                            } 
+                                                                        })),
+                                                                        preferredDir: "BespokeWeddings&Engagements"
+                                                                    });
+                                                                    setIsPickerOpen(true);
+                                                                }}
+                                                                className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] lg:w-[calc(20%-1rem)] aspect-[4/5] md:aspect-[3/4] border border-dashed border-white/10 rounded-sm flex flex-col items-center justify-center gap-4 text-white/20 hover:text-primary hover:border-primary/40 transition-all bg-white/[0.01] hover:bg-white/[0.03]"
+                                                            >
+                                                                <div className="p-4 bg-primary/5 rounded-full border border-primary/10">
+                                                                    <Plus size={24}/>
+                                                                </div>
+                                                                <span className="text-[9px] uppercase font-black tracking-widest">Add Masterpiece</span>
+                                                            </button>
+                                                        </div>
+                                                    </SortableContext>
+                                                </DndContext>
+                                            </div>
+                                        </div>
                                     )}
 
                                     {activeTab === 'reviews' && (
                                         <div className="space-y-12">
                                             <div className="flex justify-between items-center px-2">
                                                 <p className="text-[10px] uppercase tracking-widest text-primary/40 font-black">Testimonial Ledger</p>
-                                                <button onClick={() => setFormData(p => ({ ...p, reviewItems: [{ id: Date.now(), name: "John Doe", rating: 5, comment: "Exceptional mastery." }, ...p.reviewItems] }))} className="px-6 py-3 bg-primary text-black rounded-full text-[10px] uppercase font-black flex items-center gap-2"><Plus size={14}/> Add reflection</button>
+                                                <button onClick={() => setFormData(p => ({ ...p, reviewItems: [{ id: Date.now(), name: "John Doe", rating: 5, comment: "Exceptional mastery." }, ...p.reviewItems] }))} className="px-6 py-3 bg-primary text-black rounded-full text-[10px] uppercase font-black flex items-center gap-2 shadow-lg"><Plus size={14}/> Add reflection</button>
                                             </div>
-                                            <div className="grid md:grid-cols-2 gap-8">
-                                                {formData.reviewItems.map((r, i) => (
-                                                    <div key={r.id} className="p-10 bg-white/[0.02] border border-white/5 rounded-[2.5rem] space-y-6 relative group">
-                                                        <button onClick={() => setFormData(p => ({ ...p, reviewItems: p.reviewItems.filter((_, idx) => idx !== i) }))} className="absolute top-6 right-6 text-red-500/20 hover:text-red-500 transition-all"><Trash2 size={16}/></button>
-                                                        <div className="flex justify-between items-center gap-6">
-                                                            <div className="flex-1">
-                                                                <Field label="Client Distinction" value={r.name} onChange={(v: string) => {
-                                                                    const nr = [...formData.reviewItems]; nr[i].name = v; setFormData(p => ({ ...p, reviewItems: nr }));
-                                                                }} />
-                                                            </div>
-                                                            <select className="bg-black/40 border border-white/5 rounded-xl h-10 px-4 text-[10px] text-primary/60" value={r.rating} onChange={(e) => {
-                                                                const nr = [...formData.reviewItems]; nr[i].rating = parseInt(e.target.value); setFormData(p => ({ ...p, reviewItems: nr }));
-                                                            }}>
-                                                                {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} Stars</option>)}
-                                                            </select>
-                                                        </div>
-                                                        <Field label="Reflection Content" value={r.comment} onChange={(v: string) => {
-                                                            const nr = [...formData.reviewItems]; nr[i].comment = v; setFormData(p => ({ ...p, reviewItems: nr }));
-                                                        }} area italic />
+                                            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'reviews')}>
+                                                <SortableContext items={formData.reviewItems.map(r => r.id)} strategy={verticalListSortingStrategy}>
+                                                    <div className="grid md:grid-cols-2 gap-8">
+                                                        {formData.reviewItems.map((r, i) => (
+                                                            <SortableListItem 
+                                                                key={r.id} 
+                                                                id={r.id} 
+                                                                onRemove={() => setFormData(p => ({ ...p, reviewItems: p.reviewItems.filter((_, idx) => idx !== i) }))}
+                                                            >
+                                                                <div className="space-y-4">
+                                                                    <div className="flex justify-between items-center gap-4">
+                                                                        <div className="flex-1">
+                                                                            <Field label="Client Distinction" value={r.name} onChange={(v: string) => {
+                                                                                const nr = [...formData.reviewItems]; nr[i].name = v; setFormData(p => ({ ...p, reviewItems: nr }));
+                                                                            }} />
+                                                                        </div>
+                                                                        <select className="bg-black/40 border border-white/10 rounded-xl h-12 px-4 text-[10px] text-primary/60 outline-none" value={r.rating} onChange={(e) => {
+                                                                            const nr = [...formData.reviewItems]; nr[i].rating = parseInt(e.target.value); setFormData(p => ({ ...p, reviewItems: nr }));
+                                                                        }}>
+                                                                            {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} Stars</option>)}
+                                                                        </select>
+                                                                    </div>
+                                                                    <Field label="Reflection Content" value={r.comment} onChange={(v: string) => {
+                                                                        const nr = [...formData.reviewItems]; nr[i].comment = v; setFormData(p => ({ ...p, reviewItems: nr }));
+                                                                    }} area italic />
+                                                                </div>
+                                                            </SortableListItem>
+                                                        ))}
                                                     </div>
-                                                ))}
-                                            </div>
+                                                </SortableContext>
+                                            </DndContext>
                                         </div>
                                     )}
 
@@ -700,24 +1118,47 @@ export default function Admin() {
                                     {activeTab === 'welcome' && (
                                         <div className="space-y-12">
                                             <div className="grid md:grid-cols-2 gap-8">
-                                                <Field label="Popup Title" value={(formData as any).welcomePopup.title.main} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...(p as any).welcomePopup, title: { ...(p as any).welcomePopup.title, main: v } } }))} />
-                                                <Field label="Title Accent" value={(formData as any).welcomePopup.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...(p as any).welcomePopup, title: { ...(p as any).welcomePopup.title, accent: v } } }))} />
+                                                <Field label="Popup Title" value={formData.welcomePopup.title.main} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...p.welcomePopup, title: { ...p.welcomePopup.title, main: v } } }))} />
+                                                <Field label="Title Accent" value={formData.welcomePopup.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...p.welcomePopup, title: { ...p.welcomePopup.title, accent: v } } }))} />
                                             </div>
-                                            <Field label="Popup Description" value={(formData as any).welcomePopup.description} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...(p as any).welcomePopup, description: v } }))} area italic />
-                                            <Field label="Featured Invitation Asset" value={(formData as any).welcomePopup.image} dir="Welcome" onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...(p as any).welcomePopup, image: v } }))} image />
+                                            <Field label="Popup Description" value={formData.welcomePopup.description} onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...p.welcomePopup, description: v } }))} area italic />
+                                            <Field 
+                                                label="Featured Invitation Asset" 
+                                                value={formData.welcomePopup.image} 
+                                                onChange={(v: string) => setFormData(p => ({ ...p, welcomePopup: { ...p.welcomePopup, image: v } }))} 
+                                                image
+                                                onBrowse={() => {
+                                                    setActivePickerField({ 
+                                                        label: "Popup Asset", 
+                                                        path: formData.welcomePopup.image, 
+                                                        setter: (v) => setFormData(p => ({ ...p, welcomePopup: { ...p.welcomePopup, image: v } })),
+                                                        preferredDir: "Welcome"
+                                                    });
+                                                    setIsPickerOpen(true);
+                                                }}
+                                            />
                                         </div>
                                     )}
                                 </div>
-
                                 <hr className="border-white/5 my-16"/>
-
-                                {/* Section-Specific Asset Browser */}
                                 <div className="space-y-12">
                                     <div className="flex items-center gap-4">
                                         <Search size={16} className="text-primary/40"/>
-                                        <h4 className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20">Asset Repository Browser</h4>
+                                        <h4 className="text-[10px] font-black uppercase tracking-[0.6em] text-white/20">Global Asset Repository Browser</h4>
                                     </div>
-                                    <ImageCRUD dir={bgDirMap[activeTab] || "backgrounds"} />
+                                    <RepositoryBrowser 
+                                        dir={bgDirMap[activeTab] || "backgrounds"} 
+                                        assetFiles={assetFiles}
+                                        fetchAllAssets={fetchAllAssets}
+                                        isFetchingFiles={isFetchingFiles}
+                                        onFileChange={onFileChange}
+                                        selectedUploadFile={selectedUploadFile}
+                                        uploadTargetDirForSection={uploadTargetDirForSection}
+                                        setUploadTargetDirForSection={setUploadTargetDirForSection}
+                                        handleImageUpload={handleImageUpload}
+                                        handleDeleteAsset={handleDeleteAsset}
+                                        usedAssets={usedAssets}
+                                    />
                                 </div>
                             </div>
                         </motion.div>
@@ -778,7 +1219,17 @@ export default function Admin() {
                                     <RepositoryBrowser 
                                         dir={dir} 
                                         activeSelection={activePickerField?.path}
-                                        onSelect={(fullPath) => {
+                                        assetFiles={assetFiles}
+                                        fetchAllAssets={fetchAllAssets}
+                                        isFetchingFiles={isFetchingFiles}
+                                        onFileChange={onFileChange}
+                                        selectedUploadFile={selectedUploadFile}
+                                        uploadTargetDirForSection={uploadTargetDirForSection}
+                                        setUploadTargetDirForSection={setUploadTargetDirForSection}
+                                        handleImageUpload={handleImageUpload}
+                                        handleDeleteAsset={handleDeleteAsset}
+                                        usedAssets={usedAssets}
+                                        onSelect={(fullPath: string) => {
                                             if(activePickerField) {
                                                 activePickerField.setter(fullPath);
                                                 setIsPickerOpen(false);
