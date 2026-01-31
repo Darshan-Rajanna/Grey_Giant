@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Lock, Mail, Github, Save, CheckCircle, AlertCircle, Image as ImageIcon, Send, X, Plus, Trash2, ArrowRight, Layers, Star, PlusCircle, Pencil, Search, RefreshCw, UploadCloud, Eye, FileText } from "lucide-react";
 import { siteContent, type SiteContent } from "@/data/siteContent";
 import { updateGitHubFile, uploadGitHubImage, listGitHubFiles, deleteGitHubFile, type GitHubConfig } from "@/lib/github-api";
+import { resolveAsset } from "@/lib/asset-utils";
 
 // --- Types ---
 interface AuthState {
@@ -225,7 +226,7 @@ export default function Admin() {
             />
             {image && value && (
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg border border-white/10 overflow-hidden bg-black/40">
-                    <img src={value.includes('/') ? `/client/src/assets/gallery/${value}` : `/client/src/assets/backgrounds/${value}`} className="w-full h-full object-cover" alt="Thumb" onError={(e:any)=>e.target.src="https://placehold.co/100x100/111/fff?text=?"}/>
+                    <img src={resolveAsset(value)} className="w-full h-full object-cover" alt="Thumb" onError={(e:any)=>e.target.src="https://placehold.co/100x100/111/fff?text=?"}/>
                 </div>
             )}
         </div>
@@ -269,7 +270,7 @@ export default function Admin() {
             {(formData.backgrounds as any)[pageId] && (
                 <div className="w-full md:w-32 aspect-video bg-black/40 rounded-2xl border border-white/5 overflow-hidden group relative">
                     <img 
-                      src={`/client/src/assets/backgrounds/${(formData.backgrounds as any)[pageId]}`} 
+                      src={resolveAsset((formData.backgrounds as any)[pageId])} 
                       className="w-full h-full object-cover opacity-50 transition-opacity group-hover:opacity-80" 
                       alt="Preview"
                       onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Loading"}
@@ -327,7 +328,7 @@ export default function Admin() {
                         className={`aspect-square bg-white/[0.02] border rounded-[2rem] overflow-hidden group relative transition-all duration-500 ${isActive ? 'border-primary/60 shadow-[0_0_30px_rgba(212,175,55,0.2)]' : 'border-white/5'}`}
                     >
                         <img 
-                          src={isBg ? `/client/src/assets/backgrounds/${f}` : `/client/src/assets/gallery/${dir}/${f}`} 
+                          src={resolveAsset(fullPath)} 
                           className={`w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-90 grayscale-0' : 'opacity-40 group-hover:opacity-80 grayscale-[0.5] group-hover:grayscale-0'}`} 
                           alt={f}
                           onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Asset+Error"}

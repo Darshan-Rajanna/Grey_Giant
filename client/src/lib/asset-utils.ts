@@ -61,13 +61,17 @@ export function getBackground(fileName: string): string {
 export function resolveAsset(path: string): string {
     if (!path) return "";
 
-    // Normalize path for matching
-    const normalizedPath = path.replace(/\\/g, '/');
+    // Normalize path for matching (standardize separators)
+    const normalizedSearch = path.replace(/\\/g, '/');
 
-    // Attempt to match the path suffix in the allAssets keys
-    const match = Object.entries(allAssets).find(([assetPath]) =>
-        assetPath.endsWith(`/${normalizedPath}`)
-    );
+    // We attempt to match the path suffix. 
+    // We decode the asset keys just in case Vite encoded them, 
+    // though usually they are plain strings in the glob.
+    const match = Object.entries(allAssets).find(([assetPath]) => {
+        // Double check against encoded and decoded versions for safety with special chars
+        const decodedPath = decodeURIComponent(assetPath);
+        return assetPath.endsWith(`/${normalizedSearch}`) || decodedPath.endsWith(`/${normalizedSearch}`);
+    });
 
     return match ? (match[1] as string) : "";
 }
