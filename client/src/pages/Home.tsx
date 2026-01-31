@@ -13,9 +13,57 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { siteContent } from "@/data/siteContent";
-import { getFirstImageInDir } from "@/lib/asset-utils";
+import { getFirstImageInDir, getBackground } from "@/lib/asset-utils";
 
-const heroImg = getFirstImageInDir("Hero");
+const heroImgFilename = siteContent.backgrounds.home;
+const heroImg = getBackground(heroImgFilename) || getFirstImageInDir("Hero");
+
+const SnowOverlay = () => {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-30">
+      {[...Array(100)].map((_, i) => {
+        const isGold = Math.random() > 0.4;
+        const sizeMultiplier = i % 10 === 0 ? 3 : 1; 
+        const size = (Math.random() * 10 + 4) * sizeMultiplier;
+        const duration = Math.random() * 20 + 15;
+        const initialOpacity = Math.random() * 0.4 + 0.2;
+        
+        return (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            initial={{ 
+              left: `${Math.random() * 100}%`, 
+              top: `${Math.random() * 120}%`, 
+              opacity: 0,
+              scale: Math.random() * 0.4 + 0.8
+            }}
+            animate={{ 
+              y: -1600, 
+              opacity: [0, initialOpacity, initialOpacity, 0],
+              x: [(Math.random() - 0.5) * 150, (Math.random() - 0.5) * 300],
+              rotate: [0, 360]
+            }}
+            transition={{ 
+              duration: duration, 
+              repeat: Infinity, 
+              ease: "linear", 
+              delay: -Math.random() * duration 
+            }}
+            style={{ 
+              width: `${size}px`, 
+              height: `${size}px`, 
+              background: isGold ? 'radial-gradient(circle at 30% 30%, #f8e4b1, #d4af37)' : 'radial-gradient(circle at 30% 30%, #ffffff, #f1f1f1)',
+              boxShadow: isGold ? `0 0 ${size}px rgba(212, 175, 55, 0.4)` : `0 0 ${size}px rgba(255, 255, 255, 0.3)`,
+              filter: sizeMultiplier > 2 ? 'blur(1px)' : 'blur(0.5px)',
+              zIndex: Math.floor(size)
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
@@ -26,6 +74,8 @@ export default function Home() {
     <div className="min-h-screen bg-[#020202] overflow-hidden selection:bg-primary/30">
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <SnowOverlay />
+        
         {/* Abstract Background Noise / Grid */}
         <div className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none"
           style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
@@ -39,12 +89,12 @@ export default function Home() {
           <img
             src={heroImg}
             alt="Luxury Event Background"
-            className="w-full h-full object-cover opacity-40 grayscale-[0.2]"
+            className="w-full h-full object-cover object-[50%_85%] opacity-50 grayscale-[0.1]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/30 to-transparent" />
         </div>
 
-        <div className="container relative z-20 px-6 text-center">
+        <div className="container relative z-40 px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -64,9 +114,9 @@ export default function Home() {
               <span className="w-12 h-[1px] bg-primary/20" />
             </motion.div>
 
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[0.9]">
               {hero.title.first} <span className="relative inline-block">
-                <span className="inline-block bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{hero.title.second}&nbsp;</span>
+                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent font-accent italic pr-4" style={{ fontSize: '1.1em' }}>{hero.title.second}&nbsp;</span>
               </span>
             </h1>
 

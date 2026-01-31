@@ -9,27 +9,45 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog";
 import { siteContent } from "@/data/siteContent";
-import { getFirstImageInDir } from "@/lib/asset-utils";
+import { getFirstImageInDir, getBackground } from "@/lib/asset-utils";
 
 const introductionImg = getFirstImageInDir("OurStory");
+const bgImg = getBackground(siteContent.backgrounds.story);
+
 
 export default function Distinction() {
     const { distinction } = siteContent;
     return (
-        <section className="py-24 bg-black">
-            <div className="container mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
+        <section className="py-12 md:py-20 bg-black relative overflow-hidden">
+            {/* Background Image with Overlay */}
+            {bgImg && (
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <img
+                        src={bgImg}
+                        alt=""
+                        className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-black" />
+                </div>
+            )}
+            
+            {/* Abstract Background Noise / Grid */}
+            <div className="absolute inset-0 opacity-[0.03] z-0 pointer-events-none"
+                style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
                     <motion.div 
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="relative"
+                        className="relative p-2 bg-black/20 rounded-sm border border-primary/30 shadow-2xl group flex items-center justify-center overflow-hidden"
                     >
-                        <div className="absolute -inset-4 bg-white/5 blur-2xl rounded-full opacity-50" />
+                        <div className="absolute -inset-4 bg-primary/5 blur-2xl rounded-full opacity-30 group-hover:opacity-50 transition-opacity" />
                         <img
                             src={introductionImg}
-                            alt="Architecture"
-                            className="relative z-10 w-full max-h-[600px] object-cover mx-auto brightness-75 contrast-125 rounded-sm shadow-2xl"
+                            alt="Our Story"
+                            className="relative z-10 w-full h-auto max-h-[400px] md:max-h-[600px] object-contain md:object-cover mx-auto brightness-75 contrast-125 rounded-sm transition-transform duration-1000 group-hover:scale-[1.02]"
                         />
                     </motion.div>
                     <motion.div 
@@ -42,13 +60,13 @@ export default function Distinction() {
                             <motion.span 
                                 initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                className="text-[10px] uppercase tracking-[0.6em] text-primary/60 font-bold block mb-6"
+                                className="text-[10px] uppercase tracking-[0.6em] text-primary/60 font-bold block mb-4"
                             >
                                 {distinction.eyebrow}
                             </motion.span>
-                            <h2 className="text-5xl md:text-7xl lg:text-7xl font-serif text-white tracking-tighter leading-[0.85] flex flex-col items-center">
+                            <h2 className="text-5xl md:text-8xl lg:text-8xl font-serif text-white tracking-tighter leading-[0.85] flex flex-col items-center">
                                 <span>{distinction.title.parts[0]}</span>
-                                <span className="text-sm md:text-base lg:text-lg text-white/20 uppercase tracking-[0.5em] my-4 font-sans font-bold">{distinction.title.parts[1]}</span>
+                                <span className="text-[10px] md:text-base lg:text-lg text-white/20 uppercase tracking-[0.5em] my-4 font-sans font-bold">{distinction.title.parts[1]}</span>
                                 <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{distinction.title.parts[2]}</span>
                             </h2>
                         </div>

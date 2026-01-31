@@ -1,48 +1,32 @@
 import { Star, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteContent } from "@/data/siteContent";
+import { getBackground } from "@/lib/asset-utils";
 
-const reviews = [
-  {
-    id: 1,
-    name: "Priya S.",
-    rating: 5,
-    comment: "Absolutely stunning execution for our corporate gala. The black and gold theme was perfection."
-  },
-  {
-    id: 2,
-    name: "Rahul M.",
-    rating: 5,
-    comment: "Grey Giant made our wedding day unforgettable. Seamless coordination and beautiful decor."
-  },
-  {
-    id: 3,
-    name: "Anjali K.",
-    rating: 5,
-    comment: "Very professional team. They handled our social gathering with great attention to detail."
-  },
-  {
-    id: 4,
-    name: "Vikram R. (Product Launch)",
-    rating: 5,
-    comment: "Their product launch management was exceptional. Every detail was handled with precision and flair."
-  },
-  {
-    id: 5,
-    name: "Sneha D. (Anniversary)",
-    rating: 5,
-    comment: "Celebrating our 25th anniversary with Grey Giant was the best decision. A truly magical experience for our family."
-  }
-];
 
 export default function Reviews() {
-  const { reviewsPage } = siteContent;
+  const { reviewsPage, reviewItems } = siteContent;
+  const bgImg = getBackground(siteContent.backgrounds.reviews);
+
   
   return (
     <div className="pt-20 min-h-screen bg-[#020202] relative overflow-hidden selection:bg-primary/30">
+      {/* Background Image with Overlay */}
+      {bgImg && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={bgImg}
+            alt=""
+            className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/50 to-[#020202]" />
+        </div>
+      )}
+
       {/* Abstract Background Noise / Grid */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+      <div className="absolute inset-0 opacity-[0.03] z-0 pointer-events-none" 
            style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
+
 
       {/* Dynamic Glows */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[150px] rounded-full pointer-events-none animate-pulse" />
@@ -72,13 +56,13 @@ export default function Reviews() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1300px] mx-auto px-4 justify-center">
-          {reviews.map((review, i) => (
+          {reviewItems.map((testimonial, index) => (
             <motion.div
-              key={review.id}
+              key={testimonial.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: index * 0.05, duration: 1, ease: [0.22, 1, 0.36, 1] }}
               className="group/card relative p-10 bg-white/[0.03] border border-white/10 rounded-[2rem] overflow-hidden flex flex-col transition-all duration-700 hover:bg-white/[0.05] hover:border-primary/40 hover:-translate-y-2"
             >
               {/* Top Row: Quote (Left) & Stars (Center) */}
@@ -88,7 +72,7 @@ export default function Reviews() {
                   {Array.from({ length: 5 }).map((_, idx) => (
                     <Star
                       key={idx}
-                      className={`w-5 h-5 ${idx < review.rating ? "text-primary fill-primary" : "text-white/5"}`}
+                      className={`w-5 h-5 ${idx < testimonial.rating ? "text-primary fill-primary" : "text-white/5"}`}
                     />
                   ))}
                 </div>
@@ -96,16 +80,14 @@ export default function Reviews() {
 
               {/* Comment Content (Left Aligned) */}
               <div className="flex-grow flex flex-col justify-center text-left">
-                <p className="text-white/60 group-hover/card:text-white/80 transition-colors duration-700 font-light leading-relaxed text-base md:text-lg font-sans italic">
-                  "{review.comment}"
-                </p>
+                <blockquote className="relative text-lg text-white/70 italic leading-relaxed font-serif">
+                "{testimonial.comment}"
+              </blockquote>
               </div>
               
               {/* Footer Row (Name Right Aligned) */}
               <div className="mt-10 pt-8 border-t border-white/5 flex justify-end">
-                <p className="text-white font-serif text-lg tracking-tight group-hover/card:text-primary transition-colors duration-700 uppercase italic">
-                  {review.name}
-                </p>
+                <h3 className="text-xl font-serif text-white/50">{testimonial.name}</h3>
               </div>
 
               {/* Sophisticated Glow Accents */}

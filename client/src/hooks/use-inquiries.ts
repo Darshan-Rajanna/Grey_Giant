@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api, type InsertInquiry } from "@shared/routes";
+import { api, type InsertInquiry } from "@/lib/api-schema";
 import { useToast } from "@/hooks/use-toast";
 
 export function useCreateInquiry() {

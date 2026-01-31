@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindAnimate from "tailwindcss-animate";
+import tailwindTypography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -85,6 +87,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        accent: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {
@@ -103,5 +106,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [tailwindAnimate, tailwindTypography],
 } satisfies Config;

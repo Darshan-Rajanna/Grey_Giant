@@ -39,6 +39,40 @@ export function getFirstImageInDir(subDir: string): string {
 }
 
 /**
+ * Get a background image by its filename.
+ * @param fileName The filename stored in siteContent.json
+ * @returns Resolved image source URL
+ */
+export function getBackground(fileName: string): string {
+    if (!fileName) return "";
+
+    // Search for the file in the backgrounds directory
+    const match = Object.entries(allAssets).find(([path]) =>
+        path.includes(`/backgrounds/${fileName}`)
+    );
+
+    return match ? (match[1] as string) : "";
+}
+
+/**
+ * Resolve a full asset path (e.g. "Welcome/img.jpg" or "bg.jpg") to a build-time URL.
+ * @param path The relative path from within assets/gallery or assets/backgrounds
+ */
+export function resolveAsset(path: string): string {
+    if (!path) return "";
+
+    // Normalize path for matching
+    const normalizedPath = path.replace(/\\/g, '/');
+
+    // Attempt to match the path suffix in the allAssets keys
+    const match = Object.entries(allAssets).find(([assetPath]) =>
+        assetPath.endsWith(`/${normalizedPath}`)
+    );
+
+    return match ? (match[1] as string) : "";
+}
+
+/**
  * Returns all assets as a record.
  */
 export function getAllAssets() {

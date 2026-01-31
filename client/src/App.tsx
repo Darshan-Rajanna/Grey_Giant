@@ -1,4 +1,4 @@
-import { Switch, Route, Router } from "wouter";
+import { Switch, Route, Router, useRoute } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -56,6 +56,9 @@ function MainContent() {
 }
 
 function AppRouter() {
+  const [match] = useRoute("/admin");
+  const isAdminRoute = !!match;
+
   return (
     <div className="bg-black min-h-screen flex flex-col">
       <Navigation />
@@ -67,9 +70,9 @@ function AppRouter() {
             <Route path="/services/:id" component={ServiceDetails} />
             <Route component={NotFound} />
           </Switch>
+          {!isAdminRoute && <Footer />}
         </Router>
       </main>
-      <Footer />
     </div>
   );
 }

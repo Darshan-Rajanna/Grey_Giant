@@ -1,13 +1,29 @@
 import { motion } from "framer-motion";
 import { siteContent } from "@/data/siteContent";
-import { getFirstImageInDir } from "@/lib/asset-utils";
+import { getFirstImageInDir, getBackground } from "@/lib/asset-utils";
 
-const About_img = getFirstImageInDir("About");
+const aboutImgFilename = siteContent.backgrounds.about;
+const About_img = getBackground(aboutImgFilename) || getFirstImageInDir("About");
 
 export default function About() {
   const { about } = siteContent;
+  const bgImgFilename = siteContent.backgrounds.about;
+  const bgImg = getBackground(bgImgFilename);
+
   return (
-    <div className="min-h-fit bg-[#020202] text-white py-24 selection:bg-primary/30 relative overflow-hidden">
+    <div className="min-h-fit bg-[#020202] text-white py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
+      {/* Background Image with Overlay */}
+      {bgImg && (
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src={bgImg}
+            alt=""
+            className="w-full h-full object-cover opacity-25 grayscale-[0.2]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/60 to-[#020202]" />
+        </div>
+      )}
+
       {/* Premium Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
@@ -71,21 +87,15 @@ export default function About() {
               <span className="w-8 h-[1px] bg-primary/30" />
             </div>
 
-            {/* Main Image Container */}
-            <div className="relative aspect-[4/5] md:aspect-[3/4] lg:aspect-auto lg:h-[600px] overflow-hidden rounded-sm border border-white/5 shadow-2xl">
+            {/* Main Image Container with Gold Frame - Flexible on Mobile, Fixed on Desktop */}
+            <div className="relative h-fit lg:h-[600px] w-full overflow-hidden rounded-sm p-2 bg-black/20 border border-primary/30 shadow-2xl group flex items-center justify-center">
               <img
                 src={About_img}
                 alt="Grey Giant Event Setup"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain md:object-cover rounded-sm transition-transform duration-1000 group-hover:scale-105"
               />
             </div>
 
-            {/* Bottom Label (Optional, but matching the screenshot's symmetry) */}
-            <div className="flex items-center justify-center gap-4 mt-6 opacity-40">
-              <span className="text-[8px] uppercase tracking-[0.6em] text-white/60 font-medium">
-                {about.labels}
-              </span>
-            </div>
           </motion.div>
         </div>
       </section>

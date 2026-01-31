@@ -13,10 +13,13 @@
   --elevate-2: rgba(212, 175, 55, .08);
 
   /* Gold/Yellow Base: HSL(45, 60%, 52%) -> #d4af37 */
-  --background: 0 0% 5%; /* Deep Charcoal Black */
-  --foreground: 45 30% 95%; /* Creamy White */
+  --background: 0 0% 5%;
+  /* Deep Charcoal Black */
+  --foreground: 45 30% 95%;
+  /* Creamy White */
 
-  --border: 45 20% 20%; /* Dark Gold Border */
+  --border: 45 20% 20%;
+  /* Dark Gold Border */
 
   --card: 0 0% 8%;
   --card-foreground: 45 30% 95%;
@@ -25,7 +28,8 @@
   --sidebar: 0 0% 4%;
   --sidebar-foreground: 45 30% 90%;
   --sidebar-border: 45 20% 15%;
-  --sidebar-primary: 45 60% 52%; /* Gold */
+  --sidebar-primary: 45 60% 52%;
+  /* Gold */
   --sidebar-primary-foreground: 0 0% 0%;
   --sidebar-accent: 45 20% 15%;
   --sidebar-accent-foreground: 45 60% 52%;
@@ -35,7 +39,8 @@
   --popover-foreground: 45 30% 95%;
   --popover-border: 45 20% 20%;
 
-  --primary: 45 70% 55%; /* More vibrant Gold */
+  --primary: 45 70% 55%;
+  /* More vibrant Gold */
   --primary-foreground: 0 0% 0%;
 
   --secondary: 45 10% 20%;
@@ -52,7 +57,7 @@
 
   --input: 45 20% 20%;
   --ring: 45 70% 55%;
-  
+
   --chart-1: 45 70% 55%;
   --chart-2: 45 30% 40%;
   --chart-3: 45 10% 20%;
@@ -63,7 +68,7 @@
   --font-serif: 'Playfair Display', serif;
   --font-mono: Menlo, monospace;
   --radius: .25rem;
-  
+
   --shadow-2xs: 0px 2px 0px 0px hsl(45 70% 55% / 0.05);
   --shadow-xs: 0px 2px 0px 0px hsl(45 70% 55% / 0.05);
   --shadow-sm: 0px 2px 0px 0px hsl(45 70% 55% / 0.05);
@@ -72,7 +77,7 @@
   --shadow-lg: 0px 12px 24px -4px hsl(0 0% 0% / 0.6);
   --shadow-xl: 0px 20px 32px -8px hsl(0 0% 0% / 0.7);
   --shadow-2xl: 0px 24px 48px -12px hsl(0 0% 0% / 0.8);
-  
+
   --spacing: 0.25rem;
 
   --sidebar-primary-border: hsl(var(--sidebar-primary));
@@ -99,10 +104,16 @@
 
   body {
     @apply font-sans antialiased bg-background text-white/90;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-tight;
   }
 }
 
@@ -110,18 +121,23 @@
   .hover-elevate:hover::after {
     background-color: var(--elevate-1);
   }
+
   .active-elevate-2:active::after {
     background-color: var(--elevate-2);
   }
+
   .premium-border {
     @apply border-2 border-primary/30 p-2 transition-all duration-500 hover:border-primary/60;
   }
+
   .premium-border-inner {
     @apply border border-primary/20 p-1 transition-all duration-500 hover:border-primary/40;
   }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
