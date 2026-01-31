@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import { siteContent } from "@/data/siteContent";
-import { getBackground, getFirstImageInDir } from "@/lib/asset-utils";
+import { getBackground, getFirstImageInDir, resolveAsset } from "@/lib/asset-utils";
 
 export default function Services() {
   const [showAll, setShowAll] = useState(false);
@@ -68,7 +68,7 @@ export default function Services() {
               >
                 <div className="flex items-center justify-center bg-black/20 w-full h-full p-2 border border-primary/30">
                   <img
-                    src={service.image}
+                    src={resolveAsset(service.image)}
                     alt={service.title}
                     className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
                   />

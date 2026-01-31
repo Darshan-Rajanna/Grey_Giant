@@ -151,7 +151,7 @@
             "accent": "Excellence"
         },
         "description": "You're Invited to Craft Something Extraordinary",
-        "image": "Welcome/invite.jpg"
+        "image": "Welcome/welcome_bg.jpg"
     },
     "backgrounds": {
         "home": "hero_new.png",
