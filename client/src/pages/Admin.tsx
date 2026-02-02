@@ -440,8 +440,6 @@ export default function Admin() {
   const fetchAllAssets = async () => {
     setIsFetchingFiles(true);
     const config: GitHubConfig = { owner: auth.githubOwner, repo: auth.githubRepo, token: auth.githubToken };
-    const dirs = ["backgrounds", "Hero", "About", "OurStory", "Welcome", "LuxuryCorporateEvents", "BespokeWeddings&Engagements", "DJNights&PrivateParties", "TraditionalBands&BrandOpenings", "Catering & Culinary Experiences", "Makeup&StylingServices", "Pastries & Celebration Cakes", "Balloon Décor & Birthday Celebrations", "Private & Social Celebrations", "Schools, Colleges & University Event Services"];
-    
     const newAssets: { [key: string]: string[] } = {};
     for (const dir of assetDirectories) {
       const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory") 
