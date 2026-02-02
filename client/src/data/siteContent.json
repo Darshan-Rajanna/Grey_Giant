@@ -198,7 +198,7 @@
   },
   "backgrounds": {
     "home": "Hero_bg.jpg",
-    "about": "About_bg.jpg",
+    "about": "hero_new.png",
     "story": "Story_bg.jpg",
     "values": "About_bg.jpg",
     "services": "Services_bg.jpg",
