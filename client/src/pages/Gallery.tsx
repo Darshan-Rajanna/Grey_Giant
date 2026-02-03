@@ -66,15 +66,15 @@ export default function Gallery() {
       {/* Background Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <img src={bgImg} alt="" className="w-full h-full object-cover opacity-35 grayscale-[0.2]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/50 to-[#020202]" />
+          <img src={bgImg} alt="" className="w-full h-full object-cover opacity-60 grayscale-[0.2]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
         </div>
       )}
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-col items-center text-center mb-16 md:mb-28 px-4">
-          <h1 className="text-5xl md:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-            {galleryPage.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{galleryPage.title.accent}</span>
+          <h1 className="text-5xl md:text-8xl font-serif text-white mb-10 tracking-tighter leading-[1.1] py-2">
+            {galleryPage.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{galleryPage.title.accent}</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
             "{galleryPage.description}"
@@ -96,7 +96,7 @@ export default function Gallery() {
               >
                 <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover rounded-sm transition-transform duration-1000 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                  <Maximize2 className="text-primary w-5 h-5" />
+                  <Maximize2 className="text-primary w-5 h-5" aria-label="View Large" />
                 </div>
               </motion.div>
             ))}
@@ -130,7 +130,7 @@ export default function Gallery() {
         <DialogContent className="max-w-7xl bg-transparent border-none p-0 outline-none shadow-none flex items-center justify-center h-[90vh]">
           {selectedIndex !== null && (
             <div className="relative w-full h-full flex items-center justify-center px-4 md:px-20 group">
-              <button onClick={handlePrev} className="absolute left-4 z-50 p-4 bg-white/5 rounded-full text-white/40 hover:text-primary transition-all">
+              <button onClick={handlePrev} className="absolute left-4 z-50 p-4 bg-white/5 rounded-full text-white/40 hover:text-primary transition-all" aria-label="Previous Image">
                 <ChevronLeft size={32} />
               </button>
               
@@ -138,7 +138,7 @@ export default function Gallery() {
                 <img src={photos[selectedIndex].src} alt="" className="max-w-full max-h-[80vh] object-contain" />
               </motion.div>
 
-              <button onClick={handleNext} className="absolute right-4 z-50 p-4 bg-white/5 rounded-full text-white/40 hover:text-primary transition-all">
+              <button onClick={handleNext} className="absolute right-4 z-50 p-4 bg-white/5 rounded-full text-white/40 hover:text-primary transition-all" aria-label="Next Image">
                 <ChevronRight size={32} />
               </button>
             </div>

@@ -7,7 +7,7 @@
  */
 
 // We use import.meta.glob to scan the assets directory at build time.
-const allAssets = import.meta.glob("@assets/**/*.{jpg,jpeg,png,webp,svg}", {
+const allAssets = import.meta.glob("@assets/**/*.{jpg,jpeg,png,webp,svg,pdf}", {
     eager: true,
     import: "default",
 });

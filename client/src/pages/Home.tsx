@@ -89,14 +89,14 @@ export default function Home() {
           <img
             src={heroImg}
             alt="Luxury Event Background"
-            className="w-full h-full object-cover object-[50%_85%] opacity-50 grayscale-[0.1]"
-            fetchPriority="high"
+            className="w-full h-full object-cover object-[50%_85%] opacity-60 grayscale-[0.1]"
+            {...{ fetchpriority: "high" } as any}
             loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/30 to-transparent" />
         </div>
 
-        <div className="container relative z-40 px-6 text-center">
+        <div className="container relative z-40 px-6 text-center pt-24 md:pt-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ export default function Home() {
               <span className="w-12 h-[1px] bg-primary/20" />
             </motion.div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[0.9]">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2">
               {hero.title.first} <span className="relative inline-block">
                 <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent font-accent italic pr-4" style={{ fontSize: '1.1em' }}>{hero.title.second}&nbsp;</span>
               </span>

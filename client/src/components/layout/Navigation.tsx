@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight, Github, Instagram, Facebook, MessageCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import logoImg from "@assets/logo/logo1.jpeg";
+import { siteContent } from "@/data/siteContent";
 
 const navItems = [
   { name: "Home", href: "home" },
@@ -57,6 +58,7 @@ export function Navigation() {
           {/* Logo Section */}
           <button 
             onClick={() => scrollToSection('home')} 
+            aria-label="Grey Giant Home"
             className="flex items-center gap-4 group text-left"
           >
             <div className="relative">
@@ -95,6 +97,7 @@ export function Navigation() {
              <button 
                className="p-2 text-white/60 hover:text-white transition-colors" 
                onClick={() => setIsOpen(!isOpen)}
+               aria-label={isOpen ? "Close Menu" : "Open Menu"}
              >
                {isOpen ? <X size={24}/> : <Menu size={24}/>}
              </button>
@@ -146,9 +149,12 @@ export function Navigation() {
 
               {/* Mobile Socials */}
               <div className="flex items-center gap-10 mt-12 pt-10 border-t border-white/5 w-full justify-center">
-                 <Instagram className="text-white/20 hover:text-primary transition-colors cursor-pointer" size={20}/>
-                 <Facebook className="text-white/20 hover:text-primary transition-colors cursor-pointer" size={20}/>
-                 <MessageCircle className="text-white/20 hover:text-primary transition-colors cursor-pointer" size={20}/>
+                 <a href={`https://instagram.com/${siteContent.socials.instagram}`} target="_blank" rel="noreferrer" aria-label="Follow us on Instagram">
+                    <Instagram className="text-white/20 hover:text-primary transition-colors cursor-pointer" size={20}/>
+                 </a>
+                 <a href={`https://wa.me/${siteContent.socials.whatsapp}`} target="_blank" rel="noreferrer" aria-label="Chat with us on WhatsApp">
+                    <MessageCircle className="text-white/20 hover:text-primary transition-colors cursor-pointer" size={20}/>
+                 </a>
               </div>
             </div>
           </motion.div>

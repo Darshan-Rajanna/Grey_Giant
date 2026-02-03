@@ -160,12 +160,19 @@ const VisualImageField = ({ label, value, onBrowse }: any) => (
       onClick={onBrowse}
       className="group relative aspect-video bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden cursor-pointer hover:border-primary/40 transition-all duration-500"
     >
-      <img 
-        src={resolveAsset(value)} 
-        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700" 
-        alt={label}
-        onError={(e: any) => e.target.src = "https://placehold.co/600x400/0a0a0a/d4af37?text=Select+Asset"}
-      />
+      {value?.toLowerCase().endsWith('.pdf') ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-primary/5 text-primary">
+          <FileText size={48} className="mb-4 opacity-40 group-hover:opacity-100 transition-opacity duration-700"/>
+          <span className="text-[10px] uppercase font-black tracking-widest opacity-40 group-hover:opacity-100 transition-opacity duration-700">PDF Asset Selected</span>
+        </div>
+      ) : (
+        <img 
+          src={resolveAsset(value)} 
+          className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-700" 
+          alt={label}
+          onError={(e: any) => e.target.src = "https://placehold.co/600x400/0a0a0a/d4af37?text=Select+Asset"}
+        />
+      )}
       <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
         <div className="flex flex-col items-center gap-2">
           <div className="p-4 bg-primary/20 rounded-full border border-primary/30">
@@ -280,7 +287,7 @@ const RepositoryBrowser = ({ dir, onSelect, activeSelection, assetFiles, fetchAl
              <label htmlFor={`up-${dir}`} className="text-primary/60 hover:text-primary transition-colors cursor-pointer flex items-center gap-2 text-[10px] uppercase font-black">
                   <UploadCloud size={14}/> Upload New
              </label>
-             <input type="file" id={`up-${dir}`} className="hidden" accept="image/*" onChange={(e) => {
+             <input type="file" id={`up-${dir}`} className="hidden" accept={dir === "Brochure" ? ".pdf" : "image/*"} onChange={(e) => {
                  setUploadTargetDirForSection(dir);
                  onFileChange(e);
              }} />
@@ -391,7 +398,7 @@ export default function Admin() {
   const [selectedUploadFile, setSelectedUploadFile] = useState<{ name: string; base64: string } | null>(null);
   const [activePickerField, setActivePickerField] = useState<{ label: string, path: string, setter: (val: string) => void, preferredDir?: string } | null>(null);
 
-  const assetDirectories = ["backgrounds", "Welcome", "About", "OurStory", "LuxuryCorporateEvents", "BespokeWeddings&Engagements", "GeneralGallery", "DJNights&PrivateParties", "TraditionalBands&BrandOpenings", "Catering & Culinary Experiences", "Makeup&StylingServices", "Pastries & Celebration Cakes", "Balloon Decor & Birthday Celebrations", "Private & Social Celebrations", "Schools, Colleges & University Event Services"];
+  const assetDirectories = ["backgrounds", "Welcome", "About", "OurStory", "Brochure", "LuxuryCorporateEvents", "BespokeWeddings&Engagements", "GeneralGallery", "DJNights&PrivateParties", "TraditionalBands&BrandOpenings", "Catering & Culinary Experiences", "Makeup&StylingServices", "Pastries & Celebration Cakes", "Balloon Decor & Birthday Celebrations", "Private & Social Celebrations", "Schools, Colleges & University Event Services"];
 
   // Configuration mapping for background directory associations
   const bgDirMap: Record<Tab, string> = {
@@ -404,8 +411,9 @@ export default function Admin() {
     reviews: "DJNights&PrivateParties",
     contact: "Private & Social Celebrations",
     socials: "backgrounds",
-    welcome: "Welcome"
-  };
+    welcome: "Welcome",
+    brochure: "Brochure"
+  } as any;
 
   // Load GitHub config from local storage
   useEffect(() => {
@@ -442,7 +450,7 @@ export default function Admin() {
     const config: GitHubConfig = { owner: auth.githubOwner, repo: auth.githubRepo, token: auth.githubToken };
     const newAssets: { [key: string]: string[] } = {};
     for (const dir of assetDirectories) {
-      const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory") 
+      const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory" || dir === "Brochure") 
         ? `client/src/assets/${dir}` 
         : `client/src/assets/gallery/${dir}`;
       const result = await listGitHubFiles(config, path);
@@ -624,7 +632,7 @@ export default function Admin() {
     if (!confirm(`Permanently delete ${fileName}?`)) return;
     setIsSaving(true);
     const config: GitHubConfig = { owner: auth.githubOwner, repo: auth.githubRepo, token: auth.githubToken };
-    const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory")
+    const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory" || dir === "Brochure")
         ? `client/src/assets/${dir}/${fileName}`
         : `client/src/assets/gallery/${dir}/${fileName}`;
     const result = await deleteGitHubFile(config, path, `Admin: Resource removal ${fileName}`);
@@ -681,6 +689,19 @@ export default function Admin() {
   const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (uploadTargetDirForSection === "Brochure") {
+        if (!file.type.includes("pdf") && !file.name.toLowerCase().endsWith(".pdf")) {
+            setStatus({ type: "error", message: "Only PDF files are allowed for the brochure." });
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            setSelectedUploadFile({ name: file.name, base64: e.target?.result as string });
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
       setIsOptimizing(true);
       try {
         const optimized = await processImage(file);
@@ -950,6 +971,7 @@ export default function Admin() {
                 <div className="space-y-16">
                     {activeTab === 'hero' && (
                         <div className="space-y-10">
+                            <Field label="Section Eyebrow" value={formData.hero.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, hero: { ...p.hero, eyebrow: v } }))} />
                             <div className="grid md:grid-cols-2 gap-8">
                                 <Field label="Hero First Title" value={formData.hero.title.first} onChange={(v: string) => setFormData(p => ({ ...p, hero: { ...p.hero, title: { ...p.hero.title, first: v } } }))} />
                                 <Field label="Hero Accent Title" value={formData.hero.title.second} onChange={(v: string) => setFormData(p => ({ ...p, hero: { ...p.hero, title: { ...p.hero.title, second: v } } }))} />
@@ -960,6 +982,7 @@ export default function Admin() {
 
                     {activeTab === 'about' && (
                         <div className="space-y-12">
+                            <Field label="Section Eyebrow" value={formData.about.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, about: { ...p.about, eyebrow: v } }))} />
                             <div className="grid md:grid-cols-2 gap-8">
                                 <Field label="Heading Main" value={formData.about.title.main} onChange={(v: string) => setFormData(p => ({ ...p, about: { ...p.about, title: { ...p.about.title, main: v } } }))} />
                                 <Field label="Heading Accent" value={formData.about.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, about: { ...p.about, title: { ...p.about.title, accent: v } } }))} />
@@ -1010,6 +1033,7 @@ export default function Admin() {
 
                     {activeTab === 'story' && (
                         <div className="space-y-12">
+                            <Field label="Section Eyebrow" value={formData.distinction.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, distinction: { ...p.distinction, eyebrow: v } }))} />
                             <div className="grid md:grid-cols-2 gap-8">
                                 <Field label="Intro Overview" value={formData.distinction.shortDesc} onChange={(v: string) => setFormData(p => ({ ...p, distinction: { ...p.distinction, shortDesc: v } }))} area italic />
                                 <VisualImageField 
@@ -1059,6 +1083,7 @@ export default function Admin() {
 
                     {activeTab === 'values' && (
                         <div className="space-y-12">
+                            <Field label="Section Eyebrow" value={formData.values.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, values: { ...p.values, eyebrow: v } }))} />
                             <p className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black px-2">Core Principles</p>
                             <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={(e) => handleDragEnd(e, 'values')}>
                                 <SortableContext items={formData.values.items.map(v => v.title)} strategy={verticalListSortingStrategy}>
@@ -1094,6 +1119,7 @@ export default function Admin() {
 
                     {activeTab === 'services' && (
                         <div className="space-y-20">
+                            <Field label="Section Eyebrow" value={formData.servicesPage.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, servicesPage: { ...p.servicesPage, eyebrow: v } }))} />
                             <div className="flex justify-between items-center px-2">
                                 <p className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black">Offerings Repository</p>
                                 <button onClick={() => setFormData(p => ({ ...p, services: [{ id: `svc-${Date.now()}`, title: "New Offering", desc: "Brief intro", fullDescription: "Detailed narrative", image: "", details: [] }, ...p.services] }))} className="px-8 py-4 bg-primary text-black rounded-2xl text-[10px] uppercase font-black flex items-center gap-3 shadow-2xl hover:scale-105 transition-all outline-none"><Plus size={16}/> New Offering</button>
@@ -1190,6 +1216,7 @@ export default function Admin() {
 
                     {activeTab === 'gallery' && (
                         <div className="space-y-16">
+                            <Field label="Section Eyebrow" value={formData.galleryPage.eyebrow || ""} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, eyebrow: v } }))} />
                             <div className="grid md:grid-cols-2 gap-8">
                                 <Field label="Section Header" value={formData.galleryPage.title.main} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, title: { ...p.galleryPage.title, main: v } } }))} />
                                 <Field label="Header Accent" value={formData.galleryPage.title.accent} onChange={(v: string) => setFormData(p => ({ ...p, galleryPage: { ...p.galleryPage, title: { ...p.galleryPage.title, accent: v } } }))} />
@@ -1267,6 +1294,7 @@ export default function Admin() {
 
                     {activeTab === 'reviews' && (
                         <div className="space-y-16">
+                            <Field label="Section Eyebrow" value={formData.reviewsPage.eyebrow} onChange={(v: string) => setFormData(p => ({ ...p, reviewsPage: { ...p.reviewsPage, eyebrow: v } }))} />
                             <div className="flex justify-between items-center px-2">
                                 <p className="text-[10px] uppercase tracking-[0.4em] text-white/20 font-black">Testimonial Ledger</p>
                                 <button onClick={() => setFormData(p => ({ ...p, reviewItems: [{ id: Date.now(), name: "John Doe", rating: 5, comment: "Exceptional mastery." }, ...p.reviewItems] }))} className="px-8 py-4 bg-primary text-black rounded-2xl text-[10px] uppercase font-black flex items-center gap-3 shadow-2xl hover:scale-105 transition-all outline-none"><Plus size={16}/> Add reflection</button>
@@ -1309,8 +1337,9 @@ export default function Admin() {
                     )}
 
                     {activeTab === 'contact' && (
-                        <div className="grid md:grid-cols-2 gap-12">
-                            <div className="space-y-10">
+                        <div className="space-y-16">
+                            <Field label="Section Eyebrow" value={formData.contactPage.eyebrow || ""} onChange={(v: string) => setFormData(p => ({ ...p, contactPage: { ...p.contactPage, eyebrow: v } }))} />
+                            <div className="grid md:grid-cols-2 gap-12">
                                 <Field label="Primary Header" value={formData.contactPage.title.main} onChange={(v: string) => setFormData(p => ({ ...p, contactPage: { ...p.contactPage, title: { ...p.contactPage.title, main: v } } }))} />
                                 <Field label="Communication Prompt" value={formData.contactPage.description} onChange={(v: string) => setFormData(p => ({ ...p, contactPage: { ...p.contactPage, description: v } }))} area />
                             </div>
@@ -1318,6 +1347,27 @@ export default function Admin() {
                                 <h4 className="text-[10px] uppercase tracking-[0.4em] text-primary/60 font-black">Meta Connectors</h4>
                                 <Field label="Studio Location" value={formData.contact.address} onChange={(v: string) => setFormData(p => ({ ...p, contact: { ...p.contact, address: v } }))} area />
                                 <Field label="Operational Hours" value={formData.contact.hours} onChange={(v: string) => setFormData(p => ({ ...p, contact: { ...p.contact, hours: v } }))} />
+                                <Field label="Google Maps URL" value={formData.contact.mapsLink || ""} onChange={(v: string) => setFormData(p => ({ ...p, contact: { ...p.contact, mapsLink: v } }))} />
+                                <VisualImageField 
+                                    label="Event Brochure (PDF)" 
+                                    value={formData.contact.brochureLink || ""} 
+                                    onBrowse={() => {
+                                        setActivePickerField({ 
+                                            label: "Select Brochure PDF", 
+                                            path: formData.contact.brochureLink || "", 
+                                            setter: (v) => setFormData(p => ({ ...p, contact: { ...p.contact, brochureLink: v } })),
+                                            preferredDir: "Brochure"
+                                        });
+                                        setIsPickerOpen(true);
+                                    }}
+                                />
+                                {formData.contact.brochureLink && (
+                                    <div className="flex justify-end px-4 -mt-6">
+                                        <a href={resolveAsset(formData.contact.brochureLink)} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[10px] uppercase font-black text-primary hover:text-white transition-colors">
+                                            <Eye size={12}/> Review Brochure
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

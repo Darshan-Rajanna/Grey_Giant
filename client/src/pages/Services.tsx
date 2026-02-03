@@ -20,9 +20,10 @@ export default function Services() {
           <img
             src={bgImg}
             alt=""
-            className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/50 to-[#020202]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
         </div>
       )}
 
@@ -48,8 +49,8 @@ export default function Services() {
             <span className="w-12 h-[1px] bg-primary/20" />
           </motion.div>
 
-          <h1 className="text-5xl md:text-8xl lg:text-8xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[0.9]">
-            {servicesPage.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{servicesPage.title.accent}</span>
+          <h1 className="text-5xl md:text-8xl lg:text-8xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2">
+            {servicesPage.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{servicesPage.title.accent}</span>
           </h1>
           <p className="text-white/40 max-w-xl font-light italic text-sm md:text-base leading-relaxed font-serif">
             "{servicesPage.description}"

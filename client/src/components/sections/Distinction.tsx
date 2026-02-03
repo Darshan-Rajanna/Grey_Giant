@@ -25,9 +25,9 @@ export default function Distinction() {
                     <img
                         src={bgImg}
                         alt=""
-                        className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+                        className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-black" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
                 </div>
             )}
             
@@ -64,10 +64,10 @@ export default function Distinction() {
                             >
                                 {distinction.eyebrow}
                             </motion.span>
-                            <h2 className="text-5xl md:text-8xl lg:text-8xl font-serif text-white tracking-tighter leading-[0.85] flex flex-col items-center">
+                            <h2 className="text-5xl md:text-8xl lg:text-8xl font-serif text-white tracking-tighter leading-[1.1] flex flex-col items-center py-2">
                                 <span>{distinction.title.parts[0]}</span>
                                 <span className="text-[10px] md:text-base lg:text-lg text-white/20 uppercase tracking-[0.5em] my-4 font-sans font-bold">{distinction.title.parts[1]}</span>
-                                <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{distinction.title.parts[2]}</span>
+                                <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{distinction.title.parts[2]}</span>
                             </h2>
                         </div>
 

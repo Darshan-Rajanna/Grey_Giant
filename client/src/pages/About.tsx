@@ -17,9 +17,10 @@ export default function About() {
           <img
             src={bgImg}
             alt=""
-            className="w-full h-full object-cover opacity-25 grayscale-[0.2]"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/60 to-[#020202]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
         </div>
       )}
 
@@ -50,8 +51,8 @@ export default function About() {
                 <span className="w-10 h-[1px] bg-primary/20 lg:hidden" />
               </motion.div>
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[0.9]">
-                {about.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{about.title.accent}</span>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-10 tracking-tighter leading-[1.1] py-2">
+                {about.title.main} <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{about.title.accent}</span>
               </h1>
             </motion.div>
 

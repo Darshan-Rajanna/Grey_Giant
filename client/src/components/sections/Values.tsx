@@ -142,9 +142,9 @@ export default function Values() {
                     <img
                         src={bgImg}
                         alt=""
-                        className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+                        className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/50 to-[#020202]" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
                 </div>
             )}
 
@@ -172,9 +172,9 @@ export default function Values() {
                         <span className="w-12 h-[1px] bg-primary/20" />
                     </motion.div>
                     
-                    <h2 className="text-5xl md:text-8xl lg:text-9xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[0.9]">
+                    <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2">
                         {valuesContent.title.main} <span className="relative inline-block">
-                             <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">{valuesContent.title.accent}</span>
+                             <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{valuesContent.title.accent}</span>
                         </span>
                     </h2>
                 </div>

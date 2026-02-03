@@ -180,13 +180,14 @@
     "whatsapp": "917483216698",
     "email": "greygiant01@gmail.com",
     "address": "Post-office, Kamakshipalya, Bengaluru, Karnataka 560079",
-    "hours": "Always At Your Service | 24/7 Concierge"
+    "hours": "Always At Your Service | 24/7 Concierge",
+    "mapsLink": "https://maps.app.goo.gl/Mswc8fReeUE8PGNAA",
+    "brochureLink": "Brochure/Grey Giant events Brochure.pdf"
   },
   "socials": {
-    "instagram": "https://instagram.com/greygiant",
-    "facebook": "https://facebook.com/greygiant",
-    "linkedin": "https://linkedin.com/company/greygiant",
-    "twitter": "https://twitter.com/greygiant"
+    "instagram": "https://www.instagram.com/_grey_giant_",
+    "twitter": "https://x.com/grey_giant_25",
+    "whatsapp": "917483216698"
   },
   "welcomePopup": {
     "title": {

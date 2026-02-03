@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MapPin, Phone, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteContent } from "@/data/siteContent";
-import { getBackground } from "@/lib/asset-utils";
+import { getBackground, resolveAsset } from "@/lib/asset-utils";
 
 import { useToast } from "@/hooks/use-toast";
 
@@ -58,9 +58,9 @@ export default function Contact() {
           <img
             src={bgImg}
             alt=""
-            className="w-full h-full object-cover opacity-35 grayscale-[0.2]"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/50 to-[#020202]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
         </div>
       )}
 
@@ -97,9 +97,9 @@ export default function Contact() {
                   <span className="w-10 h-[1px] bg-primary/20 xl:hidden" />
                 </motion.div>
 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white tracking-tighter leading-[0.9]">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white tracking-tighter leading-[1.1] py-2 text-center xl:text-left">
                   Envision Your <br />
-                  <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic">Experience</span>
+                  <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">Experience</span>
                 </h1>
                 <p className="text-white/30 max-w-sm mx-auto xl:mx-0 font-light italic text-sm md:text-base leading-relaxed font-serif">
                   "Connect with our artisans to begin crafting your next milestone event with absolute precision and refined elegance."
@@ -108,16 +108,19 @@ export default function Contact() {
 
               <div className="grid sm:grid-cols-1 gap-4 max-w-2xl mx-auto xl:mx-0">
                 {[
-                  { icon: MapPin, label: "Location", value: "Post-office, Kamakshipalya, Bengaluru, 560079" },
-                  { icon: Phone, label: "Contact", value: "+91 7483216698" },
-                  { icon: Mail, label: "Email", value: "greygiant01@gmail.com" }
+                  { icon: MapPin, label: "Location", value: siteContent.contact.address, href: siteContent.contact.mapsLink },
+                  { icon: Phone, label: "Contact", value: `+${siteContent.contact.whatsapp}`, href: `tel:+${siteContent.contact.whatsapp}` },
+                  { icon: Mail, label: "Email", value: siteContent.contact.email, href: `mailto:${siteContent.contact.email}` }
                 ].map((item, i) => (
-                  <motion.div
+                  <motion.a
                     key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className="group flex flex-col xl:flex-row items-center xl:items-center gap-4 p-5 rounded-[1.5rem] bg-white/[0.01] border border-white/5 hover:bg-white/[0.02] hover:border-primary/20 transition-all duration-500"
+                    className="group flex flex-col xl:flex-row items-center xl:items-center gap-4 p-5 rounded-[1.5rem] bg-white/[0.01] border border-white/5 hover:bg-white/[0.02] hover:border-primary/20 transition-all duration-500 cursor-pointer text-left"
                   >
                     <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all duration-500 shrink-0">
                       <item.icon size={18} />
@@ -126,36 +129,56 @@ export default function Contact() {
                       <p className="text-[9px] uppercase tracking-[0.5em] text-primary/40 font-bold mb-1">{item.label}</p>
                       <p className="text-white/70 font-light text-sm md:text-base leading-snug font-serif italic">{item.value}</p>
                     </div>
-                  </motion.div>
+                  </motion.a>
                 ))}
+
+                {/* Brochure Download Option */}
+                {siteContent.contact.brochureLink && (
+                  <motion.a
+                    href={resolveAsset(siteContent.contact.brochureLink)}
+                    download
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="group flex flex-col xl:flex-row items-center xl:items-center gap-4 p-5 rounded-[1.5rem] bg-white/[0.01] border border-white/5 hover:bg-primary/5 hover:border-primary/20 transition-all duration-500 cursor-pointer mt-4"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-black transition-all duration-500 shrink-0">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    </div>
+                    <div className="text-center xl:text-left">
+                      <p className="text-[9px] uppercase tracking-[0.5em] text-white/40 font-bold mb-1">Resources</p>
+                      <p className="text-white/70 group-hover:text-white font-bold text-sm md:text-base leading-snug font-serif italic transition-colors">Download Event Brochure (PDF)</p>
+                    </div>
+                  </motion.a>
+                )}
               </div>
             </motion.div>
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-12 xl:col-span-7 h-full">
+          <div className="lg:col-span-12 xl:col-span-7">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="relative h-full"
+              className="relative"
             >
               <div className="absolute -inset-10 bg-primary/5 blur-[120px] rounded-full opacity-20 pointer-events-none" />
 
-              <div className="relative h-full p-8 md:p-10 backdrop-blur-3xl bg-white/[0.01] border border-white/5 rounded-[2.5rem] shadow-2xl flex flex-col">
+              <div className="relative p-8 md:p-10 backdrop-blur-3xl bg-white/[0.01] border border-white/5 rounded-[2.5rem] shadow-2xl flex flex-col">
                 <h2 className="text-xl font-serif text-white mb-8 italic font-light tracking-tight text-center xl:text-left">"{contactPage.formQuote}"</h2>
 
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 md:space-y-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                       <FormField
                         control={form.control}
                         name="name"
                         render={({ field }) => (
-                          <FormItem className="space-y-2">
+                          <FormItem className="space-y-3">
                             <FormLabel className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold px-1">Your Name</FormLabel>
                             <FormControl>
-                              <Input {...field} className="bg-white/[0.03] border-white/10 rounded-xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="John Doe" />
+                              <Input {...field} className="bg-white/[0.03] border-white/10 rounded-xl h-14 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="John Doe" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -165,10 +188,10 @@ export default function Contact() {
                         control={form.control}
                         name="phone"
                         render={({ field }) => (
-                          <FormItem className="space-y-2">
+                          <FormItem className="space-y-3">
                             <FormLabel className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold px-1">Phone Number</FormLabel>
                             <FormControl>
-                              <Input {...field} value={field.value || ""} className="bg-white/[0.03] border-white/10 rounded-xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="+91 00000 00000" />
+                              <Input {...field} value={field.value || ""} className="bg-white/[0.03] border-white/10 rounded-xl h-14 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="+91 00000 00000" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -176,15 +199,15 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                       <FormField
                         control={form.control}
                         name="email"
                         render={({ field }) => (
-                          <FormItem className="space-y-2">
+                          <FormItem className="space-y-3">
                             <FormLabel className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold px-1">Email Address</FormLabel>
                             <FormControl>
-                              <Input {...field} value={field.value || ""} className="bg-white/[0.03] border-white/10 rounded-xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="john@example.com" />
+                              <Input {...field} value={field.value || ""} className="bg-white/[0.03] border-white/10 rounded-xl h-14 focus:ring-primary/20 focus:border-primary/30 transition-all placeholder:text-white/5 font-light" placeholder="john@example.com" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -194,11 +217,11 @@ export default function Contact() {
                         control={form.control}
                         name="eventType"
                         render={({ field }) => (
-                          <FormItem className="space-y-2">
+                          <FormItem className="space-y-3">
                             <FormLabel className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold px-1">Type of Event</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
                               <FormControl>
-                                <SelectTrigger className="bg-white/[0.03] border-white/10 rounded-xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all text-white/50">
+                                <SelectTrigger className="bg-white/[0.03] border-white/10 rounded-xl h-14 focus:ring-primary/20 focus:border-primary/30 transition-all text-white/50">
                                   <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                               </FormControl>
@@ -225,10 +248,10 @@ export default function Contact() {
                       control={form.control}
                       name="message"
                       render={({ field }) => (
-                        <FormItem className="space-y-2">
+                        <FormItem className="space-y-3">
                           <FormLabel className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-bold px-1">Message / Vision</FormLabel>
                           <FormControl>
-                            <Textarea {...field} className="bg-white/[0.03] border-white/10 rounded-xl min-h-[100px] focus:ring-primary/20 focus:border-primary/30 transition-all resize-none placeholder:text-white/5 text-white/70 font-light" placeholder="Tell us about your dream event..." />
+                            <Textarea {...field} className="bg-white/[0.03] border-white/10 rounded-xl min-h-[160px] focus:ring-primary/20 focus:border-primary/30 transition-all resize-none placeholder:text-white/5 text-white/70 font-light" placeholder="Tell us about your dream event..." />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
