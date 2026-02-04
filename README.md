@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Event Horizon - Premium Event Management
 
 A high-end, immersive event management application built with a focus on luxury aesthetics and refined user experience.
@@ -52,8 +51,6 @@ npm run dev
 ```
 The application will be accessible at: **[http://localhost:5000](http://localhost:5000)**
 
-
-
 ## 📁 Project Structure
 - `client/src/pages`: Component-based page layouts.
 - `client/src/assets`: Image assets and visual resources.
@@ -63,6 +60,3 @@ The application will be accessible at: **[http://localhost:5000](http://localhos
 
 ---
 *Created with distinction by the Grey Giant team.*
-=======
-# Grey_gaint
->>>>>>> 74ddf99e77cbcf4e8d91d0262d521f7a0154c560

@@ -13,7 +13,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { siteContent } from "@/data/siteContent";
-import { getFirstImageInDir, getBackground } from "@/lib/asset-utils";
+import { getFirstImageInDir, getBackground, resolveAsset } from "@/lib/asset-utils";
 
 const heroImgFilename = siteContent.backgrounds.hero;
 const heroImg = getBackground(heroImgFilename) || getFirstImageInDir("Hero");
@@ -23,36 +23,36 @@ const SnowOverlay = () => {
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-30">
       {[...Array(40)].map((_, i) => {
         const isGold = Math.random() > 0.4;
-        const sizeMultiplier = i % 10 === 0 ? 3 : 1; 
+        const sizeMultiplier = i % 10 === 0 ? 3 : 1;
         const size = (Math.random() * 10 + 4) * sizeMultiplier;
         const duration = Math.random() * 20 + 15;
         const initialOpacity = Math.random() * 0.4 + 0.2;
-        
+
         return (
           <motion.div
             key={i}
             className="absolute rounded-full"
-            initial={{ 
-              left: `${Math.random() * 100}%`, 
-              top: `${Math.random() * 120}%`, 
+            initial={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 120}%`,
               opacity: 0,
               scale: Math.random() * 0.4 + 0.8
             }}
-            animate={{ 
-              y: -1600, 
+            animate={{
+              y: -1600,
               opacity: [0, initialOpacity, initialOpacity, 0],
               x: [(Math.random() - 0.5) * 150, (Math.random() - 0.5) * 300],
               rotate: [0, 360]
             }}
-            transition={{ 
-              duration: duration, 
-              repeat: Infinity, 
-              ease: "linear", 
-              delay: -Math.random() * duration 
+            transition={{
+              duration: duration,
+              repeat: Infinity,
+              ease: "linear",
+              delay: -Math.random() * duration
             }}
-            style={{ 
-              width: `${size}px`, 
-              height: `${size}px`, 
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
               background: isGold ? 'radial-gradient(circle at 30% 30%, #f8e4b1, #d4af37)' : 'radial-gradient(circle at 30% 30%, #ffffff, #f1f1f1)',
               boxShadow: isGold ? `0 0 ${size}px rgba(212, 175, 55, 0.4)` : `0 0 ${size}px rgba(255, 255, 255, 0.3)`,
               filter: sizeMultiplier > 2 ? 'blur(1px)' : 'blur(0.5px)',
@@ -75,7 +75,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <SnowOverlay />
-        
+
         {/* Abstract Background Noise / Grid */}
         <div className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none"
           style={{ backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: '40px 40px' }} />
@@ -89,14 +89,12 @@ export default function Home() {
           <img
             src={heroImg}
             alt="Luxury Event Background"
-            className="w-full h-full object-cover object-[50%_85%] opacity-60 grayscale-[0.1]"
-            {...{ fetchpriority: "high" } as any}
-            loading="eager"
+            className="w-full h-full object-cover object-[50%_85%] opacity-50 grayscale-[0.1]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/30 to-transparent" />
         </div>
 
-        <div className="container relative z-40 px-6 text-center pt-24 md:pt-32">
+        <div className="container relative z-40 px-6 text-center pt-16 md:pt-24 -translate-y-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,14 +109,14 @@ export default function Home() {
             >
               <span className="w-12 h-[1px] bg-primary/20" />
               <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
-                {hero.eyebrow}
+                The Art of Celebration
               </span>
               <span className="w-12 h-[1px] bg-primary/20" />
             </motion.div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2">
-              {hero.title.first} <span className="relative inline-block">
-                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent font-accent italic pr-4" style={{ fontSize: '1.1em' }}>{hero.title.second}&nbsp;</span>
+            <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2 uppercase">
+              GREY <span className="relative inline-block">
+                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent italic pr-4" style={{ fontSize: '1.2em', fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontStyle: 'italic' }}>GIANT&nbsp;</span>
               </span>
             </h1>
 
@@ -128,7 +126,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 1 }}
               className="max-w-2xl mx-auto text-base md:text-lg text-white/50 font-light leading-relaxed mb-16 italic font-serif"
             >
-              "{hero.description}"
+              "Where visionary design meets absolute precision. We don't just plan events; we architect the moments that define your legacy."
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
@@ -142,7 +140,7 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="relative px-12 py-5 bg-gradient-to-r from-primary via-[#f8e4b1] to-primary text-black font-bold uppercase tracking-[0.3em] text-[11px] overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] rounded-none"
                   >
-                    <span className="relative z-10">{hero.ctaPrimary}</span>
+                    <span className="relative z-10">Get a Quote</span>
                     <div className="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                   </motion.button>
                 </DialogTrigger>
@@ -152,20 +150,10 @@ export default function Home() {
                       <Star className="w-8 h-8 text-primary animate-pulse" />
                     </div>
                     <DialogTitle className="text-3xl md:text-5xl font-serif mb-10 leading-[1.1] italic text-white font-light text-center">
-                      "{hero.dialog.quote.split(',').map((part, i) => (
-                        <span key={i}>
-                          {i > 0 && ", "}
-                          {part.includes("elegance") ? (
-                            <>
-                              {part.replace("elegance", "")}
-                              <span className="text-primary not-italic">elegance</span>
-                            </>
-                          ) : part}
-                        </span>
-                      ))}"
+                      "We don’t just plan events, we create memories wrapped in <span className="text-primary not-italic">elegance</span>."
                     </DialogTitle>
                     <DialogDescription className="text-[10px] text-primary/40 font-semibold tracking-[0.5em] uppercase mb-10 text-center">
-                      {hero.dialog.eyebrow}
+                      Every occasion, a signature of distinction.
                     </DialogDescription>
                   </DialogHeader>
 
@@ -180,7 +168,7 @@ export default function Home() {
                       }}
                       className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-16 text-[10px] tracking-[0.3em] font-bold uppercase w-full md:w-auto cursor-pointer"
                     >
-                      {hero.dialog.button}
+                      Begin Your Vision
                     </Button>
                   </div>
 
@@ -215,14 +203,8 @@ export default function Home() {
                           </div>
 
                           <h3 className="text-2xl md:text-3xl font-serif italic text-white leading-tight mb-6">
-                            "{hero.redirectPopup.quote.split('&').map((part, i) => (
-                              <span key={i}>
-                                {i > 0 && <br />}
-                                {part.includes("Experience the Difference") ? (
-                                  <span className="text-primary not-italic">{part.trim()}</span>
-                                ) : part}
-                              </span>
-                            ))}"
+                            "Define Your Celebration & <br />
+                            <span className="text-primary not-italic">Experience the Difference</span>"
                           </h3>
 
                           <motion.div
@@ -235,7 +217,7 @@ export default function Home() {
                           <div className="flex items-center justify-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
                             <p className="text-[10px] uppercase tracking-[0.6em] text-primary/50 font-bold">
-                              {hero.redirectPopup.status}
+                              Redirecting to Your Journey
                             </p>
                           </div>
                         </motion.div>
@@ -251,13 +233,14 @@ export default function Home() {
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-12 py-5 bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white/60 font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-500 hover:text-white hover:border-white/20 rounded-none relative overflow-hidden group"
               >
-                <span className="relative z-10">{hero.ctaSecondary}</span>
+                <span className="relative z-10">View Crafted Offerings</span>
                 <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </motion.button>
             </div>
           </motion.div>
         </div>
       </section>
+
     </div>
   );
 }

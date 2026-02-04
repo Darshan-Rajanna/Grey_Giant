@@ -1,21 +1,21 @@
 {
   "hero": {
-    "eyebrow": "The Art of Celebration",
+    "eyebrow": "Premium Event Management",
     "title": {
       "first": "GREY",
       "second": "GIANT"
     },
-    "description": "Where visionary design meets absolute precision. We don't just plan events; we architect the moments that define your legacy.",
-    "ctaPrimary": "Start Your Story",
-    "ctaSecondary": "Explore Our Craft",
+    "description": "Specializing in luxury corporate events, bespoke weddings, and exclusive gatherings. Where vision meets excellence.",
+    "ctaPrimary": "Get a Quote",
+    "ctaSecondary": "View Crafted Offerings",
     "dialog": {
-      "quote": "An event is not just a gathering; it is a canvas where every detail whispers elegance.",
-      "eyebrow": "A Signature of Unrivaled Distinction.",
+      "quote": "We don’t just plan events, we create memories wrapped in elegance.",
+      "eyebrow": "Every occasion, a signature of distinction.",
       "button": "Begin Your Vision"
     },
     "redirectPopup": {
-      "quote": "Your Journey to Exceptional Hosting Starts Here",
-      "status": "Assembling Your Concierge Experience"
+      "quote": "Define Your Celebration & Experience the Difference",
+      "status": "Redirecting to Your Journey"
     }
   },
   "about": {
@@ -25,32 +25,32 @@
       "accent": "Giants"
     },
     "description": [
-      "We believe that every landmark event is a story waiting to be told. At Grey Giant, we aren't just managers; we are stewards of your most precious milestones, dedicated to the art of flawless execution.",
-      "Our philosophy is rooted in 'Silent Excellence'—a commitment to invisible, omni-present planning that allows you to be a guest at your own celebration, knowing that every intricate detail is being handled with absolute devotion.",
-      "From the pulse of Bengaluru to the most exclusive private estates, we bring a global standard of sophistication to local heritage. We don't just coordinate venues; we curate atmospheres that leave an indelible mark on the soul."
+      "Grey Giant Events & Services is a premium event management company specializing in luxury corporate events, bespoke weddings, birthday celebrations, and exclusive social gatherings.",
+      "We provide end-to-end planning, coordination, and execution, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.",
+      "Whether it is a high-profile corporate gathering or a personal milestone celebration, we deliver customized experiences that reflect class, professionalism, and timeless elegance. At Grey Giant, we craft moments of distinction where vision meets excellence and every event leaves a lasting impression."
     ],
-    "labels": "Artistry • Devotion • Soul",
+    "labels": "Elite • Tailored • Exquisite",
     "image": "About/About_main.png"
   },
   "distinction": {
     "eyebrow": "The Philosophy",
     "title": {
       "parts": [
-        "Curating",
-        "Atmospheres",
-        "of Boundless Soultion"
+        "Crafting",
+        "Moments",
+        "of Distinction"
       ]
     },
     "image": "OurStory/Story_main.png",
     "shortDesc": "Grey Giant Events & Services is a premier event management firm in Bengaluru. We provide end-to-end planning, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.",
     "dialog": {
-      "eyebrow": "Our Spirit",
-      "title": "A Devotion to the Extraordinary",
+      "eyebrow": "Our Heritage",
+      "title": "A Legacy of Excellence",
       "paragraphs": [
-        "Our story began with a simple belief: that an event should be as unique as the individuals it celebrates. We moved away from the 'standard' to embrace the bespoke, treating every wedding and corporate gala as a unique masterstroke of design.",
-        "We pride ourselves on our 'Silent Concierge' approach. This means our team works tirelessly behind the scenes, managing the pulse of the event so you can focus on what truly matters—connecting with your guests and savoring the moment.",
-        "By selecting only the most exceptional partners and utilizing the latest in event architecture, we ensure that every Grey Giant production is a showcase of global luxury. We are here to transform your expectations into a legacy of memories.",
-        "Whether it's a strategic launch that defines a brand or an intimate union that joins two families, we treat every occasion with the reverence it deserves. At Grey Giant, your vision is our mission."
+        "At Grey Giant Events, our story began with a simple yet ambitious vision: to transform standard event planning into an art form. We believe that every gathering, whether a grand wedding or a strategic corporate summit, is a unique canvas waiting for a masterstroke of design and precision.",
+        "Over years of orchestrating high-profile events in the heart of Bengaluru, we have refined a philosophy of \"Silent Excellence.\" This means our planning is invisible yet omni-present, allowing our clients to be guests at their own milestones while we manage every intricate detail with military precision and artistic flair.",
+        "Our commitment to the \"Global Standard\" is reflected in our selection of vendors, our use of cutting-edge event technology, and our unwavering dedication to aesthetics. We don't just plan events; we architect experiences that linger in the memory long after the final toast.",
+        "Whether orchestrating a prestigious corporate engagement or an intimate personal celebration, we design tailor-made experiences that embody class, professionalism, and timeless style. At Grey Giant, where vision is elevated through excellence and every occasion leaves a lasting impression."
       ]
     }
   },
@@ -102,15 +102,15 @@
   "servicesPage": {
     "eyebrow": "The Curations",
     "title": {
-      "main": "The",
-      "accent": "Signature Suites"
+      "main": "Our Exclusive",
+      "accent": "Crafted Offerings"
     },
     "description": "Step into a world of curated experiences, where every service is an invitation to elevate your vision into an unforgettable masterpiece."
   },
   "galleryPage": {
     "eyebrow": "Visual Anthology",
     "title": {
-      "main": "The",
+      "main": "Grey Gained",
       "accent": "Collections"
     },
     "description": "A window into our world of distinction—captured moments from the storied celebrations we've had the honor to craft.",

@@ -1,0 +1,108 @@
+﻿git : remote: error: 
+GH013: Repository 
+rule violations 
+found for refs/heads/
+FINAL_REFINEMENTS.   
+     
+At line:1 char:1
++ git push origin HEA
+D:FINAL_REFINEMENTS 
+-f 2>&1 | Out-File 
+-FilePath f ...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (remote:   
+  error: ...EMENT    
+S.        :Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+remote: 
+remote: - GITHUB 
+PUSH PROTECTION      
+  
+remote:   ΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇö        
+remote:     Resolve 
+the following 
+violations before 
+pushing again        
+remote: 
+remote:     - Push 
+cannot contain 
+secrets        
+remote: 
+remote:             
+remote:      (?) 
+Learn how to resolve 
+a blocked push       
+ 
+remote:      https://
+docs.github.com/code-
+security/secret-scann
+ing/working-with-secr
+et-scanning-and-push-
+protection/working-wi
+th-push-protection-fr
+om-the-command-line#r
+esolving-a-blocked-pu
+sh        
+remote:             
+remote:             
+remote:       ΓÇöΓÇö 
+GitHub Personal 
+Access Token ΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇöΓÇöΓÇ
+öΓÇöΓÇöΓÇöΓÇöΓÇö     
+   
+remote:        
+locations:        
+remote:          - 
+commit: 5241eb6af3054
+d51ecde7814d6e6282c4f
+5ffa7b        
+remote:            
+path: README.md:71   
+     
+remote:             
+remote:        (?) 
+To push, remove 
+secret from 
+commit(s) or follow 
+this URL to allow 
+the secret.        
+remote:        https:
+//github.com/Amulyaaa
+R/Grey_gaint/security
+/secret-scanning/unbl
+ock-secret/39CFSPHJDx
+HPpDfnXJPHKy8yc0s    
+    
+remote:             
+remote: 
+remote: 
+To https://github.com
+/AmulyaaaR/Grey_gaint
+.git
+ ! [remote rejected] 
+HEAD -> 
+FINAL_REFINEMENTS 
+(push declined due 
+to repository rule 
+violations)
+error: failed to 
+push some refs to 'ht
+tps://github.com/Amul
+yaaaR/Grey_gaint.git'

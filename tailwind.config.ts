@@ -87,6 +87,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        display: ["Cormorant Garamond", "serif"],
         accent: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },

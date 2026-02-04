@@ -45,7 +45,6 @@ function MainContent() {
     <>
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-white z-[60] origin-left" style={{ scaleX }} />
       <div id="home"><Home /></div>
-      <div id="about"><About /></div>
       <div id="story"><Distinction /></div>
       <div id="values"><Values /></div>
       <div id="services"><Services /></div>
