@@ -42,7 +42,7 @@
       ]
     },
     "image": "OurStory/Story_main.png",
-    "shortDesc": "Based in the heart of Bengaluru, Grey Giant is a creative powerhouse dedicated to the art of luxury hosting. We believe in planning that is felt but never seen, ensuring your vision is elevated through a lens of unyielding precision and refined artistry.",
+    "shortDesc": "Grey Giant Events & Services is a premier event management firm in Bengaluru. We provide end-to-end planning, ensuring every event is seamless, elegant, and stress-free. From concept creation to flawless on-site management, every detail is thoughtfully curated with precision and refined aesthetics.",
     "dialog": {
       "eyebrow": "Our Spirit",
       "title": "A Devotion to the Extraordinary",
@@ -211,7 +211,7 @@
   "services": [
     {
       "id": "corporate",
-      "title": "Executive Corporate Galas",
+      "title": "Luxury Corporate Events",
       "desc": "Commanding environments where brand identity meets strategic excellence.",
       "fullDescription": "We translate your corporate vision into high-impact environments. From high-profile summits to celebratory launches, our corporate events are designed to be as influential as the brands they represent—balancing a professional edge with unmistakable sophistication.",
       "image": "LuxuryCorporateEvents/E1.jpg",
@@ -244,31 +244,31 @@
     },
     {
       "id": "weddings",
-      "title": "Heirloom Weddings",
+      "title": "Bespoke Weddings & Engagements",
       "desc": "Deeply personal unions crafted for a lifetime of memories.",
       "fullDescription": "A wedding is more than an event; it's a start of a new history. We approach every union as an heirloom, layering personal touches with grand design to create a celebration that is uniquely, undeniably yours.",
       "image": "BespokeWeddings&Engagements/W1.jpg",
       "details": [
         {
-          "title": "Intimate Unions",
+          "title": "Engagement Soirées",
           "buttonText": "View Intimacy",
           "image": "BespokeWeddings&Engagements/W1.jpg",
           "description": "Small, soulful gatherings where every guest feels the depth of the celebration."
         },
         {
-          "title": "Grand Traditions",
+          "title": "Mandap & Rituals",
           "buttonText": "Honor Culture",
           "image": "BespokeWeddings&Engagements/W2.jpg",
           "description": "Centering heritage and ritual within a frame of modern luxury, respecting every meaningful custom."
         },
         {
-          "title": "Bespoke Receptions",
+          "title": "Reception Galas",
           "buttonText": "Dance & Dine",
           "image": "BespokeWeddings&Engagements/W3.jpg",
           "description": "Transcend the ordinary with receptions that feel like a private premiere of your new life together."
         },
         {
-          "title": "The Sanctuary",
+          "title": "Bridal Suites",
           "buttonText": "Peace & Elegance",
           "image": "BespokeWeddings&Engagements/W4.jpg",
           "description": "Luxury suites designed to be a haven of calm and preparation before your grand entrance."
@@ -277,31 +277,31 @@
     },
     {
       "id": "dj-nights",
-      "title": "Electric Socials & Private Parties",
+      "title": "DJ Nights & Private Parties",
       "desc": "High-octane energy designed for the ultimate urban celebration.",
       "fullDescription": "For when the night needs to be legendary. We blend top-tier sound, light architecture, and curated energy to create private parties that become the talk of the town.",
       "image": "DJNights&PrivateParties/dj1.jpg",
       "details": [
         {
-          "title": "Sonic Mastery",
+          "title": "Professional DJ Setups",
           "buttonText": "Hear the Energy",
           "image": "DJNights&PrivateParties/dj1.jpg",
           "description": "Audiovisual setups that move the room, featuring only the finest acoustic engineering."
         },
         {
-          "title": "Light Architecture",
+          "title": "Dance Floor Energy",
           "buttonText": "See the Vibe",
           "image": "DJNights&PrivateParties/dj2.jpg",
           "description": "Immersive lighting that doesn't just illuminate, but guides the emotion of the night."
         },
         {
-          "title": "Hidden Lounges",
+          "title": "Private Lounge Parties",
           "buttonText": "Exclusive Access",
           "image": "DJNights&PrivateParties/dj3.jpg",
           "description": "Private sanctuary spaces within the party for those moments of close connection."
         },
         {
-          "title": "Concept Celebrations",
+          "title": "Themed Party Decor",
           "buttonText": "Break the Standard",
           "image": "DJNights&PrivateParties/dj4.jpg",
           "description": "Themed environments that transport your guests to another world for one night only."
@@ -310,31 +310,31 @@
     },
     {
       "id": "bands",
-      "title": "Heritage Bands & Brand Premieres",
+      "title": "Traditional Bands & Brand Openings",
       "desc": "Powerful cultural performances for grand celebratory launches.",
       "fullDescription": "We bridge tradition and modern brand presence. Our launches use cultural resonance to create a powerful opening statement that commands attention and respect.",
       "image": "TraditionalBands&BrandOpenings/B1.jpg",
       "details": [
         {
-          "title": "Classical Artistry",
+          "title": "Bharatanatyam",
           "buttonText": "Experience Grace",
           "image": "TraditionalBands&BrandOpenings/B1.jpg",
           "description": "Performances that honor the timeless beauty of our region's most storied dance forms."
         },
         {
-          "title": "Rhythmic Power",
+          "title": "Dollu Kunitha",
           "buttonText": "Feel the Beat",
           "image": "TraditionalBands&BrandOpenings/B2.jpg",
           "description": "The thundering soul of traditional drums, announcing your presence with undeniable energy."
         },
         {
-          "title": "The Tiger's Spirit",
+          "title": "Kamsale",
           "buttonText": "Behold the Dance",
           "image": "TraditionalBands&BrandOpenings/T1.jpg",
           "description": "A visceral display of power and tradition, perfect for a grand and memorable welcome."
         },
         {
-          "title": "Premier Openings",
+          "title": "Huli Kunitha",
           "buttonText": "Make Your Mark",
           "image": "TraditionalBands&BrandOpenings/T2.jpg",
           "description": "Flawless launch sequences that ensure your brand enters the market with absolute distinction."
@@ -343,31 +343,31 @@
     },
     {
       "id": "catering",
-      "title": "Epicurean Journeys",
+      "title": "Catering & Culinary Experiences",
       "desc": "A masterclass in taste, presentation, and culinary hospitality.",
       "fullDescription": "Food is the heart of hospitality. Our culinary experiences are designed as a journey for the senses—pairing world-class flavors with artistry that makes every meal a memory.",
       "image": "Catering & Culinary Experiences/C1.jpg",
       "details": [
         {
-          "title": "Gourmet Altars",
+          "title": "Luxury Buffets",
           "buttonText": "Sample the Craft",
           "image": "Catering & Culinary Experiences/C1.jpg",
           "description": "Grand buffets that are as beautiful as they are delicious, featuring seasonally-led global menus."
         },
         {
-          "title": "Private Platings",
+          "title": "Fine Dining",
           "buttonText": "View Artistry",
           "image": "Catering & Culinary Experiences/C2.jpg",
           "description": "The ultimate luxury of seated service, where every course is a personal conversation with our chefs."
         },
         {
-          "title": "Chef's Theater",
+          "title": "Live Counters",
           "buttonText": "Interactive Dining",
           "image": "Catering & Culinary Experiences/C3.jpg",
           "description": "Culinary preparation as a performance, bringing the energy of the kitchen into your event space."
         },
         {
-          "title": "Table Scapes",
+          "title": "Table Aesthetics",
           "buttonText": "Dine in Style",
           "image": "Catering & Culinary Experiences/Catering, Birthday & Wedding Cakes and Desserts.jpg",
           "description": "Fine linens, custom florals, and premium glassware that frame your meal in absolute beauty."
@@ -376,31 +376,31 @@
     },
     {
       "id": "makeup",
-      "title": "Artistic Styling & Prep",
+      "title": "Makeup & Styling Services",
       "desc": "Personalized artistry to help you face your grandest moments with confidence.",
       "fullDescription": "We believe in enhancing your natural essence. Our stylists aren't just artists; they are your personal support team, ensuring you feel as radiant as the occasion itself.",
       "image": "Makeup&StylingServices/M1.jpg",
       "details": [
         {
-          "title": "Radiant Artistry",
+          "title": "Bridal Artistry",
           "buttonText": "Find Your Look",
           "image": "Makeup&StylingServices/M1.jpg",
           "description": "Bespoke makeup that highlights your personal story while ensuring camera-ready perfection."
         },
         {
-          "title": "Sculpted Styles",
+          "title": "Hair Styling",
           "buttonText": "View Designs",
           "image": "Makeup&StylingServices/M2.jpg",
           "description": "Hair design that serves as the perfect accessory to your attire, from grand to understated."
         },
         {
-          "title": "Elite Concierge Kit",
+          "title": "Professional Kits",
           "buttonText": "See the Standard",
           "image": "Makeup&StylingServices/M3.jpg",
           "description": "Only the world's most prestigious products, handled with hygienic precision for a flawless result."
         },
         {
-          "title": "Final Touches",
+          "title": "Nail Design",
           "buttonText": "Complete the Vision",
           "image": "Makeup&StylingServices/M4.jpg",
           "description": "Subtle details, from nails to draping, that ensure you are polished from head to toe."
@@ -409,31 +409,31 @@
     },
     {
       "id": "pastries",
-      "title": "Designer Patisserie",
+      "title": "Pastries & Celebration Cakes",
       "desc": "Edible masterpieces that serve as the focal point of your sweet celebrations.",
       "fullDescription": "Because every milestone deserves a sweet signature. Our cakes and pastries are tailored masterpieces, designed to be the crowning jewel of your dessert table.",
       "image": "Pastries & Celebration Cakes/C1.jpg",
       "details": [
         {
-          "title": "Tiered Architecture",
+          "title": "Designer Cakes",
           "buttonText": "Design Your Cake",
           "image": "Pastries & Celebration Cakes/C1.jpg",
           "description": "Cakes that defy gravity and expectations, customized down to the very last sugar petal."
         },
         {
-          "title": "The Sweet Council",
+          "title": "Gourmet Pastries",
           "buttonText": "Explore Flavors",
           "image": "Pastries & Celebration Cakes/C2.jpg",
           "description": "A curated selection of delicate treats that invite your guests to sample a world of sweetness."
         },
         {
-          "title": "Sugar Landscapes",
+          "title": "Dessert Tables",
           "buttonText": "View Displays",
           "image": "Pastries & Celebration Cakes/C3.jpg",
           "description": "Dessert tables that serve as an interactive installation of culinary beauty."
         },
         {
-          "title": "The First Cut",
+          "title": "Cake Ceremonies",
           "buttonText": "Make the Moment",
           "image": "Catering & Culinary Experiences/Catering, Birthday & Wedding Cakes and Desserts.jpg",
           "description": "Capturing the iconic moment of sharing, framed within a beautiful and delicious centerpiece."
@@ -442,31 +442,31 @@
     },
     {
       "id": "balloon",
-      "title": "Whimsical Decor & Birthdays",
+      "title": "Balloon Décor & Birthday Celebrations",
       "desc": "Joyful, creative installations that bring a sense of wonder to every age.",
       "fullDescription": "Birthdays are about the magic of the moment. We use creative styling and installation art to turn standard spaces into wonderlands of color and joy.",
       "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
       "details": [
         {
-          "title": "Wonder Walls",
+          "title": "Themed Setups",
           "buttonText": "See the Magic",
           "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
           "description": "Vibrant, creative backdrops that serve as the perfect frame for your celebratory photos."
         },
         {
-          "title": "Grand Entrances",
+          "title": "Balloon Arches",
           "buttonText": "Welcome Guests",
           "image": "Balloon Decor & Birthday Celebrations/B2.jpg",
           "description": "Whimsical arches and pillar installations that say 'the party has officially started'."
         },
         {
-          "title": "Youthful Joy",
+          "title": "Kids Celebrations",
           "buttonText": "Plan a Dream",
           "image": "Balloon Decor & Birthday Celebrations/B3.jpg",
           "description": "Themed environments designed specifically to spark the imagination of our youngest guests."
         },
         {
-          "title": "Bespoke Accents",
+          "title": "Accent Decor",
           "buttonText": "Style Your Party",
           "image": "Balloon Decor & Birthday Celebrations/B4.jpg",
           "description": "Coordinated decor that ensures your birthday celebration feels thoughtfully curated throughout."
@@ -475,7 +475,7 @@
     },
     {
       "id": "social",
-      "title": "Intimate Social Soirées",
+      "title": "Private & Social Celebrations",
       "desc": "Refined gatherings that focus on the warmth of connection and conversation.",
       "fullDescription": "Luxury isn't always about the grand; it's often found in the intimate. We design small-scale socials that feel deeply personal, warm, and exceptionally sophisticated.",
       "image": "Private & Social Celebrations/p1.jpg",
@@ -493,13 +493,13 @@
           "description": "Cocktail hours with a focus on ease and elegance, designed for the modern socialite."
         },
         {
-          "title": "The Open Sky",
+          "title": "Cocktail Parties",
           "buttonText": "Breathe Luxury",
           "image": "Private & Social Celebrations/p3.jpg",
           "description": "Outdoor gatherings that embrace the natural beauty of the garden, styled for comfort."
         },
         {
-          "title": "Atmospheric Home",
+          "title": "Social Soirées",
           "buttonText": "Host at Home",
           "image": "Private & Social Celebrations/p4.jpg",
           "description": "Bringing the Grey Giant standard to your private residence for an unmatched hosting experience."
@@ -508,13 +508,13 @@
     },
     {
       "id": "institutional",
-      "title": "Academic & Institutional Honors",
+      "title": "Schools, Colleges & University Events",
       "desc": "Professional, prestigious ceremonies for the legacy moments of learning.",
       "fullDescription": "We bring a sense of ceremony and protocol to institutional events. Our academic celebrations are designed to honor achievement with the respect it deserves.",
       "image": "Schools, Colleges & University Event Services/I1.jpg",
       "details": [
         {
-          "title": "The Grand Stage",
+          "title": "Cultural Festivals",
           "buttonText": "See the Setup",
           "image": "Schools, Colleges & University Event Services/I1.jpg",
           "description": "Dignified stage architecture designed to be the focus of your academic festivals."
@@ -526,13 +526,13 @@
           "description": "Ceremonies handled with the gravity and professional protocol that a graduation demands."
         },
         {
-          "title": "Thought Series",
+          "title": "Seminars",
           "buttonText": "Explore Seminars",
           "image": "Schools, Colleges & University Event Services/I3.jpg",
           "description": "Professional seminar environments that allow the exchange of ideas to take center stage."
         },
         {
-          "title": "Legacy Awards",
+          "title": "Academic Awards",
           "buttonText": "Celebrate Success",
           "image": "Schools, Colleges & University Event Services/I4.jpg",
           "description": "Formal occasions designed to shine a light on the academic and cultural stars of your institution."
