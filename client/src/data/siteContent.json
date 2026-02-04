@@ -199,12 +199,12 @@
   },
   "backgrounds": {
     "home": "Hero_bg.jpg",
-    "about": "About_bg_v2.png",
+    "about": "About_bg.png",
     "story": "hero_new.png",
-    "values": "hero_new.png",
+    "values": "Values_bg.jpg",
     "services": "Services_bg.jpg",
-    "gallery": "Gallery_bg.jpg",
-    "reviews": "Reviews_bg.jpg",
+    "gallery": "Gallery_bg.png",
+    "reviews": "Reviews_bg.png",
     "contact": "Contact_bg.jpg",
     "hero": "hero_new.png"
   },
@@ -217,28 +217,40 @@
       "image": "LuxuryCorporateEvents/E1.jpg",
       "details": [
         {
-          "title": "Strategic Summits",
-          "buttonText": "Explore Leadership",
+          "title": "Concept & Strategic Planning",
+          "buttonText": "Explore Strategy",
           "image": "LuxuryCorporateEvents/E1.jpg",
-          "description": "Environments designed for focus, fostering the clarity needed for your organization's next great leap."
+          "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
-          "title": "Prestigious Galas",
-          "buttonText": "View Celebrations",
+          "title": "Venue, Design & Corporate Décor",
+          "buttonText": "View Refined Decor",
           "image": "LuxuryCorporateEvents/E2.jpg",
-          "description": "Where the corporate world finds its festive heart—grand dinners with uncompromising attention to detail."
+          "description": "We source premium venues and design refined environments with sophisticated décor. Staging, lighting, sound, and visual elements are seamlessly integrated."
         },
         {
-          "title": "Legacy Recognitions",
-          "buttonText": "Honor Excellence",
+          "title": "Branding, Launches & Showcases",
+          "buttonText": "Capture Impact",
           "image": "LuxuryCorporateEvents/E3.jpg",
-          "description": "Celebrating the milestones of your team with ceremonies that carry true weight and significance."
+          "description": "From product launches to inaugurations and milestone events, we deliver controlled impact. Brand identity is woven subtly through space, movement, and experience."
         },
         {
-          "title": "Atmospheric Networking",
-          "buttonText": "Connect & Grow",
+          "title": "Technical Production & Ops",
+          "buttonText": "Ensure Precision",
           "image": "LuxuryCorporateEvents/E4.jpg",
-          "description": "Spaces that encourage dialogue, perfectly tuned to foster the connections that drive your future."
+          "description": "Advanced audio-visual systems, stage management, and technical rehearsals ensure precision. Every cue, transition, and timeline is managed flawlessly behind the scenes."
+        },
+        {
+          "title": "Management & Guest Experience",
+          "buttonText": "Seamless Flow",
+          "image": "LuxuryCorporateEvents/E1.jpg",
+          "description": "Conferences, leadership meets, and award nights are executed with structure. Registrations, speaker coordination, and flow are handled seamlessly."
+        },
+        {
+          "title": "Execution & On-Ground Control",
+          "buttonText": "Operational Excellence",
+          "image": "LuxuryCorporateEvents/E2.jpg",
+          "description": "Our team operates discreetly to manage logistics, catering, and hospitality. VIP handling and service standards are maintained without disruption."
         }
       ]
     },
@@ -250,94 +262,124 @@
       "image": "BespokeWeddings&Engagements/W1.jpg",
       "details": [
         {
-          "title": "Engagement Soirées",
-          "buttonText": "View Intimacy",
+          "title": "Personalized Concept & Storytelling",
+          "buttonText": "Explore Your Story",
           "image": "BespokeWeddings&Engagements/W1.jpg",
-          "description": "Small, soulful gatherings where every guest feels the depth of the celebration."
+          "description": "We take time to understand your love story, traditions, and personal style. Every wedding is thoughtfully designed to reflect who you are as a couple for a celebration that feels meaningful and elegant."
         },
         {
-          "title": "Mandap & Rituals",
-          "buttonText": "Honor Culture",
+          "title": "Venue Selection & Wedding Design",
+          "buttonText": "View Design Harmony",
           "image": "BespokeWeddings&Engagements/W2.jpg",
-          "description": "Centering heritage and ritual within a frame of modern luxury, respecting every meaningful custom."
+          "description": "Whether intimate or grand, we help you choose the perfect venue. Each space is transformed with refined décor, lighting, and visual harmony to create a beautiful and balanced setting."
         },
         {
-          "title": "Reception Galas",
-          "buttonText": "Dance & Dine",
+          "title": "Custom Décor & Floral Styling",
+          "buttonText": "Bespoke Artistry",
           "image": "BespokeWeddings&Engagements/W3.jpg",
-          "description": "Transcend the ordinary with receptions that feel like a private premiere of your new life together."
+          "description": "Décor and florals are designed to match your vision and wedding mood. We select colors, textures, and flowers that feel luxurious yet timeless, enhancing the emotion of every moment."
         },
         {
-          "title": "Bridal Suites",
-          "buttonText": "Peace & Elegance",
+          "title": "Ceremony & Ritual Management",
+          "buttonText": "Honor Tradition",
           "image": "BespokeWeddings&Engagements/W4.jpg",
-          "description": "Luxury suites designed to be a haven of calm and preparation before your grand entrance."
+          "description": "All ceremonies and rituals are planned with respect and cultural understanding. Timelines are carefully managed so each moment flows naturally, allowing you to enjoy every ritual without stress."
+        },
+        {
+          "title": "Guest Experience & Hospitality",
+          "buttonText": "Refined Comfort",
+          "image": "BespokeWeddings&Engagements/W1.jpg",
+          "description": "From the first invite to the final farewell, guests are cared for thoughtfully. Hospitality, seating, catering, and comfort are managed seamlessly so everyone feels welcomed and relaxed."
+        },
+        {
+          "title": "Execution & On-Ground Coordination",
+          "buttonText": "Stay Joyful",
+          "image": "BespokeWeddings&Engagements/W2.jpg",
+          "description": "Our experienced team manages everything quietly in the background. Logistics, coordination, and timing are handled with precision, ensuring you stay present and joyful throughout."
         }
       ]
     },
     {
       "id": "dj-nights",
-      "title": "DJ Nights & Private Parties",
+      "title": "DJ Night & Private Party Event Services",
       "desc": "High-octane energy designed for the ultimate urban celebration.",
       "fullDescription": "For when the night needs to be legendary. We blend top-tier sound, light architecture, and curated energy to create private parties that become the talk of the town.",
       "image": "DJNights&PrivateParties/dj1.jpg",
       "details": [
         {
-          "title": "Professional DJ Setups",
+          "title": "DJ Setup & Sound Experience",
           "buttonText": "Hear the Energy",
           "image": "DJNights&PrivateParties/dj1.jpg",
-          "description": "Audiovisual setups that move the room, featuring only the finest acoustic engineering."
+          "description": "High-quality sound systems and professional DJ setups tailored to the event. Music flow, bass balance, and clarity are carefully managed."
         },
         {
-          "title": "Dance Floor Energy",
+          "title": "Lighting, Visuals & Ambience",
           "buttonText": "See the Vibe",
           "image": "DJNights&PrivateParties/dj2.jpg",
-          "description": "Immersive lighting that doesn't just illuminate, but guides the emotion of the night."
+          "description": "Dynamic lighting, LED effects, and visual setups create the right mood. Designs are customized for energetic DJ nights or intimate private parties."
         },
         {
-          "title": "Private Lounge Parties",
-          "buttonText": "Exclusive Access",
+          "title": "Stage, Dance Floor & Layout",
+          "buttonText": "Feel the Beat",
           "image": "DJNights&PrivateParties/dj3.jpg",
-          "description": "Private sanctuary spaces within the party for those moments of close connection."
+          "description": "Well-planned stage and dance floor arrangements for comfort and safety. Layouts allow smooth movement and immersive party experiences."
         },
         {
-          "title": "Themed Party Decor",
-          "buttonText": "Break the Standard",
+          "title": "Coordination & Crowd Flow",
+          "buttonText": "Seamless Energy",
           "image": "DJNights&PrivateParties/dj4.jpg",
-          "description": "Themed environments that transport your guests to another world for one night only."
+          "description": "Timelines, music transitions, and on-ground coordination are handled seamlessly. Crowd movement and safety are managed discreetly."
+        },
+        {
+          "title": "Private Party Décor & Styling",
+          "buttonText": "Exclusive Mood",
+          "image": "DJNights&PrivateParties/dj1.jpg",
+          "description": "Customized décor for birthdays, house parties, and exclusive celebrations. Themes, props, and styling reflect personal taste and mood."
+        },
+        {
+          "title": "Setup, Execution & Wrap-Up",
+          "buttonText": "Quiet Perfection",
+          "image": "DJNights&PrivateParties/dj2.jpg",
+          "description": "Complete setup, live monitoring, and post-event closure handled professionally. Our team works quietly behind the scenes so you enjoy the night."
         }
       ]
     },
     {
       "id": "bands",
-      "title": "Traditional Bands & Brand Openings",
+      "title": "Traditional Bands & Brand Opening Décor",
       "desc": "Powerful cultural performances for grand celebratory launches.",
       "fullDescription": "We bridge tradition and modern brand presence. Our launches use cultural resonance to create a powerful opening statement that commands attention and respect.",
       "image": "TraditionalBands&BrandOpenings/B1.jpg",
       "details": [
         {
-          "title": "Bharatanatyam",
-          "buttonText": "Experience Grace",
+          "title": "Traditional Folk Bands & Performances",
+          "buttonText": "Experience Culture",
           "image": "TraditionalBands&BrandOpenings/B1.jpg",
-          "description": "Performances that honor the timeless beauty of our region's most storied dance forms."
+          "description": "We arrange authentic traditional bands and folk artists for grand openings. Performances create a festive, welcoming, and culturally rich atmosphere."
         },
         {
-          "title": "Dollu Kunitha",
-          "buttonText": "Feel the Beat",
+          "title": "Brand Opening & Inauguration Décor",
+          "buttonText": "View Brand Style",
           "image": "TraditionalBands&BrandOpenings/B2.jpg",
-          "description": "The thundering soul of traditional drums, announcing your presence with undeniable energy."
+          "description": "Elegant décor designed to reflect your brand identity and values. Floral arrangements, entrance styling, and stage décor are curated with care."
         },
         {
-          "title": "Kamsale",
-          "buttonText": "Behold the Dance",
+          "title": "Ribbon-Cutting & Ceremonies",
+          "buttonText": "Impressive Launch",
           "image": "TraditionalBands&BrandOpenings/T1.jpg",
-          "description": "A visceral display of power and tradition, perfect for a grand and memorable welcome."
+          "description": "Complete arrangements for ribbon cutting, lamp lighting, and inaugural moments. Backdrops and ceremonial elements are styled for visual elegance."
         },
         {
-          "title": "Huli Kunitha",
-          "buttonText": "Make Your Mark",
+          "title": "Floral, Traditional & Thematic Styling",
+          "buttonText": "Timeless Artistry",
           "image": "TraditionalBands&BrandOpenings/T2.jpg",
-          "description": "Flawless launch sequences that ensure your brand enters the market with absolute distinction."
+          "description": "Fresh floral décor, traditional elements, and thematic designs are blended seamlessly. Décor balances tradition with modern brand aesthetics."
+        },
+        {
+          "title": "On-Ground Management & Execution",
+          "buttonText": "Professional Launch",
+          "image": "TraditionalBands&BrandOpenings/B1.jpg",
+          "description": "Our team handles setup, coordination, and dismantling professionally. Everything runs quietly in the background so you focus on your launch."
         }
       ]
     },
@@ -349,193 +391,259 @@
       "image": "Catering & Culinary Experiences/C1.jpg",
       "details": [
         {
-          "title": "Luxury Buffets",
-          "buttonText": "Sample the Craft",
+          "title": "Curated Menus & Culinary Planning",
+          "buttonText": "Explore Flavors",
           "image": "Catering & Culinary Experiences/C1.jpg",
-          "description": "Grand buffets that are as beautiful as they are delicious, featuring seasonally-led global menus."
+          "description": "We design menus tailored to your event style, guest preferences, and cultural tastes. Each selection balances flavor, presentation, and quality to enhance the overall experience."
         },
         {
-          "title": "Fine Dining",
-          "buttonText": "View Artistry",
+          "title": "Premium Ingredients & Preparation",
+          "buttonText": "Taste Excellence",
           "image": "Catering & Culinary Experiences/C2.jpg",
-          "description": "The ultimate luxury of seated service, where every course is a personal conversation with our chefs."
+          "description": "Only fresh, high-quality ingredients are used in every preparation. Our chefs focus on consistency, taste, and elegant presentation, maintaining quality from kitchen to table."
         },
         {
-          "title": "Live Counters",
-          "buttonText": "Interactive Dining",
+          "title": "Multi-Cuisine & Custom Dining",
+          "buttonText": "Worldly Tastes",
           "image": "Catering & Culinary Experiences/C3.jpg",
-          "description": "Culinary preparation as a performance, bringing the energy of the kitchen into your event space."
+          "description": "From traditional to international cuisines, we offer diverse menu choices. Live counters, plated meals, and buffet styles are thoughtfully executed and customized to suit the occasion."
         },
         {
-          "title": "Table Aesthetics",
-          "buttonText": "Dine in Style",
+          "title": "Professional Service & Presentation",
+          "buttonText": "Refined Hospitality",
           "image": "Catering & Culinary Experiences/Catering, Birthday & Wedding Cakes and Desserts.jpg",
-          "description": "Fine linens, custom florals, and premium glassware that frame your meal in absolute beauty."
+          "description": "Service staff are trained to deliver hospitality with grace and efficiency. Presentation, timing, and service flow are managed seamlessly for an effortless experience."
+        },
+        {
+          "title": "Hygiene, Safety & Quality Standards",
+          "buttonText": "Dine with Confidence",
+          "image": "Catering & Culinary Experiences/C1.jpg",
+          "description": "Strict hygiene and food safety standards are followed at every stage. Cleanliness, freshness, and consistency are never compromised, so guests dine with complete comfort."
+        },
+        {
+          "title": "End-to-End Catering Management",
+          "buttonText": "Quiet Excellence",
+          "image": "Catering & Culinary Experiences/C2.jpg",
+          "description": "From setup to service and cleanup, everything is handled professionally. Coordination with the event flow ensures smooth service while we manage the dining experience quietly."
         }
       ]
     },
     {
       "id": "makeup",
-      "title": "Makeup & Styling Services",
+      "title": "Makeup & Hairstyle Services",
       "desc": "Personalized artistry to help you face your grandest moments with confidence.",
       "fullDescription": "We believe in enhancing your natural essence. Our stylists aren't just artists; they are your personal support team, ensuring you feel as radiant as the occasion itself.",
       "image": "Makeup&StylingServices/M1.jpg",
       "details": [
         {
-          "title": "Bridal Artistry",
+          "title": "Personalized Consultation & Styling",
           "buttonText": "Find Your Look",
           "image": "Makeup&StylingServices/M1.jpg",
-          "description": "Bespoke makeup that highlights your personal story while ensuring camera-ready perfection."
+          "description": "Every look begins with understanding your personality, occasion, and preferences. We curate styles that complement your features, outfit, and event theme."
         },
         {
-          "title": "Hair Styling",
-          "buttonText": "View Designs",
+          "title": "Bridal & Groom Styling",
+          "buttonText": "Radiant & Refined",
           "image": "Makeup&StylingServices/M2.jpg",
-          "description": "Hair design that serves as the perfect accessory to your attire, from grand to understated."
+          "description": "Bridal and groom looks are crafted with precision, balance, and timeless appeal. From subtle to statement styles, every detail is thoughtfully perfected."
         },
         {
-          "title": "Professional Kits",
-          "buttonText": "See the Standard",
+          "title": "Fashion, Themed & Event Makeup",
+          "buttonText": "Creative Vision",
           "image": "Makeup&StylingServices/M3.jpg",
-          "description": "Only the world's most prestigious products, handled with hygienic precision for a flawless result."
+          "description": "Whether fashion-forward, themed, or contemporary, styles are tailored to the occasion. Makeup and hair are designed to align seamlessly with the event concept."
         },
         {
-          "title": "Nail Design",
-          "buttonText": "Complete the Vision",
+          "title": "Non-Bridal & Guest Styling",
+          "buttonText": "Polished Elegance",
           "image": "Makeup&StylingServices/M4.jpg",
-          "description": "Subtle details, from nails to draping, that ensure you are polished from head to toe."
+          "description": "For family members and guests, we offer polished, elegant makeup and hairstyles. Looks are comfortable, flattering, and long-lasting for lasting confidence."
+        },
+        {
+          "title": "Premium Products & Hygiene",
+          "buttonText": "Safe Artistry",
+          "image": "Makeup&StylingServices/M1.jpg",
+          "description": "Only high-quality, professional products are used for flawless results. Strict hygiene and sanitation standards are maintained for your safety and comfort."
+        },
+        {
+          "title": "On-Site Service & Timely Execution",
+          "buttonText": "Punctual Perfection",
+          "image": "Makeup&StylingServices/M2.jpg",
+          "description": "Our team provides punctual, on-location services for complete convenience. Styling is delivered calmly and efficiently, even on busy schedules."
         }
       ]
     },
     {
       "id": "pastries",
-      "title": "Pastries & Celebration Cakes",
-      "desc": "Edible masterpieces that serve as the focal point of your sweet celebrations.",
+      "title": "Customized Cakes & Desserts",
+      "desc": "Edible masterpieces tailored to match your event theme and style.",
       "fullDescription": "Because every milestone deserves a sweet signature. Our cakes and pastries are tailored masterpieces, designed to be the crowning jewel of your dessert table.",
       "image": "Pastries & Celebration Cakes/C1.jpg",
       "details": [
         {
-          "title": "Designer Cakes",
+          "title": "Personalized Design & Concepts",
           "buttonText": "Design Your Cake",
           "image": "Pastries & Celebration Cakes/C1.jpg",
-          "description": "Cakes that defy gravity and expectations, customized down to the very last sugar petal."
+          "description": "Every cake and dessert is custom-designed to match your event theme and style. From elegant wedding cakes to playful cupcakes, each creation reflects your vision."
         },
         {
-          "title": "Gourmet Pastries",
-          "buttonText": "Explore Flavors",
+          "title": "Premium Ingredients & Craftsmanship",
+          "buttonText": "Taste the Art",
           "image": "Pastries & Celebration Cakes/C2.jpg",
-          "description": "A curated selection of delicate treats that invite your guests to sample a world of sweetness."
+          "description": "We use high-quality ingredients to ensure rich taste and perfect texture. Each dessert is crafted with precision, care, and attention to detail."
         },
         {
-          "title": "Dessert Tables",
-          "buttonText": "View Displays",
+          "title": "Wide Range of Dessert Selections",
+          "buttonText": "Explore Treats",
           "image": "Pastries & Celebration Cakes/C3.jpg",
-          "description": "Dessert tables that serve as an interactive installation of culinary beauty."
+          "description": "From signature cakes and cupcakes to pastries, brownies, and dessert jars. Options are available for all occasions and preferences."
         },
         {
-          "title": "Cake Ceremonies",
-          "buttonText": "Make the Moment",
-          "image": "Catering & Culinary Experiences/Catering, Birthday & Wedding Cakes and Desserts.jpg",
-          "description": "Capturing the iconic moment of sharing, framed within a beautiful and delicious centerpiece."
+          "title": "Flavor Customization & Dietary",
+          "buttonText": "Personalize Flavor",
+          "image": "Pastries & Celebration Cakes/C1.jpg",
+          "description": "Flavors are customized to suit your taste and guest preferences. Eggless, vegan, and special dietary options are available for everyone to enjoy."
+        },
+        {
+          "title": "Elegant Presentation & Display",
+          "buttonText": "View Styling",
+          "image": "Pastries & Celebration Cakes/C2.jpg",
+          "description": "Desserts are presented beautifully with coordinated styling and setup. Displays enhance the overall décor and visual appeal of the event."
+        },
+        {
+          "title": "Seamless Delivery & Setup",
+          "buttonText": "Quiet Perfection",
+          "image": "Pastries & Celebration Cakes/C3.jpg",
+          "description": "We ensure timely delivery and careful setup at the venue. Every detail is handled professionally and discreetly for the perfect finishing touch."
         }
       ]
     },
     {
       "id": "balloon",
-      "title": "Balloon Décor & Birthday Celebrations",
-      "desc": "Joyful, creative installations that bring a sense of wonder to every age.",
+      "title": "Birthday Events & Celebration Services",
+      "desc": "Joyful, creative installations that bring a sense of wonder to every celebration.",
       "fullDescription": "Birthdays are about the magic of the moment. We use creative styling and installation art to turn standard spaces into wonderlands of color and joy.",
       "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
       "details": [
         {
-          "title": "Themed Setups",
+          "title": "Creative Party Planning & Themes",
           "buttonText": "See the Magic",
           "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
-          "description": "Vibrant, creative backdrops that serve as the perfect frame for your celebratory photos."
+          "description": "We design birthday celebrations around your chosen theme and personality. From kids' parties to elegant adult celebrations, every concept feels special."
         },
         {
-          "title": "Balloon Arches",
-          "buttonText": "Welcome Guests",
+          "title": "Themed Party Décor & Styling",
+          "buttonText": "View Styling",
           "image": "Balloon Decor & Birthday Celebrations/B2.jpg",
-          "description": "Whimsical arches and pillar installations that say 'the party has officially started'."
+          "description": "Décor is curated to match the theme, color palette, and mood of the celebration. Backdrops, table styling, and props come together beautifully."
         },
         {
-          "title": "Kids Celebrations",
-          "buttonText": "Plan a Dream",
+          "title": "Balloon Décor & Installations",
+          "buttonText": "Add Impact",
           "image": "Balloon Decor & Birthday Celebrations/B3.jpg",
-          "description": "Themed environments designed specifically to spark the imagination of our youngest guests."
+          "description": "From balloon arches and ceilings to custom balloon arrangements. Designs are playful, stylish, and tailored to add color, energy, and visual impact."
         },
         {
-          "title": "Accent Decor",
-          "buttonText": "Style Your Party",
+          "title": "Floral-Themed Décor",
+          "buttonText": "Choose Elegance",
           "image": "Balloon Decor & Birthday Celebrations/B4.jpg",
-          "description": "Coordinated decor that ensures your birthday celebration feels thoughtfully curated throughout."
+          "description": "Fresh and artificial florals are styled to suit elegant or modern celebrations. Floral installations add softness, charm, and sophistication to luxury birthday events."
+        },
+        {
+          "title": "Games, Activities & Fun",
+          "buttonText": "Join the Fun",
+          "image": "Balloon Decor & Birthday Celebrations/B1.jpg",
+          "description": "Engaging games and activities are planned for all age groups. From kids' entertainment to interactive party games, fun is managed smoothly throughout."
+        },
+        {
+          "title": "Execution & Event Coordination",
+          "buttonText": "Joy Overflowing",
+          "image": "Balloon Decor & Birthday Celebrations/B2.jpg",
+          "description": "Our team handles setup, coordination, and on-ground management. Everything runs smoothly while you enjoy the celebration stress-free and unforgettable."
         }
       ]
     },
     {
       "id": "social",
-      "title": "Private & Social Celebrations",
+      "title": "Public Events & Social Activity Services",
       "desc": "Refined gatherings that focus on the warmth of connection and conversation.",
       "fullDescription": "Luxury isn't always about the grand; it's often found in the intimate. We design small-scale socials that feel deeply personal, warm, and exceptionally sophisticated.",
       "image": "Private & Social Celebrations/p1.jpg",
       "details": [
         {
-          "title": "Candlelit Ties",
-          "buttonText": "Gather Together",
+          "title": "Public Event Planning & Coordination",
+          "buttonText": "See the Flow",
           "image": "Private & Social Celebrations/p1.jpg",
-          "description": "Dinner parties where the lighting is soft and the conversation is the main event."
+          "description": "We plan and manage large-scale public and social events with structured execution. Permissions, timelines, and crowd flow are handled professionally."
         },
         {
-          "title": "Lounge Society",
-          "buttonText": "View Socials",
+          "title": "Stage Setup & Audio Systems",
+          "buttonText": "Clear Messaging",
           "image": "Private & Social Celebrations/p2.jpg",
-          "description": "Cocktail hours with a focus on ease and elegance, designed for the modern socialite."
+          "description": "Strong, reliable stage structures with clear sound coverage for large audiences. Microphones, speakers, and sound balancing are carefully managed."
         },
         {
-          "title": "Cocktail Parties",
-          "buttonText": "Breathe Luxury",
+          "title": "Political Event & Rally Décor",
+          "buttonText": "Visual Impact",
           "image": "Private & Social Celebrations/p3.jpg",
-          "description": "Outdoor gatherings that embrace the natural beauty of the garden, styled for comfort."
+          "description": "Professional décor for political meetings, rallies, and public addresses. Backdrops, banners, and seating are designed for visibility and impact."
         },
         {
-          "title": "Social Soirées",
-          "buttonText": "Host at Home",
+          "title": "Social Activities & Marathons",
+          "buttonText": "Organized Energy",
           "image": "Private & Social Celebrations/p4.jpg",
-          "description": "Bringing the Grey Giant standard to your private residence for an unmatched hosting experience."
+          "description": "Complete setup for marathons, walks, and awareness programs. Start–finish gates, branding elements, and crowd guidance are arranged seamlessly."
+        },
+        {
+          "title": "On-Ground Management & Safety",
+          "buttonText": "Responsible Control",
+          "image": "Private & Social Celebrations/p2.jpg",
+          "description": "Dedicated teams manage coordination, timing, and logistics on-site. Safety measures, barricading, and controlled access are always prioritized."
         }
       ]
     },
     {
       "id": "institutional",
-      "title": "Schools, Colleges & University Events",
+      "title": "School & College Event Services",
       "desc": "Professional, prestigious ceremonies for the legacy moments of learning.",
       "fullDescription": "We bring a sense of ceremony and protocol to institutional events. Our academic celebrations are designed to honor achievement with the respect it deserves.",
       "image": "Schools, Colleges & University Event Services/I1.jpg",
       "details": [
         {
-          "title": "Cultural Festivals",
-          "buttonText": "See the Setup",
+          "title": "Event Planning & Concept Design",
+          "buttonText": "See the Vision",
           "image": "Schools, Colleges & University Event Services/I1.jpg",
-          "description": "Dignified stage architecture designed to be the focus of your academic festivals."
+          "description": "We plan school and college events around the institution’s vision and theme. Concepts are engaging, organized, and student-focused for cultural fests and annual days."
         },
         {
-          "title": "The Convocation",
-          "buttonText": "Honor Graduates",
+          "title": "Stage Setup & Technical Support",
+          "buttonText": "Hear the Quality",
           "image": "Schools, Colleges & University Event Services/I2.jpg",
-          "description": "Ceremonies handled with the gravity and professional protocol that a graduation demands."
+          "description": "Professional stage design with lighting, sound, and audio-visual systems. Clear visibility and smooth transitions ensure performances flow seamlessly."
         },
         {
-          "title": "Seminars",
-          "buttonText": "Explore Seminars",
+          "title": "Activity Stalls & Event Zones",
+          "buttonText": "Feel the Energy",
           "image": "Schools, Colleges & University Event Services/I3.jpg",
-          "description": "Professional seminar environments that allow the exchange of ideas to take center stage."
+          "description": "Custom stalls for games, food, and sponsor activities. Layouts are planned for easy movement and safety, adding energy and interaction to the event."
         },
         {
-          "title": "Academic Awards",
-          "buttonText": "Celebrate Success",
+          "title": "Photo Booths & Experience Corners",
+          "buttonText": "Capture Memories",
           "image": "Schools, Colleges & University Event Services/I4.jpg",
-          "description": "Formal occasions designed to shine a light on the academic and cultural stars of your institution."
+          "description": "Creative photo booths with themed backdrops and props. Perfect for social sharing and student engagement, capturing fun and excitement effortlessly."
+        },
+        {
+          "title": "On-Ground Event Management",
+          "buttonText": "Smooth Execution",
+          "image": "Schools, Colleges & University Event Services/I1.jpg",
+          "description": "Crowd flow, schedules, and coordination are handled professionally. Our team works efficiently to keep events on time for a smooth student experience."
+        },
+        {
+          "title": "Safe & Hassle-Free Execution",
+          "buttonText": "Stress-Free Celebration",
+          "image": "Schools, Colleges & University Event Services/I2.jpg",
+          "description": "Safety, discipline, and clear communication are always prioritized. Events are managed responsibly for a well-executed institutional celebration."
         }
       ]
     }
