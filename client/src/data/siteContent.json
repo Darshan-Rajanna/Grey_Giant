@@ -198,15 +198,15 @@
     "image": "Welcome/welcome_bg.jpg"
   },
   "backgrounds": {
-    "home": "Hero_bg.jpg",
+    "home": "Hero_bg.png",
     "about": "About_bg.png",
-    "story": "hero_new.png",
+    "story": "Story_bg.jpg",
     "values": "Values_bg.jpg",
     "services": "Services_bg.jpg",
     "gallery": "Gallery_bg.png",
     "reviews": "Reviews_bg.png",
     "contact": "Contact_bg.jpg",
-    "hero": "hero_new.webp"
+    "hero": "Hero_bg.png"
   },
   "services": [
     {
