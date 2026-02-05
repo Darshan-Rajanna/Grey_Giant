@@ -30,7 +30,7 @@
       "Whether it is a high-profile corporate gathering or a personal milestone celebration, we deliver customized experiences that reflect class, professionalism, and timeless elegance. At Grey Giant, we craft moments of distinction where vision meets excellence and every event leaves a lasting impression."
     ],
     "labels": "Elite • Tailored • Exquisite",
-    "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/About/whatsapp-image-2026-01-02-at-92259-pm-1.webp"
+    "image": "About/whatsapp-image-2026-01-02-at-92259-pm-1.webp"
   },
   "distinction": {
     "eyebrow": "The Philosophy",
@@ -122,7 +122,7 @@
     "viewLess": "Show Fewer Masterpieces",
     "galleryItems": [
       "GeneralGallery/corporate_1.png",
-      "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/GeneralGallery/whatsapp-image-2026-01-02-at-91053-pm-1.webp",
+      "GeneralGallery/whatsapp-image-2026-01-02-at-91053-pm-1.webp",
       "GeneralGallery/masterpiece_1.png",
       "GeneralGallery/wedding_1.png",
       "GeneralGallery/pastry_1.png",
@@ -153,7 +153,7 @@
     "address": "Post-office, Kamakshipalya, Bengaluru, Karnataka 560079",
     "hours": "Always At Your Service | 24/7 Concierge",
     "mapsLink": "https://maps.app.goo.gl/Mswc8fReeUE8PGNAA",
-    "brochureLink": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/Brochure/darshan-r-resume-1.pdf"
+    "brochureLink": "Brochure/darshan-r-resume-1.pdf"
   },
   "socials": {
     "instagram": "https://www.instagram.com/_grey_giant_",
@@ -190,7 +190,7 @@
         {
           "title": "Concept & Strategic Planning",
           "buttonText": "Explore Strategy",
-          "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/LuxuryCorporateEvents/darshan-professional-photo.webp",
+          "image": "LuxuryCorporateEvents/darshan-professional-photo.webp",
           "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
@@ -271,7 +271,7 @@
         {
           "title": "New Feature",
           "buttonText": "Explore",
-          "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/About/whatsapp-image-2026-01-02-at-92259-pm-1.webp",
+          "image": "About/whatsapp-image-2026-01-02-at-92259-pm-1.webp",
           "description": "test"
         }
       ]
