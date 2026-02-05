@@ -15,11 +15,13 @@ const resolveAdminAsset = (path: string, auth?: { githubOwner: string, githubRep
   // If local resolution fails (e.g. it returns a placeholder or doesn't map) 
   // or if we want to ensure we see the LATEST version from GitHub:
   if (auth && auth.githubOwner && auth.githubRepo) {
-    const isSpecial = (path.startsWith('About/') || path.startsWith('OurStory/') || path.startsWith('Welcome/') || path.startsWith('Brochure/'));
-    const repoPath = path.includes('/')
-      ? `client/src/assets/${isSpecial ? path : 'gallery/' + path}`
-      : `client/src/assets/backgrounds/${path}`;
-    return `https://raw.githubusercontent.com/${auth.githubOwner}/${auth.githubRepo}/main/${repoPath}`;
+    const isSpecial = (path.startsWith('OurStory/') || path.startsWith('Welcome/') || path.startsWith('Brochure/'));
+    const isAbout = path.startsWith('About/');
+    const isBg = !path.includes('/');
+    
+    // Resolve relative path based on directory location
+    const repoPath = isBg ? `backgrounds/${path}` : (isSpecial ? path : (isAbout ? `gallery/${path}` : `gallery/${path}`));
+    return `https://raw.githubusercontent.com/${auth.githubOwner}/${auth.githubRepo}/main/client/src/assets/${repoPath}`;
   }
   return local;
 };
@@ -312,7 +314,7 @@ const DeploymentStatus = ({ auth, isSaving, status }: any) => {
 };
 
 const Sidebar = ({ activeTab, setActiveTab, onSave, isSaving, logout, auth, status }: any) => (
-  <aside className="hidden lg:flex flex-col w-80 h-screen fixed left-0 top-0 bg-[#050505] border-r border-white/5 p-8 z-50">
+  <aside className="hidden lg:flex flex-col w-80 h-screen fixed left-0 top-0 bg-[#050505] border-r border-white/5 p-8 z-[200]">
     <div className="mb-12">
       <h1 className="text-2xl font-serif italic text-white flex items-center gap-3">
         Event Horizon <span className="text-sm uppercase tracking-wider font-sans not-italic text-primary/40">Studio</span>
@@ -322,7 +324,7 @@ const Sidebar = ({ activeTab, setActiveTab, onSave, isSaving, logout, auth, stat
       </p>
     </div>
 
-    <nav className="flex-1 space-y-3 overflow-y-auto no-scrollbar -mx-2 px-2">
+    <nav className="flex-1 min-h-0 space-y-3 overflow-y-auto custom-scrollbar -mx-2 px-2 py-4">
       {(Object.keys(tabMetadata) as Tab[]).map((tabId) => {
         const { label, icon: Icon } = tabMetadata[tabId];
         const isActive = activeTab === tabId;
@@ -624,7 +626,7 @@ const serviceFolderMap: Record<string, string> = {
     const config: GitHubConfig = { owner: auth.githubOwner, repo: auth.githubRepo, token: auth.githubToken };
     const newAssets: { [key: string]: string[] } = {};
     for (const dir of assetDirectories) {
-      const path = (dir === "backgrounds" || dir === "Welcome" || dir === "About" || dir === "OurStory" || dir === "Brochure") 
+      const path = (dir === "backgrounds" || dir === "Welcome" || dir === "OurStory" || dir === "Brochure") 
         ? `client/src/assets/${dir}` 
         : `client/src/assets/gallery/${dir}`;
       const result = await listGitHubFiles(config, path);
@@ -1275,11 +1277,11 @@ const serviceFolderMap: Record<string, string> = {
       
       <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <main className="lg:ml-80 min-h-screen pb-40 lg:pb-12 bg-[#050505] relative z-0">
-        <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-12 pb-24 lg:pt-24 lg:pb-32">
+      <main className="lg:ml-80 min-h-screen pb-48 lg:pb-12 bg-[#050505] relative z-0">
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-16 pb-24 lg:pt-24 lg:pb-32">
           
           {/* Top Bar for Mobile/Tablet */}
-          <header className="lg:hidden flex items-center justify-between mb-12">
+          <header className="lg:hidden flex items-center justify-between mb-16 pt-4">
             <div>
               <h1 className="text-2xl font-serif italic">{tabMetadata[activeTab].label}</h1>
               <div className="flex gap-2 items-center mt-1">
