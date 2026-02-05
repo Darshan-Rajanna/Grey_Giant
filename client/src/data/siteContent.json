@@ -30,7 +30,7 @@
       "Whether it is a high-profile corporate gathering or a personal milestone celebration, we deliver customized experiences that reflect class, professionalism, and timeless elegance. At Grey Giant, we craft moments of distinction where vision meets excellence and every event leaves a lasting impression."
     ],
     "labels": "Elite • Tailored • Exquisite",
-    "image": "About/whatsapp-image-2026-01-02-at-92259-pm-1.webp"
+    "image": "About/about.webp"
   },
   "distinction": {
     "eyebrow": "The Philosophy",
@@ -96,10 +96,6 @@
       {
         "title": "Wildly Devoted",
         "desc": "A heart-first approach to planning, ensuring your joy is our final metric."
-      },
-      {
-        "title": "New Principle 1770311534581",
-        "desc": "Describe the core essence..."
       }
     ]
   },
@@ -122,11 +118,13 @@
     "viewLess": "Show Fewer Masterpieces",
     "galleryItems": [
       "GeneralGallery/corporate_1.png",
-      "GeneralGallery/whatsapp-image-2026-01-02-at-91053-pm-1.webp",
       "GeneralGallery/masterpiece_1.png",
+      "GeneralGallery/whatsapp-image-2026-01-02-at-91053-pm-1.webp",
+      "BespokeWeddings&Engagements/whatsapp-image-2026-01-02-at-85156-pm-1.webp",
       "GeneralGallery/wedding_1.png",
       "GeneralGallery/pastry_1.png",
-      "GeneralGallery/soirree_1.png"
+      "GeneralGallery/soirree_1.png",
+      "GeneralGallery/.gitkeep"
     ]
   },
   "contactPage": {
@@ -153,7 +151,7 @@
     "address": "Post-office, Kamakshipalya, Bengaluru, Karnataka 560079",
     "hours": "Always At Your Service | 24/7 Concierge",
     "mapsLink": "https://maps.app.goo.gl/Mswc8fReeUE8PGNAA",
-    "brochureLink": "Brochure/darshan-r-resume-1.pdf"
+    "brochureLink": "Brochure/grey-giant-events-brochure.pdf"
   },
   "socials": {
     "instagram": "https://www.instagram.com/_grey_giant_",
@@ -177,7 +175,7 @@
     "gallery": "gallery-background.webp",
     "reviews": "reviews-background.webp",
     "contact": "contact.webp",
-    "hero": "screenshot-50.webp"
+    "hero": "hero-background.webp"
   },
   "services": [
     {
@@ -190,7 +188,7 @@
         {
           "title": "Concept & Strategic Planning",
           "buttonText": "Explore Strategy",
-          "image": "LuxuryCorporateEvents/darshan-professional-photo.webp",
+          "image": "LuxuryCorporateEvents/cimg9.webp",
           "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
@@ -267,12 +265,6 @@
           "buttonText": "Stay Joyful",
           "image": "BespokeWeddings&Engagements/Wimg6.webp",
           "description": "Our experienced team manages everything quietly in the background. Logistics, coordination, and timing are handled with precision, ensuring you stay present and joyful throughout."
-        },
-        {
-          "title": "New Feature",
-          "buttonText": "Explore",
-          "image": "About/whatsapp-image-2026-01-02-at-92259-pm-1.webp",
-          "description": "test"
         }
       ]
     },
@@ -641,7 +633,7 @@
     {
       "id": 3,
       "name": "Anjali K. (Bespoke Designer)",
-      "rating": 5,
+      "rating": 4,
       "comment": "As a designer, I'm obsessive about details. Grey Giant didn't just meet my standards; they anticipated them. Every floral choice, every light beam was perfectly tuned to our aesthetic."
     },
     {
