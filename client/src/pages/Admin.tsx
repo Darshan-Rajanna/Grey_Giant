@@ -27,7 +27,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 
 // Import ONLY GeneralGallery images (matches website Gallery.tsx)
-const allFolderImages = Object.keys(import.meta.glob("@assets/gallery/GeneralGallery/*.{png,jpg,jpeg,webp}", { eager: true }));
+// Static glob removed to avoid duplication with live GitHub asset fetching
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -514,18 +514,22 @@ const serviceFolderMap: Record<string, string> = {
   }, [auth.isLoggedIn]);
 
   const adminGalleryList = useMemo(() => {
-    const savedOrder = formData.galleryPage.galleryItems || [];
+    const savedOrder = formData.galleryPage?.galleryItems || [];
     
-    const normalizedFolderImages = allFolderImages.map(path => {
-      const parts = path.split('/');
-      const fileName = parts[parts.length - 1];
-      const folderName = parts[parts.length - 2];
-      return `${folderName}/${fileName}`;
-    });
+    // Use fetched assets instead of static glob to avoid duplication and staleness
+    const activeFiles = assetFiles["GeneralGallery"] || [];
+    const normalizedFolderImages = activeFiles.map(f => `GeneralGallery/${f}`);
     
-    const newImages = normalizedFolderImages.filter(path => !savedOrder.includes(path));
-    return [...savedOrder, ...newImages];
-  }, [formData.galleryPage.galleryItems]);
+    // Keep existing order for known items (including previews)
+    // Filter out items that are neither previews nor exist on GitHub
+    const finalOrder = [
+      ...savedOrder.filter(path => 
+        path.startsWith('data:') || path.startsWith('http') || normalizedFolderImages.includes(path)
+      ), 
+      ...newImages
+    ];
+    return finalOrder;
+  }, [formData.galleryPage?.galleryItems, assetFiles]);
 
   const fetchAllAssets = async () => {
     setIsFetchingFiles(true);
@@ -561,7 +565,7 @@ const serviceFolderMap: Record<string, string> = {
               const newIndex = adminGalleryList.indexOf(over.id as string);
               
               if (oldIndex !== -1 && newIndex !== -1) {
-                newData.galleryPage.galleryItems = arrayMove(adminGalleryList, oldIndex, newIndex);
+                newData.galleryPage.galleryItems = arrayMove([...adminGalleryList], oldIndex, newIndex);
               }
            } else if (section === 'services') {
               const oldIndex = newData.services.findIndex(s => s.id === active.id);
@@ -707,10 +711,11 @@ const serviceFolderMap: Record<string, string> = {
         const repoFilePath = targetDir === "backgrounds" ? `client/src/assets/backgrounds/${name}` : `client/src/assets/gallery/${targetDir}/${name}`;
         const rawUrl = `https://raw.githubusercontent.com/${config.owner}/${config.repo}/main/${repoFilePath}`;
 
-        // Replace any occurrences of the base64 placeholder in newData with the public raw URL
+        // Replace any occurrences of the base64 placeholder in newData with the RELATIVE path
+        // Storing relative paths (e.g., backgrounds/hero.webp) ensures resolveAsset works correctly
         const replaceBase64 = (obj: any): any => {
           if (!obj) return obj;
-          if (typeof obj === 'string') return obj === base64 ? rawUrl : obj;
+          if (typeof obj === 'string') return obj === base64 ? newPath : obj;
           if (Array.isArray(obj)) return obj.map((v) => replaceBase64(v));
           if (typeof obj === 'object') {
             Object.keys(obj).forEach((k) => {
@@ -879,7 +884,13 @@ const serviceFolderMap: Record<string, string> = {
     });
   };
 
-  const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = async (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    if (!e) {
+      setSelectedUploadFile(null);
+      setIsOptimizing(false);
+      return;
+    }
+
     const file = e.target.files?.[0];
     if (file) {
       if (uploadTargetDirForSection === "Brochure") {
@@ -902,6 +913,7 @@ const serviceFolderMap: Record<string, string> = {
       } catch (err) {
         console.error("Optimization failed:", err);
         setStatus({ type: "error", message: "Image optimization failed. Please try another file." });
+        setSelectedUploadFile(null);
       } finally {
         setIsOptimizing(false);
       }

@@ -18,12 +18,9 @@ export default function Gallery() {
     // Only consider files in the gallery folders
     const allFiles = Object.keys(imageFiles).filter(f => f.includes('/gallery/'));
 
-    // Filter out any files that might have been deleted from the folder but are still in the database
-    const validSavedOrder = savedOrder.filter(path => {
-      // Check if path ends with something that matches a file in allFiles
-      // Since saved paths are 'folder/file.jpg' and glob keys are '@assets/gallery/folder/file.jpg'
-      return allFiles.some(f => f.endsWith(`/${path}`));
-    });
+    // We don't filter savedOrder against the local glob because new images
+    // might exist on GitHub but not in the local build yet.
+    const validSavedOrder = [...savedOrder];
     
     // Find files in the folder that haven't been ordered yet
     const remainingFiles = allFiles.filter(path => {
