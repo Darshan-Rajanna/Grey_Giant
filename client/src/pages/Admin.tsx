@@ -250,7 +250,10 @@ const MobileNav = ({ activeTab, setActiveTab }: any) => (
         return (
           <button
             key={tabId}
-            onClick={() => setActiveTab(tabId)}
+            onClick={() => {
+              setActiveTab(tabId);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             title={`Edit ${label} section`}
             className={`flex flex-col items-center gap-1.5 min-w-[68px] py-3 px-2 rounded-xl transition-all duration-300 min-h-[44px] ${isActive ? 'text-primary bg-primary/10' : 'text-white/30 hover:bg-white/5'}`}
           >
@@ -359,7 +362,23 @@ const Sidebar = ({ activeTab, setActiveTab, onSave, isSaving, logout, auth, stat
 );
 
 
-const RepositoryBrowser = ({ dir, onSelect, activeSelection, assetFiles, fetchAllAssets, isFetchingFiles, isOptimizing, onFileChange, selectedUploadFile, uploadTargetDirForSection, setUploadTargetDirForSection, handleImageUpload, handleDeleteAsset, usedAssets, auth }: any) => (
+const RepositoryBrowser = ({ 
+  dir, 
+  activeSelection, 
+  assetFiles, 
+  fetchAllAssets, 
+  isFetchingFiles, 
+  isOptimizing, 
+  onFileChange, 
+  selectedUploadFile, 
+  uploadTargetDirForSection, 
+  setUploadTargetDirForSection, 
+  handleImageUpload, 
+  handleDeleteAsset, 
+  usedAssets, 
+  onSelect,
+  auth
+}: any) => (
   <div className="space-y-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-2">
           <div>
@@ -447,7 +466,7 @@ const RepositoryBrowser = ({ dir, onSelect, activeSelection, assetFiles, fetchAl
                       className={`aspect-square bg-white/[0.02] border rounded-[2rem] overflow-hidden group relative transition-all duration-500 ${isActive ? 'border-primary/60 shadow-[0_0_30px_rgba(212,175,55,0.2)]' : 'border-white/5'}`}
                   >
                       <img 
-                        src={resolveAsset(fullPath)} 
+                        src={resolveAdminAsset(fullPath, auth)} 
                         className={`w-full h-full object-cover transition-all duration-700 ${isActive ? 'opacity-90 grayscale-0' : 'opacity-40 group-hover:opacity-80 grayscale-[0.5] group-hover:grayscale-0'}`} 
                         alt={f}
                         onError={(e: any) => e.target.src = "https://placehold.co/600x400/020202/d4af37?text=Image"}
@@ -538,11 +557,11 @@ const serviceFolderMap: Record<string, string> = {
   // Configuration mapping for background directory associations
   const bgDirMap: Record<Tab, string> = {
     hero: "backgrounds",
-    about: "backgrounds",
-    story: "backgrounds",
+    about: "About",
+    story: "OurStory",
     values: "backgrounds",
     services: "LuxuryCorporateEvents",
-    gallery: "BespokeWeddings&Engagements",
+    gallery: "GeneralGallery",
     reviews: "DJNights&PrivateParties",
     contact: "Private & Social Celebrations",
     socials: "backgrounds",
@@ -1256,8 +1275,8 @@ const serviceFolderMap: Record<string, string> = {
       
       <MobileNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <main className="lg:ml-80 min-h-screen pb-32 lg:pb-0">
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 py-12 lg:py-24">
+      <main className="lg:ml-80 min-h-screen pb-40 lg:pb-12 bg-[#050505] relative z-0">
+        <div className="max-w-6xl mx-auto px-6 lg:px-16 pt-12 pb-24 lg:pt-24 lg:pb-32">
           
           {/* Top Bar for Mobile/Tablet */}
           <header className="lg:hidden flex items-center justify-between mb-12">
@@ -1782,7 +1801,8 @@ const serviceFolderMap: Record<string, string> = {
                                         setUploadTargetDirForSection={setUploadTargetDirForSection}
                                         handleImageUpload={handleImageUpload}
                                         handleDeleteAsset={handleDeleteAsset}
-                                        usedAssets={usedAssets}
+                                        usedAssets={otherUsage}
+                                        auth={auth}
                                     />
                                 </div>
                             </div>
@@ -1810,7 +1830,7 @@ const serviceFolderMap: Record<string, string> = {
                     initial={{ opacity: 0 }} 
                     animate={{ opacity: 1 }} 
                     exit={{ opacity: 0 }} 
-                    className="fixed inset-0 bg-black/95 backdrop-blur-3xl z-[300] p-12 overflow-y-auto scroll-smooth"
+                    className="fixed inset-0 bg-black/98 backdrop-blur-3xl z-[300] p-6 md:p-12 overflow-y-auto scroll-smooth"
                     onAnimationComplete={() => {
                         if (activePickerField?.preferredDir) {
                             const el = document.getElementById(`dir-${activePickerField.preferredDir}`);
@@ -1818,7 +1838,7 @@ const serviceFolderMap: Record<string, string> = {
                         }
                     }}
                 >
-                    <div className="container mx-auto max-w-7xl h-full flex flex-col">
+                    <div className="container mx-auto max-w-7xl h-full flex flex-col pb-32">
                         <header className="flex items-center justify-between mb-16 border-b border-white/10 pb-10">
                             <div className="flex items-center gap-8">
                                 <div className="p-5 bg-primary/10 border border-primary/20 rounded-[2rem] text-primary">
@@ -1853,7 +1873,8 @@ const serviceFolderMap: Record<string, string> = {
                                         setUploadTargetDirForSection={setUploadTargetDirForSection}
                                         handleImageUpload={handleImageUpload}
                                         handleDeleteAsset={handleDeleteAsset}
-                                        usedAssets={usedAssets}
+                                        usedAssets={otherUsage}
+                                        auth={auth}
                                         onSelect={(fullPath: string) => {
                                             if(activePickerField) {
                                                 activePickerField.setter(fullPath);
