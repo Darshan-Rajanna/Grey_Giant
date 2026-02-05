@@ -172,7 +172,7 @@
     "gallery": "Gallery BG.webp",
     "reviews": "Reviews BG.webp",
     "contact": "Contacts BG.webp",
-    "hero": "Hero BG.webp"
+    "hero": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/backgrounds/heronew.webp"
   },
   "services": [
     {
@@ -185,7 +185,7 @@
         {
           "title": "Concept & Strategic Planning",
           "buttonText": "Explore Strategy",
-          "image": "LuxuryCorporateEvents/Cimg10.webp",
+          "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/LuxuryCorporateEvents/cimg9jpg.webp",
           "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
@@ -230,7 +230,7 @@
         {
           "title": "Personalized Concept & Storytelling",
           "buttonText": "Explore Your Story",
-          "image": "BespokeWeddings&Engagements/Wimg1.webp",
+          "image": "BespokeWeddings&Engagements/Wimg4.webp",
           "description": "We take time to understand your love story, traditions, and personal style. Every wedding is thoughtfully designed to reflect who you are as a couple for a celebration that feels meaningful and elegant."
         },
         {
@@ -248,7 +248,7 @@
         {
           "title": "Ceremony & Ritual Management",
           "buttonText": "Honor Tradition",
-          "image": "BespokeWeddings&Engagements/Wimg4.webp",
+          "image": "BespokeWeddings&Engagements/Wimg7.webp",
           "description": "All ceremonies and rituals are planned with respect and cultural understanding. Timelines are carefully managed so each moment flows naturally, allowing you to enjoy every ritual without stress."
         },
         {
@@ -404,7 +404,7 @@
         {
           "title": "Personalized Consultation & Styling",
           "buttonText": "Find Your Look",
-          "image": "Makeup&StylingServices/MHimg1.webp",
+          "image": "Makeup&StylingServices/MHimg3.webp",
           "description": "Every look begins with understanding your personality, occasion, and preferences. We curate styles that complement your features, outfit, and event theme."
         },
         {
