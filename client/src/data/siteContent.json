@@ -165,14 +165,14 @@
   },
   "backgrounds": {
     "home": "hero-background.webp",
-    "about": "About-background.webp",
+    "about": "about-bg.webp",
     "story": "Ourstory-background.webp",
     "values": "Values-background.webp",
-    "services": "services-background.webp",
+    "services": "catalouge-bg.webp",
     "gallery": "gallery-background.webp",
-    "reviews": "reviews-background.webp",
+    "reviews": "voice-of-gratitude-bg.webp",
     "contact": "contact.webp",
-    "hero": "whatsapp-image-2026-02-08-at-120147-pm.webp"
+    "hero": "home-pg-bg.webp"
   },
   "services": [
     {
@@ -185,7 +185,7 @@
         {
           "title": "Concept & Strategic Planning",
           "buttonText": "Explore Strategy",
-          "image": "LuxuryCorporateEvents/cimg9.webp",
+          "image": "LuxuryCorporateEvents/c1.webp",
           "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
@@ -197,25 +197,25 @@
         {
           "title": "Branding, Launches & Showcases",
           "buttonText": "Capture Impact",
-          "image": "LuxuryCorporateEvents/Cimg5.webp",
+          "image": "LuxuryCorporateEvents/c3.webp",
           "description": "From product launches to inaugurations and milestone events, we deliver controlled impact. Brand identity is woven subtly through space, movement, and experience."
         },
         {
           "title": "Technical Production & Ops",
           "buttonText": "Ensure Precision",
-          "image": "LuxuryCorporateEvents/Cimg6.webp",
+          "image": "LuxuryCorporateEvents/c4.webp",
           "description": "Advanced audio-visual systems, stage management, and technical rehearsals ensure precision. Every cue, transition, and timeline is managed flawlessly behind the scenes."
         },
         {
           "title": "Management & Guest Experience",
           "buttonText": "Seamless Flow",
-          "image": "LuxuryCorporateEvents/Cimg7.webp",
+          "image": "LuxuryCorporateEvents/c5.webp",
           "description": "Conferences, leadership meets, and award nights are executed with structure. Registrations, speaker coordination, and flow are handled seamlessly."
         },
         {
           "title": "Execution & On-Ground Control",
           "buttonText": "Operational Excellence",
-          "image": "LuxuryCorporateEvents/Cimg8.webp",
+          "image": "LuxuryCorporateEvents/Cimg7.webp",
           "description": "Our team operates discreetly to manage logistics, catering, and hospitality. VIP handling and service standards are maintained without disruption."
         }
       ]
