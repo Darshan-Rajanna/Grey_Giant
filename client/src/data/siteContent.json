@@ -151,7 +151,7 @@
     "brochureLink": "Brochure/grey-giant-events-brochure.pdf"
   },
   "socials": {
-    "instagram": "https://www.instagram.com/_grey_giant_/",
+    "instagram": "https://www.instagram.com/greygiant.events/",
     "twitter": "https://x.com/grey_giant_25",
     "whatsapp": "917483216698"
   },
@@ -270,7 +270,7 @@
       "title": "DJ Night & Private Party Event Services",
       "desc": "High-octane energy designed for the ultimate urban celebration.",
       "fullDescription": "For when the night needs to be legendary. We blend top-tier sound, light architecture, and curated energy to create private parties that become the talk of the town.",
-      "image": "DJNights&PrivateParties/cd10jpg.webp",
+      "image": "DJNights&PrivateParties/dj-bg.webp",
       "details": [
         {
           "title": "DJ Setup & Sound Experience",
@@ -534,36 +534,36 @@
       "title": "Public Events & Social Activity Services",
       "desc": "Refined gatherings that focus on the warmth of connection and conversation.",
       "fullDescription": "Luxury isn't always about the grand; it's often found in the intimate. We design small-scale socials that feel deeply personal, warm, and exceptionally sophisticated.",
-      "image": "Private & Social Celebrations/PSEimg1.webp",
+      "image": "Private & Social Celebrations/bg-for-public.webp",
       "details": [
         {
           "title": "Public Event Planning & Coordination",
           "buttonText": "See the Flow",
-          "image": "Private & Social Celebrations/PSEimg2.webp",
+          "image": "Private & Social Celebrations/s1.webp",
           "description": "We plan and manage large-scale public and social events with structured execution. Permissions, timelines, and crowd flow are handled professionally."
         },
         {
           "title": "Stage Setup & Audio Systems",
           "buttonText": "Clear Messaging",
-          "image": "Private & Social Celebrations/PSEimg3.webp",
+          "image": "Private & Social Celebrations/s2.webp",
           "description": "Strong, reliable stage structures with clear sound coverage for large audiences. Microphones, speakers, and sound balancing are carefully managed."
         },
         {
           "title": "Political Event & Rally Décor",
           "buttonText": "Visual Impact",
-          "image": "Private & Social Celebrations/PSEimg4.webp",
+          "image": "Private & Social Celebrations/s3.webp",
           "description": "Professional décor for political meetings, rallies, and public addresses. Backdrops, banners, and seating are designed for visibility and impact."
         },
         {
           "title": "Social Activities & Marathons",
           "buttonText": "Organized Energy",
-          "image": "Private & Social Celebrations/PSEimg5.webp",
+          "image": "Private & Social Celebrations/s4.webp",
           "description": "Complete setup for marathons, walks, and awareness programs. Start–finish gates, branding elements, and crowd guidance are arranged seamlessly."
         },
         {
           "title": "On-Ground Management & Safety",
           "buttonText": "Responsible Control",
-          "image": "Private & Social Celebrations/PSEmg6.webp",
+          "image": "Private & Social Celebrations/s5.webp",
           "description": "Dedicated teams manage coordination, timing, and logistics on-site. Safety measures, barricading, and controlled access are always prioritized."
         }
       ]
@@ -573,42 +573,42 @@
       "title": "School & College Event Services",
       "desc": "Professional, prestigious ceremonies for the legacy moments of learning.",
       "fullDescription": "We bring a sense of ceremony and protocol to institutional events. Our academic celebrations are designed to honor achievement with the respect it deserves.",
-      "image": "Schools, Colleges & University Event Services/SCEimg1.webp",
+      "image": "Schools, Colleges & University Event Services/bg-c.webp",
       "details": [
         {
           "title": "Event Planning & Concept Design",
           "buttonText": "See the Vision",
-          "image": "Schools, Colleges & University Event Services/SCEimg2.webp",
+          "image": "Schools, Colleges & University Event Services/c1.webp",
           "description": "We plan school and college events around the institution’s vision and theme. Concepts are engaging, organized, and student-focused for cultural fests and annual days."
         },
         {
           "title": "Stage Setup & Technical Support",
           "buttonText": "Hear the Quality",
-          "image": "Schools, Colleges & University Event Services/SCEimg3.webp",
+          "image": "Schools, Colleges & University Event Services/c2.webp",
           "description": "Professional stage design with lighting, sound, and audio-visual systems. Clear visibility and smooth transitions ensure performances flow seamlessly."
         },
         {
           "title": "Activity Stalls & Event Zones",
           "buttonText": "Feel the Energy",
-          "image": "Schools, Colleges & University Event Services/SCE4.webp",
+          "image": "Schools, Colleges & University Event Services/c3.webp",
           "description": "Custom stalls for games, food, and sponsor activities. Layouts are planned for easy movement and safety, adding energy and interaction to the event."
         },
         {
           "title": "Photo Booths & Experience Corners",
           "buttonText": "Capture Memories",
-          "image": "Schools, Colleges & University Event Services/SCE5.webp",
+          "image": "Schools, Colleges & University Event Services/c4.webp",
           "description": "Creative photo booths with themed backdrops and props. Perfect for social sharing and student engagement, capturing fun and excitement effortlessly."
         },
         {
           "title": "On-Ground Event Management",
           "buttonText": "Smooth Execution",
-          "image": "Schools, Colleges & University Event Services/SCE6.webp",
+          "image": "Schools, Colleges & University Event Services/c5.webp",
           "description": "Crowd flow, schedules, and coordination are handled professionally. Our team works efficiently to keep events on time for a smooth student experience."
         },
         {
           "title": "Safe & Hassle-Free Execution",
           "buttonText": "Stress-Free Celebration",
-          "image": "Schools, Colleges & University Event Services/SCE7.webp",
+          "image": "Schools, Colleges & University Event Services/s5.webp",
           "description": "Safety, discipline, and clear communication are always prioritized. Events are managed responsibly for a well-executed institutional celebration."
         }
       ]
@@ -624,13 +624,13 @@
     {
       "id": 2,
       "name": "The Malhotra Family",
-      "rating": 1,
+      "rating": 5,
       "comment": "Our daughter's wedding felt like it was plucked from a dream. The team at Grey Giant took our vague ideas and layered them with so much soul and artistry. We were finally guests at our own event."
     },
     {
       "id": 3,
       "name": "Anjali K. (Bespoke Designer)",
-      "rating": 4,
+      "rating": 5,
       "comment": "As a designer, I'm obsessive about details. Grey Giant didn't just meet my standards; they anticipated them. Every floral choice, every light beam was perfectly tuned to our aesthetic."
     },
     {
@@ -642,7 +642,7 @@
     {
       "id": 5,
       "name": "Sneha & David (Silver Anniversary)",
-      "rating": 4,
+      "rating": 5,
       "comment": "They took 25 years of our memories and wove them into one magical night. It wasn't just 'luxurious'—it was deeply personal. A truly heartwarming collaboration from start to finish."
     }
   ]
