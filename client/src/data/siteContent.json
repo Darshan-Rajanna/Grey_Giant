@@ -399,42 +399,42 @@
       "title": "Makeup & Hairstyle Services",
       "desc": "Personalized artistry to help you face your grandest moments with confidence.",
       "fullDescription": "We believe in enhancing your natural essence. Our stylists aren't just artists; they are your personal support team, ensuring you feel as radiant as the occasion itself.",
-      "image": "Makeup&StylingServices/MHimg1.webp",
+      "image": "Makeup&StylingServices/bg-m.webp",
       "details": [
         {
           "title": "Personalized Consultation & Styling",
           "buttonText": "Find Your Look",
-          "image": "Makeup&StylingServices/MHimg2.webp",
+          "image": "Makeup&StylingServices/m1.webp",
           "description": "Every look begins with understanding your personality, occasion, and preferences. We curate styles that complement your features, outfit, and event theme."
         },
         {
           "title": "Bridal & Groom Styling",
           "buttonText": "Radiant & Refined",
-          "image": "Makeup&StylingServices/MHimg3.webp",
+          "image": "Makeup&StylingServices/MHimg4.webp",
           "description": "Bridal and groom looks are crafted with precision, balance, and timeless appeal. From subtle to statement styles, every detail is thoughtfully perfected."
         },
         {
           "title": "Fashion, Themed & Event Makeup",
           "buttonText": "Creative Vision",
-          "image": "Makeup&StylingServices/MHimg4.webp",
+          "image": "Makeup&StylingServices/MHimg6.webp",
           "description": "Whether fashion-forward, themed, or contemporary, styles are tailored to the occasion. Makeup and hair are designed to align seamlessly with the event concept."
         },
         {
           "title": "Non-Bridal & Guest Styling",
           "buttonText": "Polished Elegance",
-          "image": "Makeup&StylingServices/MHimg5.webp",
+          "image": "Makeup&StylingServices/MHimg1.webp",
           "description": "For family members and guests, we offer polished, elegant makeup and hairstyles. Looks are comfortable, flattering, and long-lasting for lasting confidence."
         },
         {
           "title": "Premium Products & Hygiene",
           "buttonText": "Safe Artistry",
-          "image": "Makeup&StylingServices/MHimg6.webp",
+          "image": "Makeup&StylingServices/MHimg2.webp",
           "description": "Only high-quality, professional products are used for flawless results. Strict hygiene and sanitation standards are maintained for your safety and comfort."
         },
         {
           "title": "On-Site Service & Timely Execution",
           "buttonText": "Punctual Perfection",
-          "image": "Makeup&StylingServices/MHimg7.webp",
+          "image": "Makeup&StylingServices/m6.webp",
           "description": "Our team provides punctual, on-location services for complete convenience. Styling is delivered calmly and efficiently, even on busy schedules."
         }
       ]
@@ -444,12 +444,12 @@
       "title": "Customized Cakes & Desserts",
       "desc": "Edible masterpieces tailored to match your event theme and style.",
       "fullDescription": "Because every milestone deserves a sweet signature. Our cakes and pastries are tailored masterpieces, designed to be the crowning jewel of your dessert table.",
-      "image": "Pastries & Celebration Cakes/CDimg1.webp",
+      "image": "Pastries & Celebration Cakes/c-bg.webp",
       "details": [
         {
           "title": "Personalized Design & Concepts",
           "buttonText": "Design Your Cake",
-          "image": "Pastries & Celebration Cakes/CDimg2.webp",
+          "image": "Pastries & Celebration Cakes/CDimg6.webp",
           "description": "Every cake and dessert is custom-designed to match your event theme and style. From elegant wedding cakes to playful cupcakes, each creation reflects your vision."
         },
         {
@@ -461,7 +461,7 @@
         {
           "title": "Wide Range of Dessert Selections",
           "buttonText": "Explore Treats",
-          "image": "Pastries & Celebration Cakes/CDimg4.webp",
+          "image": "Pastries & Celebration Cakes/c3.webp",
           "description": "From signature cakes and cupcakes to pastries, brownies, and dessert jars. Options are available for all occasions and preferences."
         },
         {
@@ -473,13 +473,13 @@
         {
           "title": "Elegant Presentation & Display",
           "buttonText": "View Styling",
-          "image": "Pastries & Celebration Cakes/CDimg6.webp",
+          "image": "Pastries & Celebration Cakes/CDimg7.webp",
           "description": "Desserts are presented beautifully with coordinated styling and setup. Displays enhance the overall décor and visual appeal of the event."
         },
         {
           "title": "Seamless Delivery & Setup",
           "buttonText": "Quiet Perfection",
-          "image": "Pastries & Celebration Cakes/CDimg7.webp",
+          "image": "Pastries & Celebration Cakes/CDimg4.webp",
           "description": "We ensure timely delivery and careful setup at the venue. Every detail is handled professionally and discreetly for the perfect finishing touch."
         }
       ]
@@ -489,42 +489,42 @@
       "title": "Birthday Events & Celebration Services",
       "desc": "Joyful, creative installations that bring a sense of wonder to every celebration.",
       "fullDescription": "Birthdays are about the magic of the moment. We use creative styling and installation art to turn standard spaces into wonderlands of color and joy.",
-      "image": "Balloon Decor & Birthday Celebrations/BDimg1.webp",
+      "image": "Balloon Decor & Birthday Celebrations/b-bg-main.webp",
       "details": [
         {
           "title": "Creative Party Planning & Themes",
           "buttonText": "See the Magic",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg2.webp",
+          "image": "Balloon Decor & Birthday Celebrations/b1.webp",
           "description": "We design birthday celebrations around your chosen theme and personality. From kids' parties to elegant adult celebrations, every concept feels special."
         },
         {
           "title": "Themed Party Décor & Styling",
           "buttonText": "View Styling",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg3.webp",
+          "image": "Balloon Decor & Birthday Celebrations/BDimg5.webp",
           "description": "Décor is curated to match the theme, color palette, and mood of the celebration. Backdrops, table styling, and props come together beautifully."
         },
         {
           "title": "Balloon Décor & Installations",
           "buttonText": "Add Impact",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg5.webp",
+          "image": "Balloon Decor & Birthday Celebrations/b3.webp",
           "description": "From balloon arches and ceilings to custom balloon arrangements. Designs are playful, stylish, and tailored to add color, energy, and visual impact."
         },
         {
           "title": "Floral-Themed Décor",
           "buttonText": "Choose Elegance",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg6.webp",
+          "image": "Balloon Decor & Birthday Celebrations/b4.webp",
           "description": "Fresh and artificial florals are styled to suit elegant or modern celebrations. Floral installations add softness, charm, and sophistication to luxury birthday events."
         },
         {
           "title": "Games, Activities & Fun",
           "buttonText": "Join the Fun",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg7.webp",
+          "image": "Balloon Decor & Birthday Celebrations/b5.webp",
           "description": "Engaging games and activities are planned for all age groups. From kids' entertainment to interactive party games, fun is managed smoothly throughout."
         },
         {
           "title": "Execution & Event Coordination",
           "buttonText": "Joy Overflowing",
-          "image": "Balloon Decor & Birthday Celebrations/BDimg8.webp",
+          "image": "Balloon Decor & Birthday Celebrations/b6.webp",
           "description": "Our team handles setup, coordination, and on-ground management. Everything runs smoothly while you enjoy the celebration stress-free and unforgettable."
         }
       ]
