@@ -317,10 +317,10 @@ const Sidebar = ({ activeTab, setActiveTab, onSave, isSaving, logout, auth, stat
   <aside className="hidden lg:flex flex-col w-80 h-screen fixed left-0 top-0 bg-[#050505] border-r border-white/5 p-8 z-[200]">
     <div className="mb-12">
       <h1 className="text-2xl font-serif italic text-white flex items-center gap-3">
-        Event Horizon <span className="text-sm uppercase tracking-wider font-sans not-italic text-primary/40">Studio</span>
+        Grey Giant <span className="text-sm uppercase tracking-wider font-sans not-italic text-primary/40">Studio</span>
       </h1>
       <p className="text-[10px] text-white/10 uppercase font-black tracking-[0.2em] leading-relaxed">
-        Secure Control Surface<br/>v2.4.0 • Master Polish
+        Secure Control Surface<br/>v 1.0 • Master Polish
       </p>
     </div>
 

@@ -108,15 +108,15 @@ export default function Home() {
               className="flex items-center justify-center gap-4 mb-8"
             >
               <span className="w-12 h-[1px] bg-primary/20" />
-              <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
-                The Art of Celebration
+                <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
+                {hero.eyebrow}
               </span>
               <span className="w-12 h-[1px] bg-primary/20" />
             </motion.div>
 
             <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2 uppercase">
-              GREY <span className="relative inline-block">
-                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent italic pr-4" style={{ fontSize: '1.2em', fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontStyle: 'italic' }}>GIANT&nbsp;</span>
+              {hero.title.first} <span className="relative inline-block">
+                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent italic pr-4" style={{ fontSize: '1.2em', fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontStyle: 'italic' }}>{hero.title.second}&nbsp;</span>
               </span>
             </h1>
 
@@ -126,7 +126,7 @@ export default function Home() {
               transition={{ delay: 0.5, duration: 1 }}
               className="max-w-2xl mx-auto text-base md:text-lg text-white/50 font-light leading-relaxed mb-16 italic font-serif"
             >
-              "Where visionary design meets absolute precision. We don't just plan events; we architect the moments that define your legacy."
+              "{hero.description}"
             </motion.p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
@@ -140,7 +140,7 @@ export default function Home() {
                     whileTap={{ scale: 0.98 }}
                     className="relative px-12 py-5 bg-gradient-to-r from-primary via-[#f8e4b1] to-primary text-black font-bold uppercase tracking-[0.3em] text-[11px] overflow-hidden group transition-all duration-500 hover:shadow-[0_0_50px_rgba(212,175,55,0.4)] rounded-none"
                   >
-                    <span className="relative z-10">Get a Quote</span>
+                    <span className="relative z-10">{hero.ctaPrimary}</span>
                     <div className="absolute inset-0 bg-white/30 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                   </motion.button>
                 </DialogTrigger>
@@ -150,10 +150,10 @@ export default function Home() {
                       <Star className="w-8 h-8 text-primary animate-pulse" />
                     </div>
                     <DialogTitle className="text-3xl md:text-5xl font-serif mb-10 leading-[1.1] italic text-white font-light text-center">
-                      "We don’t just plan events, we create memories wrapped in <span className="text-primary not-italic">elegance</span>."
+                      "{hero.dialog.quote.split(',').map((part, i) => i === 1 ? <><span className="text-primary not-italic"> {part.trim()}</span></> : part)}"
                     </DialogTitle>
                     <DialogDescription className="text-sm text-primary/50 font-semibold tracking-wider uppercase mb-10 text-center">
-                      Every occasion, a signature of distinction.
+                      {hero.dialog.eyebrow}
                     </DialogDescription>
                   </DialogHeader>
 
@@ -168,7 +168,7 @@ export default function Home() {
                       }}
                       className="bg-gradient-to-r from-primary to-[#f8e4b1] text-black hover:bg-white transition-all duration-500 rounded-none px-12 h-14 md:h-16 text-sm tracking-wider font-bold uppercase w-full md:w-auto cursor-pointer min-h-[56px]"
                     >
-                      Begin Your Vision
+                      {hero.dialog.button}
                     </Button>
                   </div>
 
@@ -203,8 +203,7 @@ export default function Home() {
                           </div>
 
                           <h3 className="text-2xl md:text-3xl font-serif italic text-white leading-tight mb-6">
-                            "Define Your Celebration & <br />
-                            <span className="text-primary not-italic">Experience the Difference</span>"
+                            "{hero.redirectPopup.quote.split('&').map((part, i) => i === 1 ? <><br /><span className="text-primary not-italic">{part.trim()}</span></> : part)}"
                           </h3>
 
                           <motion.div
@@ -217,7 +216,7 @@ export default function Home() {
                           <div className="flex items-center justify-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-primary animate-ping" />
                             <p className="text-xs sm:text-sm uppercase tracking-wider text-primary/50 font-bold">
-                              Redirecting to Your Journey
+                              {hero.redirectPopup.status}
                             </p>
                           </div>
                         </motion.div>
@@ -233,7 +232,7 @@ export default function Home() {
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-12 py-5 bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white/60 font-bold uppercase tracking-[0.3em] text-[11px] transition-all duration-500 hover:text-white hover:border-white/20 rounded-none relative overflow-hidden group"
               >
-                <span className="relative z-10">View Crafted Offerings</span>
+                <span className="relative z-10">{hero.ctaSecondary}</span>
                 <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
               </motion.button>
             </div>

@@ -33,7 +33,7 @@ export default function Contact() {
       const subject = `New Inquiry from ${data.name} - ${data.eventType}`;
       const body = `Name: ${data.name}%0D%0APhone: ${data.phone}%0D%0AEmail: ${data.email}%0D%0AEvent Type: ${data.eventType}%0D%0A%0D%0ADetails:%0D%0A${data.message}`;
 
-      window.location.href = `mailto:greygiant01@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      window.location.href = `mailto:${siteContent.contact.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
 
       toast({
         title: "Inquiry Prepared",
@@ -98,11 +98,11 @@ export default function Contact() {
                 </motion.div>
 
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white tracking-tighter leading-[1.1] py-2 text-center xl:text-left">
-                  Envision Your <br />
-                  <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">Experience</span>
+                  {contactPage.title.main} <br />
+                  <span className="bg-gradient-to-b from-primary via-[#f8e4b1] to-primary/40 bg-clip-text text-transparent italic pr-4">{contactPage.title.accent}</span>
                 </h1>
                 <p className="text-white/30 max-w-sm mx-auto xl:mx-0 font-light italic text-[13px] md:text-sm leading-relaxed font-serif">
-                  "Connect with our artisans to begin crafting your next milestone event with absolute precision and refined elegance."
+                  "{contactPage.description}"
                 </p>
               </div>
 

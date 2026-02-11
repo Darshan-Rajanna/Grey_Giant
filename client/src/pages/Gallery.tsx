@@ -102,7 +102,7 @@ export default function Gallery() {
               onClick={() => setDisplayLimit(prev => prev + INITIAL_COUNT)}
               className="w-full md:w-auto bg-transparent border border-primary/30 text-primary hover:bg-primary hover:text-black px-10 py-6 rounded-full uppercase tracking-[0.3em] text-[10px] font-black transition-all"
             >
-              <Plus className="mr-2 h-4 w-4" /> View More Masterpieces
+              <Plus className="mr-2 h-4 w-4" /> {galleryPage.viewMore}
             </Button>
           )}
           
@@ -111,7 +111,7 @@ export default function Gallery() {
               onClick={() => setDisplayLimit(prev => Math.max(INITIAL_COUNT, prev - INITIAL_COUNT))}
               className="w-full md:w-auto bg-transparent border border-white/10 text-white/40 hover:text-white px-10 py-6 rounded-full uppercase tracking-[0.3em] text-[10px] font-black transition-all"
             >
-              <Minus className="mr-2 h-4 w-4" /> View Less
+              <Minus className="mr-2 h-4 w-4" /> {galleryPage.viewLess}
             </Button>
           )}
         </div>
