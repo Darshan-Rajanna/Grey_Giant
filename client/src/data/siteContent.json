@@ -117,11 +117,21 @@
     "viewMore": "Unveil More Collections",
     "viewLess": "Show Fewer Masterpieces",
     "galleryItems": [
-      "GeneralGallery/corporate_1.png",
-      "GeneralGallery/masterpiece_1.png",
-      "GeneralGallery/wedding_1.png",
-      "GeneralGallery/pastry_1.png",
-      "GeneralGallery/soirree_1.png"
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85619-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85620-pm-1.webp",
+      "BespokeWeddings&Engagements/whatsapp-image-2026-02-12-at-85620-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85618-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85621-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85622-pm-1.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85622-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85623-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85628-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85627-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85624-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85625-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85626-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at-85616-pm.webp",
+      "GeneralGallery/whatsapp-image-2026-02-12-at.webp"
     ]
   },
   "contactPage": {
@@ -168,11 +178,11 @@
     "about": "about-bg.webp",
     "story": "Ourstory-background.webp",
     "values": "Values-background.webp",
-    "services": "catalouge-bg.webp",
-    "gallery": "gallery-background.webp",
+    "services": "cataloug-bg.webp",
+    "gallery": "gallery-bg.webp",
     "reviews": "voice-of-gratitude-bg.webp",
     "contact": "contact.webp",
-    "hero": "home-pg-bg.webp"
+    "hero": "home-bg.webp"
   },
   "services": [
     {
