@@ -13,7 +13,7 @@ export default function Services() {
   const bgImg = getBackground(siteContent.backgrounds.services);
 
   return (
-    <div className="min-h-screen bg-[#020202] py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
+    <div className="md:min-h-screen bg-[#020202] py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
       {/* Background Image with Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -76,15 +76,15 @@ export default function Services() {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-70" />
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12 transform translate-y-2 md:translate-y-6 transition-transform duration-500 group-hover:translate-y-0 text-left">
-                  <h3 className="text-2xl md:text-3xl font-serif text-white mb-2 md:mb-4 tracking-wide group-hover:text-primary transition-colors flex items-baseline gap-2">
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 transform translate-y-0 transition-transform duration-500 text-left">
+                  <h3 className="text-xl md:text-2xl font-serif text-white mb-4 tracking-wide group-hover:text-primary transition-colors flex items-baseline gap-2">
                     {service.title}
                   </h3>
-                  <p className="text-gray-300 font-light mb-4 md:mb-8 max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 text-xs md:text-sm">
+                  <p className="text-gray-300 font-light mb-6 max-w-md opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 text-[10px] md:text-xs line-clamp-2">
                     {service.desc}
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
-                    View Details <ArrowUpRight className="w-4 h-4" />
+                  <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 text-white/90 font-bold text-[10px] md:text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 rounded-full transition-all duration-300 hover:bg-white/20 hover:border-white/20">
+                    Know more
                   </div>
                 </div>
               </motion.div>

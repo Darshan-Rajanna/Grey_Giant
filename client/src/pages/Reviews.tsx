@@ -19,7 +19,7 @@ export default function Reviews() {
   const row2 = reviewItems.slice(half);
 
   return (
-    <div className="pt-20 min-h-screen bg-[#020202] relative overflow-hidden selection:bg-primary/30">
+    <div className="pt-20 md:min-h-screen bg-[#020202] relative overflow-hidden selection:bg-primary/30">
       {/* Background Image with Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">

@@ -12,7 +12,7 @@ import { getBackground, resolveAsset } from "@/lib/asset-utils";
 
 export default function Gallery() {
   const { galleryPage } = siteContent;
-  
+
   const photos = useMemo(() => {
     const savedOrder = galleryPage.galleryItems || [];
     // Only consider files in the gallery folders
@@ -21,7 +21,7 @@ export default function Gallery() {
     // We don't filter savedOrder against the local glob because new images
     // might exist on GitHub but not in the local build yet.
     const validSavedOrder = [...savedOrder];
-    
+
     // Combine them: ONLY Manual Order from siteContent
     const finalDisplayOrder = [...validSavedOrder];
 
@@ -36,7 +36,7 @@ export default function Gallery() {
     });
   }, [galleryPage.galleryItems]);
 
-  const INITIAL_COUNT = 10; 
+  const INITIAL_COUNT = 10;
   const [displayLimit, setDisplayLimit] = useState(INITIAL_COUNT);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const bgImg = getBackground(siteContent.backgrounds.gallery);
@@ -54,7 +54,7 @@ export default function Gallery() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020202] text-white py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
+    <div className="md:min-h-screen bg-[#020202] text-white py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
       {/* Background Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -105,7 +105,7 @@ export default function Gallery() {
               <Plus className="mr-2 h-4 w-4" /> {galleryPage.viewMore}
             </Button>
           )}
-          
+
           {displayLimit > INITIAL_COUNT && (
             <Button
               onClick={() => setDisplayLimit(prev => Math.max(INITIAL_COUNT, prev - INITIAL_COUNT))}
@@ -125,7 +125,7 @@ export default function Gallery() {
               <button onClick={handlePrev} className="absolute left-4 z-50 p-4 bg-white/5 rounded-full text-white/40 hover:text-primary transition-all" aria-label="Previous Image">
                 <ChevronLeft size={32} />
               </button>
-              
+
               <motion.div key={selectedIndex} className="relative max-w-full max-h-full p-2 bg-black/40 rounded-sm border border-primary/30">
                 <img src={photos[selectedIndex].src} alt="" className="max-w-full max-h-[80vh] object-contain" />
               </motion.div>

@@ -51,7 +51,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden selection:bg-primary/30 flex items-center pt-12">
+    <div className="md:min-h-screen relative overflow-hidden selection:bg-primary/30 md:flex md:items-center pt-24 md:pt-12 pb-12 md:pb-0">
       {/* Background Image with Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">
