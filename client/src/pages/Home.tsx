@@ -89,7 +89,7 @@ export default function Home() {
           <img
             src={heroImg}
             alt="Luxury Event Background"
-            className="w-full h-full object-cover object-[50%_85%] opacity-50 grayscale-[0.1]"
+            className="w-full h-full object-cover object-[50%_25%] opacity-50 grayscale-[0.1]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/30 to-transparent" />
         </div>
@@ -108,7 +108,7 @@ export default function Home() {
               className="flex items-center justify-center gap-4 mb-8"
             >
               <span className="w-12 h-[1px] bg-primary/20" />
-                <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
+              <span className="text-[12px] uppercase tracking-[0.5em] text-primary/60 font-semibold">
                 {hero.eyebrow}
               </span>
               <span className="w-12 h-[1px] bg-primary/20" />
@@ -116,7 +116,7 @@ export default function Home() {
 
             <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-display text-white mb-8 md:mb-10 tracking-tighter leading-[1.1] py-2 uppercase">
               {hero.title.first} <span className="relative inline-block">
-                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent italic pr-4" style={{ fontSize: '1.2em', fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontStyle: 'italic' }}>{hero.title.second}&nbsp;</span>
+                <span className="inline-block bg-gradient-to-b from-[#b8860b] via-[#f8e4b1] to-[#996515] bg-clip-text text-transparent italic pr-4" style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, fontStyle: 'italic' }}>{hero.title.second}&nbsp;</span>
               </span>
             </h1>
 

@@ -68,15 +68,29 @@ export function resolveAsset(path: string): string {
     const normalizedSearch = path.replace(/\\/g, '/');
 
     // We attempt to match the path suffix. 
-    // We decode the asset keys just in case Vite encoded them, 
-    // though usually they are plain strings in the glob.
     const match = Object.entries(allAssets).find(([assetPath]) => {
-        // Double check against encoded and decoded versions for safety with special chars
         const decodedPath = decodeURIComponent(assetPath);
         return assetPath.endsWith(`/${normalizedSearch}`) || decodedPath.endsWith(`/${normalizedSearch}`);
     });
 
-    return match ? (match[1] as string) : "";
+    if (match) return match[1] as string;
+
+    // --- FALLBACK LOGIC ---
+    // If the asset is not in the build (newly uploaded via Admin), 
+    // fallback to loading from GitHub raw content directly.
+    try {
+        const owner = "AmulyaaaR";
+        const repo = "Grey_gaint";
+
+        const isSpecial = (normalizedSearch.startsWith('About/') || normalizedSearch.startsWith('OurStory/') || normalizedSearch.startsWith('Welcome/') || normalizedSearch.startsWith('Brochure/'));
+        const isBg = !normalizedSearch.includes('/');
+
+        // Resolve relative path based on directory location
+        const repoPath = isBg ? `backgrounds/${normalizedSearch}` : (isSpecial ? normalizedSearch : `gallery/${normalizedSearch}`);
+        return `https://raw.githubusercontent.com/${owner}/${repo}/main/client/src/assets/${repoPath}`;
+    } catch (e) {
+        return "";
+    }
 }
 
 /**

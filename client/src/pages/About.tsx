@@ -17,7 +17,7 @@ export default function About() {
           <img
             src={bgImg}
             alt=""
-            className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2] blur-[8px]"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />
