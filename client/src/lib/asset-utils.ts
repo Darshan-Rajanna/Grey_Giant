@@ -79,8 +79,8 @@ export function resolveAsset(path: string): string {
     // If the asset is not in the build (newly uploaded via Admin), 
     // fallback to loading from GitHub raw content directly.
     try {
-        const owner = "AmulyaaaR";
-        const repo = "Grey_gaint";
+        const owner = "darshan-rajanna";
+        const repo = "Grey_Giant";
 
         const isSpecial = (normalizedSearch.startsWith('About/') || normalizedSearch.startsWith('OurStory/') || normalizedSearch.startsWith('Welcome/') || normalizedSearch.startsWith('Brochure/'));
         const isBg = !normalizedSearch.includes('/');

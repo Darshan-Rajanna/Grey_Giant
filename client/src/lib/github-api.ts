@@ -5,7 +5,7 @@
  */
 
 // Use environment variable for backend URL (supports both local and deployed backends)
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://grey-giant.onrender.com';
 
 /**
  * Handle API responses and redirect on authentication failure

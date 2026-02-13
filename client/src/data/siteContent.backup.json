@@ -172,7 +172,7 @@
     "gallery": "Gallery BG.webp",
     "reviews": "Reviews BG.webp",
     "contact": "Contacts BG.webp",
-    "hero": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/backgrounds/hero-background.webp"
+    "hero": "https://raw.githubusercontent.com/darshan-rajanna/Grey_Giant/main/client/src/assets/backgrounds/hero-background.webp"
   },
   "services": [
     {
@@ -185,7 +185,7 @@
         {
           "title": "Concept & Strategic Planning",
           "buttonText": "Explore Strategy",
-          "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/LuxuryCorporateEvents/cimg9jpg.webp",
+          "image": "https://raw.githubusercontent.com/darshan-rajanna/Grey_Giant/main/client/src/assets/gallery/LuxuryCorporateEvents/cimg9jpg.webp",
           "description": "We begin with deep brand immersion, audience understanding, and purpose-driven strategy. Event concepts are curated to reflect your corporate values and long-term objectives."
         },
         {
@@ -449,7 +449,7 @@
         {
           "title": "Personalized Design & Concepts",
           "buttonText": "Design Your Cake",
-          "image": "https://raw.githubusercontent.com/AmulyaaaR/Grey_gaint/main/client/src/assets/gallery/Pastries & Celebration Cakes/cd10jpg.webp",
+          "image": "https://raw.githubusercontent.com/darshan-rajanna/Grey_Giant/main/client/src/assets/gallery/Pastries & Celebration Cakes/cd10jpg.webp",
           "description": "Every cake and dessert is custom-designed to match your event theme and style. From elegant wedding cakes to playful cupcakes, each creation reflects your vision."
         },
         {

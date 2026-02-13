@@ -1,5 +1,5 @@
 {
-    "name": "grey-gaint-backend",
+    "name": "grey-giantd",
     "version": "1.0.0",
     "description": "Secure backend for Grey Gaint Admin Panel",
     "main": "server.js",

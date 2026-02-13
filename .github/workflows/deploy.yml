@@ -46,7 +46,7 @@ jobs:
         env:
           # Inject production backend URL from GitHub Actions secret
           # This overrides the value in .env.production at build time
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'https://grey-giant-backend.onrender.com' }}
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL || 'https://grey-giant.onrender.com' }}
         run: |
           npm run build
           cp dist/index.html dist/404.html
