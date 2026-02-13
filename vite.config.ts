@@ -6,7 +6,7 @@ import autoprefixer from "autoprefixer";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS || process.env.NODE_ENV === 'production' ? "/Grey_Giant/" : "/",
+  base: "/",
   plugins: [react()],
   css: {
     postcss: {
