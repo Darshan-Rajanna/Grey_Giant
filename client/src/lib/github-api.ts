@@ -4,7 +4,8 @@
  * JWT is managed via HttpOnly cookies - no manual token handling needed
  */
 
-const API_BASE_URL = 'http://localhost:3001'; // Will be configurable via env vars in production
+// Use environment variable for backend URL (supports both local and deployed backends)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 /**
  * Handle API responses and redirect on authentication failure
