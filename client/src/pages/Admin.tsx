@@ -1172,8 +1172,6 @@ export default function Admin() {
     );
   }
 
-  const logout = () => { localStorage.clear(); window.location.reload(); };
-
   return (
     <div className="min-h-screen bg-[#020202] text-white selection:bg-primary/20">
       <Sidebar
@@ -1181,7 +1179,7 @@ export default function Admin() {
         setActiveTab={setActiveTab}
         onSave={handleSave}
         isSaving={isSaving}
-        logout={logout}
+        logout={handleSignOut}
         auth={auth}
         status={status}
       />
