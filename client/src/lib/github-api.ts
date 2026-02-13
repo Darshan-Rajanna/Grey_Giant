@@ -13,7 +13,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://grey-giant.on
 async function handleResponse(response: Response) {
     if (response.status === 401) {
         // Token expired or invalid - redirect to login
-        window.location.href = '/admin';
+        // Use BASE_URL to ensure it works on GitHub Pages subfolders
+        const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+        window.location.href = `${basePath}/admin`;
         throw new Error('Session expired. Please log in again.');
     }
 
