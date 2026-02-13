@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Grey Gaint - Event Services Platform
 
 ## 🎯 Production Architecture
@@ -238,3 +239,7 @@ npm run dev          # Start development server (with auto-reload)
 ---
 
 **For deployment assistance, see the [Production Deployment Guide](file:///C:/Users/darsh/.gemini/antigravity/brain/96e63d6b-470b-4a6a-89d3-a70adc7f076d/implementation_plan.md)**
+=======
+# Grey_Giant
+GREY GIANT | Events &amp; Services - Crafting Unforgettable Experience
+>>>>>>> 5987fade6cb2cd9f89c6a977b1ca870769fe6d81
