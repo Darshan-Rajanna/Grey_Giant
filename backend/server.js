@@ -52,6 +52,9 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+// Explicit OPTIONS preflight handling to prevent CORS issues
+app.options('*', cors());
+
 // Body parsing middleware
 app.use(express.json({ limit: '50mb' })); // Increased limit for base64 images
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -67,7 +70,8 @@ if (process.env.NODE_ENV !== 'production') {
     });
 }
 
-// Health check endpoint
+// Health check endpoint - MUST be before authentication
+// This is public and used by Render monitoring, uptime tools, and manual verification
 app.get('/health', (req, res) => {
     res.json({
         status: 'healthy',

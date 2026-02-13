@@ -1,10 +1,34 @@
+# Dependencies
 node_modules
 dist
+
+# Environment files (contains sensitive data)
+.env
+.env.local
+.env.*.local
+backend/.env
+client/.env
+client/.env.local
+
+# System files
 .DS_Store
+.local
 server/public
 vite.config.ts.*
 *.tar.gz
-.env
-.env.local
-client/.env
-.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

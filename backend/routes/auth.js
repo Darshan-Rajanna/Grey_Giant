@@ -57,12 +57,12 @@ router.post('/login', loginLimiter, (req, res) => {
         // Generate JWT
         const token = generateToken({ role: 'admin' });
 
-        // Set HttpOnly cookie with security flags
+        // Set HttpOnly cookie with production-ready security flags
         res.cookie('admin_token', token, {
-            httpOnly: true, // Prevents JavaScript access
+            httpOnly: true, // Prevents JavaScript access (XSS protection)
             secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-            sameSite: 'strict', // CSRF protection
-            maxAge: 60 * 60 * 1000 // 1 hour
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 'none' for cross-origin (GitHub Pages ↔ Render)
+            maxAge: 4 * 60 * 60 * 1000 // 4 hours
         });
 
         res.json({
@@ -88,7 +88,7 @@ router.post('/logout', (req, res) => {
     res.clearCookie('admin_token', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict'
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
     });
 
     res.json({
@@ -120,7 +120,11 @@ router.get('/verify', (req, res) => {
                 message: 'Session valid'
             });
         } catch (error) {
-            res.clearCookie('admin_token');
+            res.clearCookie('admin_token', {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+            });
             res.status(401).json({
                 authenticated: false,
                 message: 'Session expired'

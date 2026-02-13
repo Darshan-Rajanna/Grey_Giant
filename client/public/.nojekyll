@@ -1,0 +1,2 @@
+# Add .nojekyll file to prevent GitHub Pages from processing files with underscores
+# This ensures assets like _redirects and files starting with underscores are served correctly

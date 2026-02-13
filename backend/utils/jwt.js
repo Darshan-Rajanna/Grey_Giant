@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
 /**
- * Generate a JWT token with 1 hour expiry
+ * Generate a JWT token with 4 hour expiry
  * @param {Object} payload - Data to encode in the token
  * @returns {string} JWT token
  */
 export function generateToken(payload) {
   return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '1h'
+    expiresIn: '4h' // Matches cookie maxAge
   });
 }
 
