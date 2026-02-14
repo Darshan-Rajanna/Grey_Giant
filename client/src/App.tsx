@@ -19,6 +19,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SectionBubbles } from "@/components/layout/SectionBubbles";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, lazy, Suspense } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 const Admin = lazy(() => import("@/pages/Admin"));
 
@@ -90,6 +91,7 @@ function App() {
         <Toaster />
         <WelcomePopup />
         <AppRouter />
+        <SpeedInsights />
       </TooltipProvider>
     </QueryClientProvider>
   );
