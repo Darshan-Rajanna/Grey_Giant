@@ -12,14 +12,14 @@ export default function About() {
 
   return (
     <div className="min-h-fit bg-[#020202] text-white py-12 md:py-20 selection:bg-primary/30 relative overflow-hidden">
-      <SectionBubbles count={40} />
+      <SectionBubbles />
       {/* Background Image with Overlay */}
       {bgImg && (
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src={bgImg}
             alt=""
-            className="w-full h-full object-cover opacity-60 grayscale-[0.2] blur-[8px]"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2] blur-[1px]"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#020202] via-[#020202]/40 to-[#020202]" />

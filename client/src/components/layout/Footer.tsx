@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[#020202] py-8 md:py-10 border-t border-white/5 overflow-hidden">
-      <SectionBubbles sideways={true} />
+      <SectionBubbles />
       {/* Background Accents */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>

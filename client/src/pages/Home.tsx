@@ -29,7 +29,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#020202] overflow-hidden selection:bg-primary/30">
       {/* HERO SECTION */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <SectionBubbles count={50} />
+        <SectionBubbles />
 
         {/* Abstract Background Noise / Grid */}
         <div className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none"

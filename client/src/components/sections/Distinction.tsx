@@ -20,14 +20,14 @@ export default function Distinction() {
     const { distinction } = siteContent;
     return (
         <section className="py-12 md:py-20 bg-black relative overflow-hidden">
-            <SectionBubbles count={40} />
+            <SectionBubbles />
             {/* Background Image with Overlay */}
             {bgImg && (
                 <div className="absolute inset-0 z-0 pointer-events-none">
                     <img
                         src={bgImg}
                         alt=""
-                        className="w-full h-full object-cover opacity-60 grayscale-[0.2]"
+                        className="w-full h-full object-cover opacity-60 grayscale-[0.2] blur-[1px]"
                         loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
@@ -75,7 +75,7 @@ export default function Distinction() {
                             </h2>
                         </div>
 
-                        <p className="text-white/40 leading-relaxed font-light text-sm md:text-base max-w-2xl mx-auto italic font-serif">
+                        <p className="text-white leading-relaxed font-light text-sm md:text-base max-w-2xl mx-auto italic font-serif">
                             {distinction.shortDesc}
                         </p>
 
@@ -111,7 +111,7 @@ export default function Distinction() {
                                             ))}"
                                         </DialogTitle>
                                     </DialogHeader>
-                                <div className="relative z-10 text-white/50 text-sm md:text-base leading-relaxed font-light space-y-8 text-center lg:text-justify italic font-serif">
+                                <div className="relative z-10 text-white text-sm md:text-base leading-relaxed font-light space-y-8 text-center lg:text-justify italic font-serif">
                                     {distinction.dialog.paragraphs.map((p, i) => (
                                         <p key={i} className={i === 0 ? "first-letter:text-6xl first-letter:font-serif first-letter:text-primary first-letter:mr-4 first-letter:float-left first-letter:leading-none" : i === 3 ? "border-l-2 border-primary/20 pl-8 italic text-white/40 py-2" : ""}>
                                             {p}
