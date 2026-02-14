@@ -4,11 +4,14 @@ dist
 
 # Environment files (contains sensitive data)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 backend/.env
+backend/.env.*
+!backend/.env.example
 client/.env
-client/.env.local
+client/.env.*
+!client/.env.example
 
 # System files
 .DS_Store

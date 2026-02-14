@@ -146,9 +146,10 @@ export default function Home() {
                               e.stopPropagation();
                               setShowPopup(false);
                             }}
-                            className="absolute top-6 right-6 text-primary/40 hover:text-primary transition-all duration-300 z-[110] cursor-pointer p-2 hover:bg-white/5 rounded-full"
+                            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-primary transition-all duration-300 z-[110] cursor-pointer p-3 md:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 rounded-xl border border-primary/20 hover:border-primary/50 shadow-lg hover:shadow-primary/20"
+                            aria-label="Close popup"
                           >
-                            <CloseIcon className="w-6 h-6" />
+                            <CloseIcon className="w-8 h-8 md:w-10 md:h-10" />
                           </button>
 
                           <div className="mb-10 flex justify-center">

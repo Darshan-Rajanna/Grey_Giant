@@ -1,39 +1,14 @@
-<<<<<<< HEAD
-# Grey Gaint - Event Services Platform
+# Grey Giant - Event Services Platform
 
-## 🎯 Production Architecture
+A premium event management and services platform showcasing luxury event planning, execution, and management services.
 
-This repository implements a modern JAMstack architecture with a static frontend on GitHub Pages and a secure backend API on Render.com.
+## 🎯 Overview
 
-### Live URLs
+Grey Giant specializes in creating unforgettable experiences through professional event services. This platform serves as both a showcase for our services and an admin management system for content updates.
 
-- **Website**: https://amulyaaar.github.io/Grey_gaint
-- **Admin Panel**: https://amulyaaar.github.io/Grey_gaint/admin
-- **Backend API**: https://grey-gaint-backend.onrender.com
+### Live Site
 
----
-
-## 🏗️ Architecture Overview
-
-```
-┌─────────────────────┐         ┌──────────────────────┐
-│   GitHub Pages      │         │   Render.com         │
-│   (Static Frontend) │ ←────→  │   (Node.js Backend)  │
-│                     │  HTTPS  │                      │
-└─────────────────────┘         └──────────────────────┘
-                                          │
-                                          ↓
-                                ┌──────────────────────┐
-                                │  GitHub Repository   │
-                                │  (Data Storage/CMS)  │
-                                └──────────────────────┘
-```
-
-**Key Features:**
-- ✅ **Zero Database**: GitHub repository acts as CMS
-- ✅ **Secure Authentication**: TOTP + JWT with HttpOnly cookies
-- ✅ **Production-Ready**: Environment-based configuration, no hardcoded URLs
-- ✅ **Free Hosting**: GitHub Pages + Render free tier
+Visit our website to explore our premium event services and portfolio.
 
 ---
 
@@ -42,170 +17,101 @@ This repository implements a modern JAMstack architecture with a static frontend
 ### Prerequisites
 
 - Node.js 18+ installed
-- GitHub account with repository access
-- Render.com account (free)
+- GitHub account
+- npm or yarn package manager
 
 ### Local Development
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/Amulyaaar/grey_gaint.git
-cd grey_gaint
+git clone https://github.com/Darshan-Rajanna/Grey_Giant.git
+cd Grey_Giant
 
-# 2. Setup backend
-cd backend
+# 2. Install dependencies
 npm install
-cp .env.example .env
-# Edit .env with your secrets (see deployment guide)
-npm run dev
 
-# 3. Setup frontend (in new terminal)
-cd client
-npm install
+# 3. Setup environment (see .env.example files)
+# Create .env files in backend/ and client/ directories
+
+# 4. Start development server
 npm run dev
 ```
 
-Visit: `http://localhost:5173` for the website, `http://localhost:5173/admin` for admin panel.
-
----
-
-## 📚 Documentation
-
-- **[PRODUCTION_DEPLOYMENT.md](file:///C:/Users/darsh/.gemini/antigravity/brain/96e63d6b-470b-4a6a-89d3-a70adc7f076d/implementation_plan.md)** - Complete deployment guide
-- **[DEPLOY_BACKEND_NOW.md](file:///C:/Users/darsh/OneDrive/Desktop/Amulya%20Project/Grey_gaintv1/grey_gaint_remote/DEPLOY_BACKEND_NOW.md)** - Quick backend deployment reference
-- **[BACKEND_DEPLOYMENT.md](file:///C:/Users/darsh/OneDrive/Desktop/Amulya%20Project/Grey_gaintv1/grey_gaint_remote/BACKEND_DEPLOYMENT.md)** - Alternative hosting options
-
----
-
-## 🔒 Security
-
-### Authentication Flow
-
-1. User enters 6-digit TOTP code (generated using `speakeasy`)
-2. Backend validates OTP and issues JWT token
-3. JWT stored in **HttpOnly cookie** (cannot be accessed by JavaScript)
-4. All admin operations require valid JWT
-5. Session expires after 4 hours
-
-### Environment Variables
-
-**Never commit secrets!** All sensitive data is in `.env` files which are gitignored.
-
-Required secrets:
-- `GITHUB_TOKEN` - Repository access
-- `OTP_SECRET` - TOTP authentication
-- `JWT_SECRET` - Session encryption
-
-See [`.env.example`](file:///C:/Users/darsh/OneDrive/Desktop/Amulya%20Project/Grey_gaintv1/grey_gaint_remote/backend/.env.example) for generation commands.
-
----
-
-## 📁 Project Structure
-
-```
-├── client/                 # Vite + React frontend
-│   ├── src/
-│   │   ├── pages/
-│   │   │   └── Admin.tsx  # Admin panel
-│   │   ├── lib/
-│   │   │   └── github-api.ts  # Backend API client
-│   │   └── assets/        # Images (tracked in Git as CMS)
-│   ├── .env.development   # Local backend URL
-│   └── .env.production    # Production backend URL
-│
-├── backend/               # Express API server
-│   ├── routes/
-│   │   ├── auth.js       # Login, verify, logout
-│   │   └── github.js     # Repository operations
-│   ├── middleware/
-│   │   └── auth.js       # JWT validation
-│   ├── services/
-│   │   └── github.service.js  # GitHub API integration
-│   └── server.js         # Main entry point
-│
-└── .github/workflows/
-    └── deploy.yml        # GitHub Pages deployment
-```
+Visit `http://localhost:5173` to view the website locally.
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Framer Motion** - Animations
-- **Tailwind CSS** - Styling
+- **React 18** - Modern UI framework
+- **TypeScript** - Type-safe development
+- **Vite** - Fast build tool and dev server
+- **Framer Motion** - Smooth animations
+- **Tailwind CSS** - Utility-first styling
+- **Wouter** - Lightweight routing
 
 ### Backend
 - **Node.js + Express** - API server
-- **Octokit** - GitHub API client
-- **jsonwebtoken** - JWT sessions
-- **speakeasy** - TOTP authentication
-- **helmet** - Security headers
-- **cors** - Cross-origin support
+- **JWT** - Secure authentication
+- **TOTP** - Two-factor authentication
+- **GitHub API** - Content management
+- **Helmet** - Security headers
 
 ---
 
-## 🌐 Deployment
+## 📁 Project Structure
 
-### Production Deployment Steps
-
-1. **Deploy Backend to Render** (see [deployment guide](file:///C:/Users/darsh/.gemini/antigravity/brain/96e63d6b-470b-4a6a-89d3-a70adc7f076d/implementation_plan.md))
-2. **Configure GitHub Secrets** with backend URL
-3. **Push to main branch** - GitHub Actions auto-deploys frontend
-
-### Deployment Checklist
-
-- [ ] Backend deployed to Render with all environment variables
-- [ ] GitHub Actions secret `VITE_API_BASE_URL` configured
-- [ ] OTP secret saved securely for login code generation  
-- [ ] Admin login tested successfully
-- [ ] Image upload verified (commits to GitHub)
+```
+├── client/              # Frontend React application
+│   ├── src/
+│   │   ├── pages/      # Page components
+│   │   ├── components/ # Reusable UI components
+│   │   ├── assets/     # Images and static files
+│   │   └── lib/        # Utilities and helpers
+│   └── public/         # Public assets
+│
+├── backend/            # Backend API server
+│   ├── routes/        # API routes
+│   ├── middleware/    # Express middleware
+│   └── services/      # Business logic
+│
+└── .github/           # GitHub workflows
+```
 
 ---
 
-## 📊 Features
+## ✨ Features
 
 ### Public Website
-- ✨ Premium event services showcase
-- 📸 Dynamic gallery with lazy loading
-- 💬 Client testimonials
-- 📞 Contact form integration
+- Premium event services showcase
+- Dynamic image gallery
+- Client testimonials and reviews
+- Responsive design for all devices
+- Contact and inquiry forms
 
 ### Admin Panel
-- 🔐 Secure TOTP authentication
-- 🖼️ Drag-and-drop image management
-- 📝 Content editing with live preview
-- 🚀 One-click deployment to GitHub
-- 📊 Asset usage tracking
+- Secure authentication
+- Content management
+- Image upload and organization
+- Service management
+- Review management
 
 ---
 
-## 🐛 Troubleshooting
+## 🔒 Security
 
-### Common Issues
-
-**Problem**: "CORS Error" in browser console  
-**Solution**: Verify `FRONTEND_URL` in Render has no trailing slash
-
-**Problem**: Admin login fails  
-**Solution**: 
-1. Check backend is awake (Render free tier sleeps after 15 min)
-2. Visit `/health` endpoint to wake it
-3. Generate fresh OTP code
-
-**Problem**: Images not uploading  
-**Solution**: Verify GitHub token has "Contents: Read & Write" permission
-
-See [full troubleshooting guide](file:///C:/Users/darsh/.gemini/antigravity/brain/96e63d6b-470b-4a6a-89d3-a70adc7f076d/implementation_plan.md#-troubleshooting) for more.
+- Environment variables for sensitive configuration
+- TOTP-based authentication for admin access
+- JWT session management
+- HTTPS-only cookies in production
+- Rate limiting on authentication endpoints
 
 ---
 
 ## 📄 License
 
-MIT
+All Rights Reserved © 2026 Grey Giant
 
 ---
 
@@ -223,23 +129,15 @@ npm run preview      # Preview production build
 **Backend:**
 ```bash
 npm start            # Start production server
-npm run dev          # Start development server (with auto-reload)
+npm run dev          # Start with auto-reload
 ```
 
 ---
 
-## 🎯 Roadmap
+## 📧 Contact
 
-- [ ] Email notifications for contact form
-- [ ] Automated image optimization pipeline  
-- [ ] Multi-admin support with roles
-- [ ] Content versioning \u0026 rollback
-- [ ] Analytics integration
+For inquiries about our event services or platform development, please visit our contact page on the website.
 
 ---
 
-**For deployment assistance, see the [Production Deployment Guide](file:///C:/Users/darsh/.gemini/antigravity/brain/96e63d6b-470b-4a6a-89d3-a70adc7f076d/implementation_plan.md)**
-=======
-# Grey_Giant
-GREY GIANT | Events &amp; Services - Crafting Unforgettable Experience
->>>>>>> 5987fade6cb2cd9f89c6a977b1ca870769fe6d81
+**Developed with Precision by [Gowtrix Hub](https://github.com/the-gowda-s-hub/)**

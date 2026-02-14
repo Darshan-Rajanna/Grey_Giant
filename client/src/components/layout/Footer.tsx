@@ -76,9 +76,20 @@ export function Footer() {
           </div>
 
           {/* Footer Bottom */}
-          <div className="pt-8 border-t border-white/5 w-full max-w-2xl flex flex-col items-center gap-4">
+          <div className="pt-8 border-t border-white/5 w-full max-w-2xl flex flex-col items-center gap-3">
             <p className="text-[9px] uppercase tracking-[0.6em] text-white/20 font-bold">
-              © 2026 Developed with Precision by <a href="https://github.com/the-gowda-s-hub/" target="_blank" rel="noreferrer" className="text-primary bg-primary/5 px-4 py-1.5 rounded-full border border-primary/10 hover:bg-primary/10 hover:border-primary/20 transition-all duration-500">Gowtrix Hub</a>
+              © 2026 Grey Giant · All Rights Reserved
+            </p>
+            <p className="text-[8px] uppercase tracking-[0.5em] text-white/15 font-semibold">
+              Developed with Precision by{" "}
+              <a 
+                href="https://github.com/the-gowda-s-hub/" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="inline-block text-primary bg-primary/5 px-3 py-1.5 ml-2 rounded-full border border-primary/10 hover:bg-primary/10 hover:border-primary/20 transition-all duration-500"
+              >
+                Gowtrix Hub
+              </a>
             </p>
           </div>
         </div>
