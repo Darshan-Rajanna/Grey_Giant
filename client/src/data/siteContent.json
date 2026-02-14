@@ -342,6 +342,18 @@
           "buttonText": "Quiet Perfection",
           "image": "DJNights&PrivateParties/DP6.webp",
           "description": "Complete setup, live monitoring, and post-event closure handled professionally. Our team works quietly behind the scenes so you enjoy the night."
+        },
+        {
+          "title": "LED Walls & Mood Lighting",
+          "buttonText": "Explore",
+          "image": "DJNights&PrivateParties/dp7.webp",
+          "description": "Enhance your celebration with high-quality LED walls for dynamic visuals, name displays, and themed backdrops. Our customized mood lighting creates the perfect ambience with elegant colors and effects, transforming the venue into a vibrant and immersive party space."
+        },
+        {
+          "title": "New FeaturVenue Selection & Setupe",
+          "buttonText": "Explore",
+          "image": "DJNights&PrivateParties/dpimg4.webp",
+          "description": "We help you select the ideal venue based on your theme, guest count, and budget — whether it’s a banquet hall, rooftop, farmhouse, or home celebration. Our team manages complete setup including décor, lighting, stage design, and seating arrangements to create a flawless party atmosphere."
         }
       ]
     },
