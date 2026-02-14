@@ -133,20 +133,20 @@ export default function Home() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-2xl z-[100] p-6 text-center"
+                        className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-2xl z-[100] p-4 md:p-6 text-center"
                       >
                         <motion.div
                           initial={{ scale: 0.9, y: 20 }}
                           animate={{ scale: 1, y: 0 }}
                           exit={{ scale: 0.9, y: 20 }}
-                          className="relative max-w-lg w-full p-8 md:p-12 bg-neutral-900/50 border border-primary/10 shadow-[0_0_100px_rgba(212,175,55,0.1)] overflow-hidden"
+                          className="relative max-w-lg w-[calc(100%-2rem)] md:w-full p-8 md:p-12 bg-neutral-900/50 border-2 border-primary/30 rounded-2xl md:rounded-none shadow-[0_0_100px_rgba(212,175,55,0.1)] overflow-hidden"
                         >
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               setShowPopup(false);
                             }}
-                            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-primary transition-all duration-300 z-[110] cursor-pointer p-3 md:p-4 bg-black/60 backdrop-blur-sm hover:bg-black/80 rounded-xl border border-primary/20 hover:border-primary/50 shadow-lg hover:shadow-primary/20"
+                            className="absolute top-3 right-3 md:top-6 md:right-6 text-white hover:text-black transition-all duration-300 z-[110] cursor-pointer p-4 md:p-5 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-xl border-2 border-primary hover:border-white shadow-xl hover:shadow-2xl hover:shadow-primary/40 hover:scale-110"
                             aria-label="Close popup"
                           >
                             <CloseIcon className="w-8 h-8 md:w-10 md:h-10" />

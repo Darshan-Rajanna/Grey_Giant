@@ -15,7 +15,7 @@ async function handleResponse(response: Response) {
         // Token expired or invalid - redirect to login
         // Use BASE_URL to ensure it works on GitHub Pages subfolders
         const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-        window.location.href = `${basePath}/admin`;
+        window.location.href = `${basePath}/bravsm`;
         throw new Error('Session expired. Please log in again.');
     }
 

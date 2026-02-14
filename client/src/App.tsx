@@ -58,7 +58,7 @@ function MainContent() {
 }
 
 function AppRouter() {
-  const [match] = useRoute("/admin");
+  const [match] = useRoute("/bravsm");
   const isAdminRoute = !!match;
 
   return (
@@ -68,7 +68,7 @@ function AppRouter() {
         <Router base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Switch>
             <Route path="/" component={MainContent} />
-            <Route path="/admin">
+            <Route path="/bravsm">
               <Suspense fallback={<div className="min-h-screen bg-black" />}>
                 <Admin />
               </Suspense>
