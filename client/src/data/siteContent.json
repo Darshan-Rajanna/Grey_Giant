@@ -117,7 +117,6 @@
     "viewMore": "Unveil More Collections",
     "viewLess": "Show Fewer Masterpieces",
     "galleryItems": [
-      "GeneralGallery/2ba986468a02d1c4ec3ebec447e60018.webp",
       "GeneralGallery/whatsapp-image-2026-02-12-at-85620-pm-1.webp",
       "GeneralGallery/whatsapp-image-2026-02-12-at-85619-pm.webp",
       "GeneralGallery/whatsapp-image-2026-02-12-at-85618-pm.webp",
@@ -181,7 +180,7 @@
     "services": "cataloug-bg.webp",
     "gallery": "gallery-bg.webp",
     "reviews": "voice-of-gratitude-bg.webp",
-    "contact": "contact.webp",
+    "contact": "con.webp",
     "hero": "bg.webp"
   },
   "services": [
